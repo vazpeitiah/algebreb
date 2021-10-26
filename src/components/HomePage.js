@@ -1,33 +1,23 @@
-import React, { Component } from 'react'
 import authService from '../services/auth.service'
+import {useState, useEffect} from 'react'
 
-export default class HomePage extends Component {
+const HomePage = () => {
+  const [user, setUser] = useState(undefined)
 
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      currentUser: undefined
-    }
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     const currentUser = authService.getCurrentUser()
-    if(currentUser)
-      this.setState({ currentUser: currentUser})
-  }
+    setUser(currentUser)
+  }, [])
 
-  render() {
-    const { currentUser } = this.state;
-
-    return (
-      <div className="container">
-        {currentUser ? (
-          <h1>Página de bienvenida para usuarios que iniciario sesion</h1>
-        ) : (
-          <h1>Página de bienvenida</h1>
-        )}
-      </div>
-    )
-  }
+  return (
+    <div className="container">
+    {user ? (
+      <h1>Bienvenido <strong>{user.name}</strong></h1>
+    ) : (
+      <h1>Algebreb</h1>
+    )}
+  </div>
+  )
 }
+
+export default HomePage
