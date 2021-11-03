@@ -1,8 +1,6 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
-//import  from '../utils/CustomHooks'
 
-const SignupForm = ({ onSignup }) => {
+const SignupForm = ({ onSignup, isLoading }) => {
 
 	const useInput = (initValue) => {
 		const [value, setValue] = useState(initValue)
@@ -20,22 +18,23 @@ const SignupForm = ({ onSignup }) => {
 	const onSubmit = (e) => {
 		e.preventDefault()
 
-		const newUser = { 
+		const newUser = {
 			email,
 			name,
 			username,
 			password,
 			passwordConfirm,
-			roles: [role] 
+			roles: [role]
 		}
 
 		onSignup(newUser)
 	}
-	
+
 	return (
 		<form onSubmit={onSubmit}>
-			<div className="mb-3">
-				<label htmlFor="email" className="form-label">Correo electrónico</label>
+			<label htmlFor="email" className="form-label">Correo electrónico: </label>
+			<div className="input-group mb-3">
+				<span className="input-group-text"><i className="bi bi-envelope-fill"></i></span>
 				<input
 					type="email"
 					className="form-control"
@@ -45,30 +44,33 @@ const SignupForm = ({ onSignup }) => {
 					value={email}
 					onChange={setEmail} />
 			</div>
-			<div className="mb-3">
-				<label htmlFor="name" className="form-label">Nombre de usuario</label>
+			<label htmlFor="name" className="form-label">Nombre completo:</label>
+			<div className="input-group mb-3">
+				<span className="input-group-text"><i className="bi bi-person-lines-fill"></i></span>
 				<input
 					type="text"
 					className="form-control"
-					placeholder="Nombre del usuario"
+					placeholder="Nombre y apellidos"
 					name="name"
 					required
 					value={name}
 					onChange={setName} />
 			</div>
-			<div className="mb-3">
-				<label htmlFor="username" className="form-label">Username o nickname</label>
+			<label htmlFor="username" className="form-label">Nombre de usuario:</label>
+			<div className="input-group mb-3">
+				<span className="input-group-text"><i className="bi bi-person-fill"></i></span>
 				<input
 					type="text"
 					className="form-control"
-					placeholder="username"
+					placeholder="Username"
 					name="username"
 					required
 					value={username}
 					onChange={setUsername} />
 			</div>
-			<div className="mb-3">
-				<label htmlFor="password" className="form-label">Contraseña</label>
+			<label htmlFor="password" className="form-label">Contraseña: </label>
+			<div className="input-group mb-3">
+				<span className="input-group-text"><i className="bi bi-key-fill"></i></span>
 				<input
 					type="password"
 					className="form-control"
@@ -78,20 +80,21 @@ const SignupForm = ({ onSignup }) => {
 					value={password}
 					onChange={setPassword} />
 			</div>
-			<div className="form-group mb-3">
-				<label htmlFor="passwordConfirm" className="form-label">Confirmar contreaseña</label>
+			<label htmlFor="passwordConfirm" className="form-label">Confirmar contreaseña: </label>
+			<div className="input-group mb-3">
+				<span className="input-group-text"><i className="bi bi-key-fill"></i></span>
 				<input
 					type="password"
 					className="form-control"
-					placeholder="Confirme su contraseña"
+					placeholder="Confirmar la contraseña"
 					name="passwordConfirm"
 					required
 					value={passwordConfirm}
 					onChange={setPasswordConfirm} />
 			</div>
-
-			<div className="mb-3">
-				<label htmlFor="role" className="form-label">Tipo de usuario</label>
+			<label htmlFor="role" className="form-label">Tipo de usuario:</label>
+			<div className="input-group mb-3">
+				<span className="input-group-text"><i className="bi bi-people-fill"></i></span>
 				<select name="role"
 					id="role"
 					className='form-select'
@@ -102,12 +105,9 @@ const SignupForm = ({ onSignup }) => {
 					<option value="profesor">Profesor</option>
 				</select>
 			</div>
-
-			<div className="form-group mb-3">
-				<Link to='/signin'>¿Ya tienes una cuenta?</Link>
-			</div>
-
-			<button type="submit" className="btn btn-primary">Registrarse</button>
+			<button type="submit"
+				className="form-control btn btn-primary mb-2"
+				disabled={isLoading}>Registrarse</button>
 		</form>
 	)
 }

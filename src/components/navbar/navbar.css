@@ -1,0 +1,39 @@
+#nav {
+  background-color: #222831;
+ /*  margin-bottom: 1.5rem; */
+}
+
+#nav .navbar-brand {
+  color: #00ADB5;
+}
+
+#nav .nav-link:hover{
+  color: #eeeeee;
+}
+
+#nav #btn-signup, #btn-signin{
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+}
+
+#nav #btn-signup{
+  background-color: #EEEEEE;
+  color: #393E46;
+}
+
+#nav #btn-signin {
+  background-color: #00ADB5;
+  border-color: #00ADB5;
+  color: #393E46;
+}
+
+#nav #btn-signup:hover{
+  background-color: #393E46;
+  color: #EEEEEE;
+}
+
+#nav #btn-signin:hover{
+  background-color: #393E46;
+  color: #EEEEEE;
+}
