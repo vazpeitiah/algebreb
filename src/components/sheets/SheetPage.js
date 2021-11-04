@@ -7,6 +7,7 @@ import exercisesService from '../../services/exercises.service'
 import sheetService from '../../services/sheets.service'
 import './sheets.css'
 import { useReactToPrint } from 'react-to-print';
+import helpers from '../../lib/helpers'
 
 const SheetPage = () => {
 	const [exercises, setExercises] = useState([])
@@ -14,55 +15,20 @@ const SheetPage = () => {
 	const [topic, setTopic] = useState('suma_polinomios')
 	const [currentSheet, setCurrentSheet] = useState(undefined)
 	const [showSolution, setShowSolution] = useState(false)
-	const [tipoSolucion, setTipoSolucion] = useState('oculta')
+	const [solutionsType, setSolutionsType] = useState('oculta')
 	// react-router-dom
 	const { sheetId } = useParams()
 	let history = useHistory()
 	// react-to-print
 	const componentRef = useRef();
 
-	const pageStyle = `
-		@media all {
-			.page-break {
-				display: none;
-			}
-			.page-break-custom {
-				display: none;
-			}
-		}
-		
-		@media print {
-			html, body {
-				height: initial !important;
-				overflow: initial !important;
-				-webkit-print-color-adjust: exact;
-			}
-		}
-		
-		@media print {
-			.page-break {
-				margin-top: 18in;
-				display: block;
-				page-break-before: auto;
-			}
-			.page-break-custom {
-				margin-top: 1rem;
-				display: block;
-				page-break-before: auto;
-			}
-		}
-		
-		@page {
-			size: auto;
-			margin: 10mm;
-		}
-		`;
 	useEffect(() => {
 		const getCurrentSheet = async () => {
 			const sheet = await sheetService.getSheetById(sheetId)
 			if (sheet) {
 				setCurrentSheet(sheet)
 				setExercises(sheet.exercises)
+				setSolutionsType(sheet.solutionsType)
 			}
 		}
 		getCurrentSheet()
@@ -79,7 +45,6 @@ const SheetPage = () => {
 				tipoRespuesta: params.tipoRespuesta
 			}
 			setExercises([...exercises, newExercises])
-			//setInstrucciones(res.instrucciones)
 		} else {
 			alert("ERROR: " + res.message)
 		}
@@ -100,7 +65,8 @@ const SheetPage = () => {
 			const updatedSheet = await sheetService.updateSheet(currentSheet._id, {
 				description: currentSheet.description,
 				type: currentSheet.type,
-				exercises: exercises
+				exercises: exercises,
+				solutionsType
 			})
 
 			if (updatedSheet && updatedSheet._id) {
@@ -123,7 +89,7 @@ const SheetPage = () => {
 	const downloadPDF = useReactToPrint({
 		content: () => componentRef.current,
 		documentTitle: currentSheet && currentSheet.description,
-		pageStyle
+		pageStyle: helpers.getPrintConfig
 	});
 
 	return (
@@ -159,11 +125,11 @@ const SheetPage = () => {
 						<option value="examen">Examen</option>
 						<option value="tarea">Tarea</option>
 					</select>
-					<label htmlFor="tipoSolucion">Tipo de solución</label>
-					<select id="tipoSolucion"
+					<label htmlFor="solutionsType">Tipo de solución</label>
+					<select id="solutionsType"
 						className='form-select'
-						value={tipoSolucion}
-						onChange={(e) => setTipoSolucion(e.target.value)}>
+						value={solutionsType}
+						onChange={(e) => setSolutionsType(e.target.value)}>
 							<option value="oculta">No mostar soluciones</option>
 							<option value="unica">Solución final</option>
 							<option value="pasos">Soluciones paso a paso</option>
@@ -187,7 +153,7 @@ const SheetPage = () => {
 						<Exercises exercises={exercises}
 							ref={componentRef}
 							title={currentSheet && currentSheet.description}
-							tipoSolucion={tipoSolucion} />) :
+							solutionsType={solutionsType} />) :
 						(<center className="mt-4">
 							<div className="spinner-border" role="status">
 								<span className="visually-hidden">Loading...</span>

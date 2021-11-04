@@ -2,12 +2,12 @@ import { forwardRef } from 'react'
 import Solutions from './Solutions';
 import Exercise from './Exercise';
 
-const Exercises = forwardRef(({ exercises, title, tipoSolucion }, ref) => {
+const Exercises = forwardRef(({ exercises, title, solutionsType }, ref) => {
 
 	return (
 		<div ref={ref} style={{ margin: "0", padding: "0" }} >
 			<h2>{title}</h2>
-			{tipoSolucion !== "solo_respuestas" && (
+			{solutionsType !== "solo_respuestas" && (
 				<>
 					{exercises.length !== 0 ? exercises.map((ex, idx) => (
 						<div className="row" key={idx}>
@@ -22,8 +22,8 @@ const Exercises = forwardRef(({ exercises, title, tipoSolucion }, ref) => {
 			)}
 
 
-			{tipoSolucion !== "oculta" && (
-				<Solutions exercises={exercises} tipoSolucion={tipoSolucion} />
+			{solutionsType !== "oculta" && (
+				<Solutions exercises={exercises} solutionsType={solutionsType} />
 			)}
 
 		</div>

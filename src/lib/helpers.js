@@ -31,4 +31,44 @@ helpers.timeago = (timestamp) => {
   return format(new Date(timestamp), 'es'); //Retornamos la fecha con el UTC corregido con el formato local que registramos
 };
 
+helpers.getPrintConfig = () => {
+  const pageStyle = `
+		@media all {
+			.page-break {
+				display: none;
+			}
+			.page-break-custom {
+				display: none;
+			}
+		}
+		
+		@media print {
+			html, body {
+				height: initial !important;
+				overflow: initial !important;
+				-webkit-print-color-adjust: exact;
+			}
+		}
+		
+		@media print {
+			.page-break {
+				margin-top: 18in;
+				display: block;
+				page-break-before: auto;
+			}
+			.page-break-custom {
+				margin-top: 1rem;
+				display: block;
+				page-break-before: auto;
+			}
+		}
+		
+		@page {
+			size: auto;
+			margin: 10mm;
+		}
+		`;
+    return pageStyle
+}
+
 export default helpers
