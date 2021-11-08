@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom'
 import Signin from '../components/login/Signin'
 import Signup from '../components/login/Signup'
 import HomePage from '../components/HomePage'
@@ -7,6 +7,7 @@ import PrivateRoute from './PrivateRoute'
 import Navigation from '../components/navbar/Navigation'
 import SheetPage from '../components/sheets/SheetPage'
 import SheetsPage from '../components/sheets/SheetsPage'
+import Groups from '../components/groups/Groups'
 
 const AppRotuer = () => {
 	return (
@@ -19,6 +20,7 @@ const AppRotuer = () => {
 				<PrivateRoute exact path="/profile" component={Profile} />
 				<PrivateRoute exact path="/sheets" component={SheetsPage} />
 				<PrivateRoute exact path="/sheet/:sheetId" component={SheetPage} />
+				<PrivateRoute exact path="/groups" component={Groups} />
 				<Redirect to="/" />
 			</Switch>
 		</Router>

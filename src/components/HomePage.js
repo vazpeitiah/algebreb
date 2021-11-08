@@ -1,5 +1,6 @@
 import authService from '../services/auth.service'
 import {useState, useEffect} from 'react'
+import LandingPage from './landingpage/LandingPage'
 
 const HomePage = () => {
   const [user, setUser] = useState(undefined)
@@ -9,14 +10,18 @@ const HomePage = () => {
     setUser(currentUser)
   }, [])
 
+  const brand = <span className="navbar-brand"> <i className="bi bi-circle-square"></i> ALGEBREB</span>
+
   return (
-    <div className="container">
+    <>
     {user ? (
-      <h1>Bienvenido <strong>{user.name}</strong></h1>
+      <div className="container mt-4 p-4">
+        <h2>Welcome to {brand} {user.name}</h2>
+      </div>
     ) : (
-      <h1>Algebreb</h1>
+      <LandingPage />
     )}
-  </div>
+  </>
   )
 }
 

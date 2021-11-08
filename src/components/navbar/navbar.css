@@ -11,10 +11,11 @@
   color: #eeeeee;
 }
 
-#nav #btn-signup, #btn-signin{
+/* #nav #btn-signup, #btn-signin{
   border-width: 1px;
   border-style: solid;
   border-radius: 5px;
+  font-size: 0.9rem;
 }
 
 #nav #btn-signup{
@@ -36,4 +37,4 @@
 #nav #btn-signin:hover{
   background-color: #393E46;
   color: #EEEEEE;
-}
+} */

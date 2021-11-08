@@ -30,10 +30,10 @@ function SheetsPage({ user }) {
 	}
 
 	return (
-		<div className='container p-2'>
+		<div className='container mt-4 p-4'>
 			<div className='row align-items-center'>
 				<div className='col'>
-					<h1>Hojas</h1>
+					<h2>Tabla de hojas</h2>
 				</div>
 				<div className='col text-end'>
 					<button className={showForm ? "btn btn-secondary" : "btn btn-success"}
@@ -49,7 +49,7 @@ function SheetsPage({ user }) {
 						<tr>
 							<th>#</th>
 							<th>Descripción</th>
-							<th>Fecha</th>
+							<th>Última modificación</th>
 							<th>Tipo</th>
 							<th></th>
 							<th></th>

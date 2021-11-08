@@ -93,9 +93,9 @@ const SheetPage = () => {
 	});
 
 	return (
-		<div className="container-fluid" >
-			<div className='row align-items-center border rounded  p-1'>
-				<div className='col-lg-3'>
+		<div className="container-fluid">
+			<div className='row align-items-center border rounded p-1'>
+				<div className='col-lg-8'>
 					<input type="text"
 						name="description"
 						id="description"

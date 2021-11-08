@@ -21,7 +21,6 @@ const Exercises = forwardRef(({ exercises, title, solutionsType }, ref) => {
 				</>
 			)}
 
-
 			{solutionsType !== "oculta" && (
 				<Solutions exercises={exercises} solutionsType={solutionsType} />
 			)}

@@ -14,7 +14,7 @@ const Profile = ({ user }) => {
   }
 
   return (
-    <div className="container col-lg-4">
+    <div className="container col-lg-4 mt-4">
       <div className="card">
         <div className="card-header">
           <h1 className="card-title">Perfil del usuario</h1>

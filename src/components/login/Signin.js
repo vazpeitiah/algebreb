@@ -20,7 +20,7 @@ const Signin = (props) => {
   }
 
   return (
-    <div className="container col-lg-4 col-md-5 col-sm-6">
+    <div className="container col-lg-4 mt-4 p-4">
       <div className="card">
         <div className="card-header">
           <h1 className="card-title">Iniciar Sesión</h1>
