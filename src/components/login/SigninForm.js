@@ -35,7 +35,7 @@ const SigninForm = ({ onLogin, isLoading }) => {
 					required />
 			</div>
 			<input type="submit" 
-				className="btn btn-primary form-control mb-2" 
+				className="btn btn-primary form-control mb-2 bg-btn" 
 				value="Iniciar sesión" 
 				disabled={isLoading} />
 		</form>

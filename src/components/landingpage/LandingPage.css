@@ -16,8 +16,8 @@
 } */
 
 .fill { 
-  min-height: 55em;
-  height: 55em;
+  min-height: 1em;
+  height: 5em;
 }
 
 .bd-placeholder-img {
