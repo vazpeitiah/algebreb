@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './login.css'
 
 const SignupForm = ({ onSignup, isLoading }) => {
 
@@ -106,7 +107,7 @@ const SignupForm = ({ onSignup, isLoading }) => {
 				</select>
 			</div>
 			<button type="submit"
-				className="form-control btn btn-primary mb-2"
+				className="form-control btn btn-primary bg-btn mb-2"
 				disabled={isLoading}>Registrarse</button>
 		</form>
 	)

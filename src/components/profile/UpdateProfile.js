@@ -21,7 +21,7 @@ const UpdateProfile = ({ user, updateProfile }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if(password === passwordConfirm) {
+    if (password === passwordConfirm) {
       const params = {
         username: user.username,
         passwd,
@@ -29,20 +29,23 @@ const UpdateProfile = ({ user, updateProfile }) => {
         email,
         roles: [role]
       }
-      if(password){
+      if (password) {
         params.password = password
       }
       updateProfile(params)
-    }else {
+    } else {
       alert('Error: Las contraseñas no coiciden')
     }
   }
 
   return (
     <>
-      <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={openModal}>
-        Editar perfil
-      </button>
+      <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button type="button" className="btn btn-primary bg-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={openModal}>
+          Editar perfil
+        </button>
+      </div>
+
 
       <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-lg">
@@ -52,57 +55,57 @@ const UpdateProfile = ({ user, updateProfile }) => {
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form onSubmit={handleSubmit}>
-            <div className="modal-body">
-                <label>Contraseña:</label>
+              <div className="modal-body">
+                <label className="fw-bold">Contraseña:</label>
                 <input type="password"
                   className='form-control'
                   value={passwd}
                   onChange={(e) => setPasswd(e.target.value)}
                   required />
-                <label htmlFor="name">Nombre de usuario</label>
+                <label className="pt-5 pb-1" htmlFor="name">Nombre de usuario</label>
                 <input type="text"
                   className='form-control'
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  required/>
-                <label htmlFor="email">Correo electrónico</label>
+                  required />
+                <label className="pt-3 pb-1" htmlFor="email">Correo electrónico</label>
                 <input type="email"
-                  className='form-control'
+                  className='form-control mb-3'
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required />
-                <label htmlFor="role" className="form-label">Tipo de usuario:</label>
+                <label className="pt-3 pb-1" htmlFor="role" className="form-label">Tipo de usuario:</label>
                 <select name="role"
                   id="role"
                   className='form-select'
                   required
                   value={role}
                   onChange={(e) => setRole(e.target.value)}>
-                  {role === "admin" ? 
+                  {role === "admin" ?
                     (<option value="admin">Administrador</option>) : (
-                    <>
-                     <option value="alumno">Alumno</option>
-                     <option value="profesor">Profesor</option>
-                    </>
-                  )}
+                      <>
+                        <option value="alumno">Alumno</option>
+                        <option value="profesor">Profesor</option>
+                      </>
+                    )}
                 </select>
-                <label>¿Quieres cambiar la contraseña?</label>
+                <label className="pt-3 pb-1">¿Quieres cambiar la contraseña?</label>
                 <select className='form-select'
                   value={showPass}
                   onChange={() => setShowPass(!showPass)}>
                   <option value="true">Sí</option>
                   <option value="false">No</option>
                 </select>
-                
-                { showPass && (
+
+                {showPass && (
                   <>
-                    <label>Nueva contraseña</label>
+                    <label className="pt-3 pb-1">Nueva contraseña</label>
                     <input type="password"
                       className='form-control'
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required />
-                    <label>Confirmar nueva contraseña</label>
+                    <label className="pt-3 pb-1">Confirmar nueva contraseña</label>
                     <input type="password"
                       className='form-control'
                       value={passwordConfirm}
@@ -111,12 +114,12 @@ const UpdateProfile = ({ user, updateProfile }) => {
                   </>
                 )}
 
-              
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal"> Cancelar </button>
-              <button type="submit" className="btn btn-primary"> Actualizar </button>
-            </div>
+
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal"> Cancelar </button>
+                <button type="submit" className="btn btn-primary bg-btn"> Actualizar </button>
+              </div>
             </form>
           </div>
         </div>
