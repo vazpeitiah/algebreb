@@ -74,7 +74,7 @@ const UpdateProfile = ({ user, updateProfile }) => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required />
-                <label className="pt-3 pb-1" htmlFor="role" className="form-label">Tipo de usuario:</label>
+                <label className="pt-3 pb-1 form-label" htmlFor="role">Tipo de usuario:</label>
                 <select name="role"
                   id="role"
                   className='form-select'
