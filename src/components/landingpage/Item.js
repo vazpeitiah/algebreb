@@ -7,8 +7,9 @@ const Item = (props) => {
       </div>
 
       <div className="col-md-5 order-md-1 my-auto">
-        <div className="thumbnail img-esponsive">
+        <div className="thumbnail">
           <img className="img-fluid mx-auto img" src={props.src} alt="img-src" />
+          <small>{props.label}</small>
         </div>
       </div>
     </div>
