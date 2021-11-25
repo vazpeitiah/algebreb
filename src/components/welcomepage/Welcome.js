@@ -1,12 +1,8 @@
 import * as Icon from "react-bootstrap-icons";
-import { useState } from "react";
-import authService from "../../services/auth.service";
 import { Link } from "react-router-dom";
 import "./welcome.css";
 
-const Welcome = () => {
-  const [user] = useState(authService.getCurrentUser());
-
+const Welcome = ({user}) => {
   return (
     <div className="container my-lg-auto fill-welcome d-flex align-items-center position-relative overflow-hidden text-center text-dark">
       <div className=" p-lg-5 mx-auto">
@@ -33,9 +29,15 @@ const Welcome = () => {
               />
               <p className="h5">Resuelve ejercicios.</p>
               <p>Realiza hojas de ejercicios, tareas y/o examenes.</p>
-              <Link to={"/groups"} className="btn btn-primary btn-lg bg-btn h5">
-                Ver mas
-              </Link>
+              {user && user.roles.includes('profesor') ? (
+                <Link to={"/groups"} className="btn btn-primary btn-lg bg-btn h5">
+                  Ver mas
+                </Link>
+              ): (
+                <Link to={"/student_groups"} className="btn btn-primary btn-lg bg-btn h5">
+                  Ver mas
+                </Link>
+              )}
             </div>
           )}
 

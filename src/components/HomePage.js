@@ -14,7 +14,7 @@ const HomePage = () => {
   return (
     <>
       {user ? (
-        <Welcome />
+        <Welcome user={user}/>
       ) : (
         <LandingPage />
       )}
