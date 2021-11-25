@@ -20,7 +20,7 @@ const LandingPage = () => {
           id="home"
           className="d-flex align-items-center fill position-relative overflow-hidden text-center text-dark pb-5"
         >
-          <div className="col-md-5 p-lg-5 mx-auto animate__animated animate__slideInLeft">
+          <div className="col-md-5 p-lg-5 mx-auto">
             <h1 className="display-1 fw-bold my-4">ALGEBREB</h1>
             <p className="lead fw-normal py-5 my-4">
               Aplicación web generadora y evaluadora de ejercicios algebraicos
@@ -30,9 +30,9 @@ const LandingPage = () => {
               Conocer mas
             </a>
           </div>
-          <div className="form-1 d-none d-md-block"></div>
-          <div className="form-2 d-none d-md-block"></div>
-          <div className="form-3 d-none d-md-block"></div>
+          <div id="form-1" className="form-1 d-none d-md-block"></div>
+          <div id="form-2" className="form-2 d-none d-md-block"></div>
+          <div id="form-3" className="form-3 d-none d-md-block"></div>
         </div>
 
         <div className="cotainer py-5"></div>
