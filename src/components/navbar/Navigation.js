@@ -1,14 +1,19 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import authService from '../../services/auth.service';
 import './navbar.css'
 
 const Navigation = () => {
-  const [user, setUser] = useState(authService.getCurrentUser())
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    const currUser = authService.getCurrentUser()
+    setUser(currUser)
+  }, [])
 
   const logout = () => {
     authService.logout()
-    setUser(undefined)
+    setUser(null)
     window.location.reload(false);
   }
 
@@ -30,9 +35,24 @@ const Navigation = () => {
                   <Link to={"/sheets"} className="nav-link">Hojas</Link>
                 </li>
                 {user.roles && user.roles.includes('profesor') && (
-                  <li className="nav-item">
-                    <Link to={"/groups"} className="nav-link">Grupos</Link>
-                  </li>
+                  <>
+                    <li className="nav-item">
+                      <Link to={"/groups"} className="nav-link">Grupos</Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link to={"/evaluations"} className="nav-link">Evaluaciones</Link>
+                    </li>
+                  </>
+                )}
+                {user.roles && user.roles.includes('alumno') && (
+                  <>
+                    <li className="nav-item">
+                      <Link to={"/student_groups"} className="nav-link">Grupos</Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link to={"/student_evaluations"} className="nav-link">Evaluaciones</Link>
+                    </li>
+                  </>
                 )}
               </ul>
             ) : (

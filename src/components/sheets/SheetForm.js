@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const SheetForm = ({ addSheet, isLoading }) => {
+const SheetForm = ({ addSheet, user }) => {
   const [description, setDescription] = useState('')
   const [type, setType] = useState('lista_ejercicios')
 
@@ -37,8 +37,12 @@ const SheetForm = ({ addSheet, isLoading }) => {
             value={type}
             onChange={(e) => setType(e.target.value)}>
             <option value="lista_ejercicios">Lista de ejercicios</option>
-            <option value="examen">Examen</option>
-            <option value="tarea">Tarea</option>
+            {user && user.roles.includes('profesor') && (
+              <>
+                <option value="examen">Examen</option>
+                <option value="tarea">Tarea</option>
+              </>
+            )}
           </select>
         </div>
 

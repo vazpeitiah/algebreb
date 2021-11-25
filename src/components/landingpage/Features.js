@@ -4,8 +4,8 @@ const Features = () => {
   const features = ["Generación de ejercicios de álgebra", "Generación de solución final", "Generación de solución paso a paso",
     "Generación de evaluaciones en línea", "Exportado a PDF", "Exportado a imagen", "Exportado a LaTeX"];
 
-  const listFeatures = features.map(feature =>
-    <div className="col d-flex align-items-start py-4">
+  const listFeatures = features.map((feature, index) =>
+    <div className="col d-flex align-items-start py-4" key={index}>
       <div className="icon-square text-dark flex-shrink-0 me-3">
         <Icon.GearFill className="bi icon-blue" />
       </div>

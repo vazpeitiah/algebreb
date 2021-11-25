@@ -42,7 +42,7 @@ function SheetsPage({ user }) {
 					</button>
 				</div>
 			</div>
-			{showForm && (<SheetForm addSheet={addSheet} />)}
+			{showForm && (<SheetForm addSheet={addSheet} user={user} />)}
 			<div className="table-responsive">
 				<table className='table table-striped'>
 					<thead>

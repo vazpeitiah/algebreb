@@ -8,6 +8,11 @@ import Navigation from '../components/navbar/Navigation'
 import SheetPage from '../components/sheets/SheetPage'
 import SheetsPage from '../components/sheets/SheetsPage'
 import Groups from '../components/groups/Groups'
+import Group from '../components/groups/Group'
+import GroupsStudent from '../components/groups_student/GroupsStudent'
+import EvaluationsTeacher from '../components/evaluations/EvaluationsTeacher'
+import EvaluationsStudent from '../components/evaluations/EvaluationsStudent'
+import ApplyEvaluation from '../components/evaluations/ApplyEvaluation'
 
 const AppRotuer = () => {
 	return (
@@ -21,6 +26,11 @@ const AppRotuer = () => {
 				<PrivateRoute exact path="/sheets" component={SheetsPage} />
 				<PrivateRoute exact path="/sheet/:sheetId" component={SheetPage} />
 				<PrivateRoute exact path="/groups" component={Groups} />
+				<PrivateRoute exact path="/group/:groupId" component={Group} />
+				<PrivateRoute exact path="/student_groups" component={GroupsStudent} />
+				<PrivateRoute exact path="/evaluations" component={EvaluationsTeacher} />
+				<PrivateRoute exact path="/student_evaluations" component={EvaluationsStudent} />
+				<PrivateRoute exact path="/exam/:examId" component={ApplyEvaluation} />
 				<Redirect to="/" />
 			</Switch>
 		</Router>

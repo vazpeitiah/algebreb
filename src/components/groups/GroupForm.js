@@ -1,17 +1,30 @@
 import { useState } from 'react'
 
-const GroupForm = ({ addGroup }) => {
-  const [name, setName] = useState('')
-  /* const [isOpen, setIsOpen] = useState(false) */
+const GroupForm = ({ addGroup, updateGroup, group}) => {
+  const [name, setName] = useState(group ? group.name : '')
+  const [isOpen, setIsOpen] = useState(group ? group.isOpen : false)
 
   const hanldeSubmit = (e) => {
     e.preventDefault()
 
-    const params = {
-      name
+    if(group) {
+      const params = {
+        name, isOpen,
+        students: group.students,
+        teacher: group.teacher, 
+      }
+      updateGroup(group._id, params)
+    } else {
+      const params = {
+        name, isOpen
+      }
+
+      addGroup(params)
     }
 
-    addGroup(params)
+    setName('')
+    setIsOpen(false)
+    
   }
 
   return (
@@ -26,14 +39,17 @@ const GroupForm = ({ addGroup }) => {
           value={name} 
           onChange={(e) => setName(e.target.value)} />
       </div>
-      {/* <div className="col-auto">
+      <div className="col-auto">
         <label htmlFor="name">¿Está abierto?:</label>
       </div>
       <div className="col-auto">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked />
-      </div> */}
+        <input className="form-check-input" 
+          type="checkbox" 
+          checked={isOpen}
+          onChange={() => setIsOpen(!isOpen)} />
+      </div>
       <div className="col">
-        <button type="submit" className="btn btn-success form-control">Agregar</button>
+        <button type="submit" className="btn btn-success form-control">{group ? "Actualizar" : "Agregar"}</button>
       </div>
 
     </form>

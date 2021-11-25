@@ -1,8 +1,8 @@
 import * as Icon from 'react-bootstrap-icons';
 
 const Topics = (props) => {
-    const listTopics = props.topics.map((topic) =>
-        <div className="col d-flex align-items-start py-4">
+    const listTopics = props.topics.map((topic, index) =>
+        <div className="col d-flex align-items-start py-4" key={index}>
             <Icon.BookHalf className="bi icon-blue text-muted flex-shrink-0 me-3" size="2em" />
             <div>
                 <h5 className="fw-bold mb-0">{topic}</h5>

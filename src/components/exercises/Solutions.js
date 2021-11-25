@@ -14,8 +14,8 @@ const Solutions = ({exercises, solutionsType}) => {
               <span><b>{index + 1})</b><InlineMath math={exercise.enunciado} /></span>
               {(solutionsType === "pasos" || solutionsType === "solo_respuestas") && (
                 <ol>
-                {exercise.pasos && exercise.pasos.map((paso, index) => (
-                  <li key={index}><InlineMath math={paso} /> </li>)
+                {exercise.pasos && exercise.pasos.map((paso, index2) => (
+                  <li key={index2}><InlineMath math={paso} /> </li>)
                 )}
                 </ol>
               )}

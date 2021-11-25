@@ -8,8 +8,11 @@ import sheetService from '../../services/sheets.service'
 import './sheets.css'
 import { useReactToPrint } from 'react-to-print';
 import helpers from '../../lib/helpers'
+import ApplyExam from './ApplyExam'
+import examsService from '../../services/exams.service'
 
-const SheetPage = () => {
+
+const SheetPage = ({user}) => {
 	const [exercises, setExercises] = useState([])
 	const [isLoading, setIsLoading] = useState(false)
 	const [topic, setTopic] = useState('suma_polinomios')
@@ -90,7 +93,17 @@ const SheetPage = () => {
 		content: () => componentRef.current,
 		documentTitle: currentSheet && currentSheet.description,
 		pageStyle: helpers.getPrintConfig
-	});
+	})
+
+	const applyExam = async (params) => {
+		params = {...params, sheet: sheetId, type: currentSheet.type}
+		const response = await examsService.createExam(params)
+		if(response && response.success) {
+			window.alert('El examen se ha generado. Puede revisar la pestaña de evaluaciones')
+		}else {
+			window.alert('Error: '+ response.message)
+		}
+	}
 
 	return (
 		<div className="container-fluid">
@@ -122,8 +135,12 @@ const SheetPage = () => {
 						value={currentSheet ? currentSheet.type : "lista_ejercicios"}
 						onChange={(e) => setCurrentSheet({ ...currentSheet, type: e.target.value })}>
 						<option value="lista_ejercicios">Lista de ejercicios</option>
-						<option value="examen">Examen</option>
-						<option value="tarea">Tarea</option>
+						{user && user.roles.includes('profesor') && (
+              <>
+                <option value="examen">Examen</option>
+                <option value="tarea">Tarea</option>
+              </>
+            )}
 					</select>
 					<label htmlFor="solutionsType">Tipo de solución</label>
 					<select id="solutionsType"
@@ -147,6 +164,9 @@ const SheetPage = () => {
 						<option value="pdf">PDF</option>
 					</select>
 					<button className='btn btn-primary form-control mt-2 mb-2' onClick={handleDownloadPDF}>Exportar</button>
+					{currentSheet && currentSheet.type === "examen" && (
+						<ApplyExam user={user} applyExam={applyExam} />
+					)}
 				</div>
 				<div className='col border rounded m-2' style={{ overflowX: 'auto'}}>
 					{!isLoading ? (

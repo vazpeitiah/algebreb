@@ -1,7 +1,7 @@
 const authService = {}
 
-//const API_URL = 'http://localhost:5000'
-const API_URL = 'https://algebreb-api.herokuapp.com'
+const API_URL = 'http://localhost:5000'
+//const API_URL = 'https://algebreb-api.herokuapp.com'
 
 authService.signin = async (user) => {
 	const configuration = {
@@ -42,7 +42,12 @@ authService.logout = () => {
 }
 
 authService.getCurrentUser = () => {
-	return JSON.parse(localStorage.getItem('user'))
+	const currentUser = JSON.parse(localStorage.getItem('user'));
+	if(currentUser && new Date(currentUser.expiresIn) >= new Date()) {
+		return currentUser
+	}else {
+		return null
+	}	 
 }
 
 // Agregar encabaezado para poder realizar peticiones a la api

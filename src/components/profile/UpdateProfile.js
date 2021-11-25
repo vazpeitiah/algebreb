@@ -30,7 +30,7 @@ const UpdateProfile = ({ user, updateProfile }) => {
         roles: [role]
       }
       if (password) {
-        params.password = password
+        params.password = password // checar que pex
       }
       updateProfile(params)
     } else {
@@ -62,7 +62,7 @@ const UpdateProfile = ({ user, updateProfile }) => {
                   value={passwd}
                   onChange={(e) => setPasswd(e.target.value)}
                   required />
-                <label className="pt-5 pb-1" htmlFor="name">Nombre de usuario</label>
+                <label className="pt-5 pb-1" htmlFor="name">Nombre completo</label>
                 <input type="text"
                   className='form-control'
                   value={name}
