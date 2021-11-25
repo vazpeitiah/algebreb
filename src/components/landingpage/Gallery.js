@@ -1,6 +1,6 @@
-import Teacher from '../../assets/img/math.jpeg'
-import Studying from '../../assets/img/studying.jpeg'
-import School from '../../assets/img/school.jpeg'
+import Teacher from '../../assets/img/teacher2.jpg'
+import Studying from '../../assets/img/student.jpg'
+import School from '../../assets/img/school.jpg'
 
 const Gallery = () => {
   return (
@@ -16,6 +16,7 @@ const Gallery = () => {
           <div className="container">
             <div className="carousel-caption">
               <h1>Nivel medio superior</h1>
+              <small>Photo by Shopify Partners from Burst</small>
             </div>
           </div>
         </div>
@@ -25,6 +26,7 @@ const Gallery = () => {
           <div className="container rounded">
             <div className="carousel-caption carousel-label rounded">
               <h1>Alumnos.</h1>
+              <small>Photo by Tirachard Kumtanom from Pexels</small>
             </div>
           </div>
         </div>
@@ -34,6 +36,7 @@ const Gallery = () => {
           <div className="container">
             <div className="carousel-caption">
               <h1>Profesores.</h1>
+              <small>Photo by Shopify Partners from Burst</small>
             </div>
           </div>
         </div>

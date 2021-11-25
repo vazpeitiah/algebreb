@@ -1,16 +1,16 @@
-import "./LandingPage.css"
+import "./LandingPage.css";
 
-import Exam from "../../assets/img/exam.jpeg"
-import Math from "../../assets/img/math.jpeg"
-import Vladi from "../../assets/img/vladimir.png"
-import Aldave from "../../assets/img/aldavera.jpeg"
-import Vargas from "../../assets/img/vargas.jpeg"
+import Exam from "../../assets/img/app.jpg";
+import Math from "../../assets/img/math.jpg";
+import Vladi from "../../assets/img/vladimir.png";
+import Aldave from "../../assets/img/aldavera.jpeg";
+import Vargas from "../../assets/img/vargas.jpeg";
 
-import Item from "./Item"
-import Gallery from "./Gallery"
-import Topics from "./Topics"
-import Features from "./Features"
-import Profile from "./Profile"
+import Item from "./Item";
+import Gallery from "./Gallery";
+import Topics from "./Topics";
+import Features from "./Features";
+import Profile from "./Profile";
 
 const LandingPage = () => {
   return (
@@ -20,7 +20,7 @@ const LandingPage = () => {
           id="home"
           className="d-flex align-items-center fill position-relative overflow-hidden text-center text-dark pb-5"
         >
-          <div className="col-md-5 p-lg-5 mx-auto">
+          <div className="col-md-5 p-lg-5 mx-auto animate__animated animate__slideInLeft">
             <h1 className="display-1 fw-bold my-4">ALGEBREB</h1>
             <p className="lead fw-normal py-5 my-4">
               Aplicación web generadora y evaluadora de ejercicios algebraicos
@@ -50,6 +50,7 @@ const LandingPage = () => {
             a  mejorar  su  desempeño  en  la  asignatura
             respectivamente."
             src={Exam}
+            label="Photo by cottonbro from Pexels"
           />
 
           {/* Característcas */}
@@ -68,6 +69,7 @@ const LandingPage = () => {
             como  lo  son  la  geometría,  el  cálculo  o  la 
             probabilidad."
             src={Math}
+            label="Photo by Karolina Grabowska from Pexels"
           />
 
           <Topics
@@ -101,9 +103,9 @@ const LandingPage = () => {
         <div id="team" className="container text-dark">
           <h3 className="display-6 fw-bold pb-5 text-center">Nuestro equipo</h3>
           <div className="row pt-5 text-center">
-            <Profile name="Vladimir Azpeitia" src={Vladi} />
-            <Profile name="Ivan Aldavera" src={Aldave} />
-            <Profile name="Ivan Vargas" src={Vargas} />
+            <Profile name="Vladimir Azpeitia" src={Vladi} url="https://github.com/vazpeitiah" />
+            <Profile name="Ivan Aldavera" src={Aldave} url="https://github.com/Ivan0123456789" />
+            <Profile name="Ivan Vargas" src={Vargas} url="https://github.com/FxIvan09" />
           </div>
         </div>
 
@@ -148,7 +150,7 @@ const LandingPage = () => {
         </div>
       </footer>
     </div>
-  )
-}
+  );
+};
 
-export default LandingPage
+export default LandingPage;
