@@ -1,7 +1,7 @@
 const authService = {}
 
-const API_URL = 'http://localhost:5000'
-//const API_URL = 'https://algebreb-api.herokuapp.com'
+//const API_URL = 'http://localhost:5000'
+const API_URL = 'https://algebreb-api.herokuapp.com'
 
 authService.signin = async (user) => {
 	const configuration = {

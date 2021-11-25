@@ -2,8 +2,8 @@ import authService from "./auth.service"
 
 const groupsService = {}
 
-const API_URL = 'http://localhost:5000'
-//const API_URL = 'https://algebreb-api.herokuapp.com'
+//const API_URL = 'http://localhost:5000'
+const API_URL = 'https://algebreb-api.herokuapp.com'
 
 groupsService.addGroup = async (params) => {
   const configuration = {
