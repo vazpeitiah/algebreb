@@ -1,13 +1,8 @@
-.fill { 
-    min-height: 1em;
-    height: 92vh;
-  }  
-
 .bg-btn {
-    background-color: #00ADB5 !important;
-    border: #0a8f96 !important;
+  background-color: #00adb5 !important;
+  border: #0a8f96 !important;
 }
 
 .bg-btn:hover {
-    background-color: #0c9299 !important;
+  background-color: #0c9299 !important;
 }
