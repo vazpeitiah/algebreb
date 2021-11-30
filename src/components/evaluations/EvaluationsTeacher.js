@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import examsService from '../../services/exams.service'
 import { Link } from 'react-router-dom'
-
+import UpdateExam from './UpdateExam'
+import helpers from '../../lib/helpers'
 
 const EvaluationsTeacher = ({user}) => {
   const [evaluations, setEvaluations] = useState([])
-  //const [groups, setGroups] = useState([])
+  const [exam, setExam] = useState(null)
 
   useEffect(() => {
     const getExams = async () => {
@@ -25,21 +26,33 @@ const EvaluationsTeacher = ({user}) => {
         window.alert('Error: '+ response.message)
       }
     }
-  
+  }
+
+  const updateExam = async (examId, params) => {
+    const res = await examsService.updateExam(examId, params)
+    if(res && res.success) {
+      setEvaluations([res.exam, ...evaluations.filter(evaluation => evaluation._id !== res.exam._id)])
+    } else {
+      window.alert("Error: " + res.message)
+    }
   }
 
   return (
-    <div className="container mt-4 p-4">
+    <div className="container-fluid mt-4 p-4">
       <h2>Tabla de evaluaciones</h2>
       <div className="table-responsive">
       <table className="table table-striped">
         <thead>
           <tr>
             <th>#</th>
-            <th>Nombre</th>
             <th>Grupo</th>
+            <th>Nombre</th>
             <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
             <th>Duración</th>
+            <th>Estado</th>
+            <th></th>
+            <th></th>
             <th></th>
             <th></th>
           </tr>
@@ -48,14 +61,29 @@ const EvaluationsTeacher = ({user}) => {
           {evaluations.map((ev, index) => (
           <tr key={index}>
             <td>{index + 1}</td>
-            <td>{ev.sheet.description}</td>
             <td>{ev.group.name}</td>
-            <td>{new Date(ev.startDate).toLocaleString()}</td>
-            <td>{(new Date(ev.endDate).getTime() - new Date(ev.startDate).getTime()) / (1000*60*60) + ' hrs'}</td>
+            <td>{ev.sheet.description}</td>
+            <td>{helpers.formatDate(ev.startDate)}</td>
+            <td>{helpers.formatDate(ev.endDate)}</td>
+            <td>{helpers.getDurationHRS(ev.startDate, ev.endDate)}</td>
+            <td>{helpers.getStateExam(ev.startDate, ev.endDate)}</td>
             <td>
-              <Link to={`/sheet/${ev.sheet._id}`} className="btn btn-primary">
-                Editar
+              <Link to={`/evaluations/admin/${ev._id}`} className="btn btn-secondary">
+                Administrar
               </Link>
+            </td>
+            <td>
+              <Link to={`/sheet/${ev.sheet._id}`} className="btn btn-secondary">
+                Ver hoja
+              </Link>
+            </td>
+            <td>
+              <button className="btn btn-primary" 
+                data-bs-toggle="modal" 
+                data-bs-target="#update-exam"
+                onClick={() => setExam(ev)}>
+                Editar
+              </button>
             </td>
             <td>
               <button className="btn btn-danger"
@@ -70,6 +98,7 @@ const EvaluationsTeacher = ({user}) => {
         )}
       </table>
       </div>
+      <UpdateExam exam={exam} updateExam={updateExam}/>
     </div>
   )
 }

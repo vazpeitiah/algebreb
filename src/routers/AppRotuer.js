@@ -13,6 +13,8 @@ import GroupsStudent from '../components/groups_student/GroupsStudent'
 import EvaluationsTeacher from '../components/evaluations/EvaluationsTeacher'
 import EvaluationsStudent from '../components/evaluations/EvaluationsStudent'
 import ApplyEvaluation from '../components/evaluations/ApplyEvaluation'
+import ExamReview from '../components/evaluations/ExamReview'
+import Evaluations from '../components/evaluations/Evaluations'
 
 const AppRotuer = () => {
 	return (
@@ -31,6 +33,8 @@ const AppRotuer = () => {
 				<PrivateRoute exact path="/evaluations" component={EvaluationsTeacher} />
 				<PrivateRoute exact path="/student_evaluations" component={EvaluationsStudent} />
 				<PrivateRoute exact path="/exam/:examId" component={ApplyEvaluation} />
+				<PrivateRoute exact path="/review/:examId" component={ExamReview} />
+				<PrivateRoute exact path="/evaluations/admin/:examId" component={Evaluations} />
 				<Redirect to="/" />
 			</Switch>
 		</Router>

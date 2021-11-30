@@ -1,4 +1,6 @@
 import { format, register } from 'timeago.js'
+import moment from 'moment';
+import 'moment-duration-format'
 
 const helpers = {}
 
@@ -70,5 +72,42 @@ helpers.getPrintConfig = () => {
 		`;
     return pageStyle
 }
+
+helpers.getDurationHRS = (sdate, edate) => {
+	const startDate = new Date(sdate)
+	const endDate = new Date(edate)
+	const diff = endDate.getTime() - startDate.getTime()
+	return `${moment.duration(diff, "milliseconds").format("hh:mm")} HRS`
+}
+
+helpers.getDuration = (sdate, edate) => {
+	const startDate = new Date(sdate)
+	const endDate = new Date(edate)
+	const diff = endDate.getTime() - startDate.getTime()
+	return moment.duration(diff, "milliseconds").format("d [days] h [hrs], m [min]")
+}
+
+helpers.formatDate = (date) => {
+	return moment(date).format('D/MM/YYYY hh:mm a')
+}
+/* Obtener el estado del examen => ['En curso', 'Aún no iniciar', 'Fecha vencida'] */
+helpers.getStateExam = (sdate, edate) => {
+	const startDate = new Date(sdate)
+	const endDate = new Date(edate)
+	const today = new Date()
+	if(today >= startDate && today < endDate) {
+		return (
+			<span className="text-success">En curso</span>
+		)
+	} else if (today < startDate) {
+		return (
+			<span className="">Inicia {helpers.timeago(startDate)} </span>
+		)
+	} else {
+		return (
+			<span className="text-danger">Finalizado</span>
+		)
+	}
+} 
 
 export default helpers

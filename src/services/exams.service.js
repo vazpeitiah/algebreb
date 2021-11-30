@@ -16,6 +16,19 @@ examsService.getExamsStudent = async (userId) => {
   return resJson
 }
 
+examsService.getKardex = async (student, group) => {
+  const configuration = {
+		headers: { ...authService.authHeader(), 'Content-Type': 'application/json' },
+    method: "POST",
+    body: JSON.stringify({student, group})
+	}
+
+  const res = await fetch(`${API_URL}/exams/kardex`, configuration)
+  const resJson = await res.json()
+
+  return resJson
+}
+
 examsService.getExams = async (userId) => {
   const configuration = {
 		headers: { ...authService.authHeader(), 'Content-Type': 'application/json' }
@@ -69,6 +82,23 @@ examsService.deleteExam = async (examId) => {
   }
 }
 
+examsService.updateExam = async (examId, params) => {
+  try {
+    const configuration = {
+      headers: { ...authService.authHeader(), 'Content-Type': 'application/json' },
+      method: "PUT",
+      body: JSON.stringify(params)
+    }
+  
+    const res = await fetch(`${API_URL}/exams/${examId}`, configuration)
+    const resJson = await res.json()
+    
+    return resJson
+  } catch (err) {
+    return {success:false, message: err.message}
+  }
+}
+
 examsService.createExam = async (params) => {
   try {
     const configuration = {
@@ -99,6 +129,49 @@ examsService.getExam = async (examId) => {
     return {success:false, message: err.message}
   }
 }
+
+examsService.submitExam = async (examId, params) => {
+  try {
+    const configuration = {
+      headers: { ...authService.authHeader(), 'Content-Type': 'application/json' },
+      method: "POST",
+      body: JSON.stringify(params)
+    }
+    const res = await fetch(`${API_URL}/exams/submit/${examId}`, configuration)
+    const data = await res.json()
+    return data
+  } catch (err) {
+    return {success:false, message: err.message}
+  }
+}
+
+examsService.getExamData = async (examId) => {
+  try {
+    const configuration = {
+      headers: { ...authService.authHeader(), 'Content-Type': 'application/json' },
+    }
+    const res = await fetch(`${API_URL}/exams/data/${examId}`, configuration)
+    const data = await res.json()
+    return data
+  } catch (err) {
+    return {success:false, message: err.message}
+  }
+}
+
+examsService.getExamsTeacher = async (examId) => {
+  try {
+    const configuration = {
+      headers: { ...authService.authHeader(), 'Content-Type': 'application/json' },
+    }
+    const res = await fetch(`${API_URL}/exams/teacher/${examId}`, configuration)
+    const data = await res.json()
+    return data
+  } catch (err) {
+    return {success:false, message: err.message}
+  }
+}
+
+
 
 
 export default examsService

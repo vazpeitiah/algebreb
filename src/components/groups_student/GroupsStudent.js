@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react"
 import groupsService from "../../services/groups.service"
 import EnrollGroup from "./EnrollGroup"
+import Kardex from "./Kardex"
 
 const GroupsStudent = ({ user }) => {
   const [groups, setGroups] = useState([])
   const [showForm, setShowForm] = useState(false)
+  const [selectedGroup, setSelectedGroup] = useState({})
 
   useEffect(() => {
     const getGroup = async () => {
@@ -68,7 +70,10 @@ const GroupsStudent = ({ user }) => {
                 <td>{group.name}</td>
                 <td>{group.teacher.name}</td>
                 <td>
-                  <button className="btn btn-primary">
+                  <button className="btn btn-primary" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#kardex-student"
+                    onClick={() => setSelectedGroup(group)}>
                     Kardex
                   </button>
                 </td>
@@ -85,6 +90,7 @@ const GroupsStudent = ({ user }) => {
           )}
         </table>
       </div>
+      <Kardex student={user} group={selectedGroup}/>
     </div>
   )
 }
