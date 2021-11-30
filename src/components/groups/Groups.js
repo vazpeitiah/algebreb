@@ -2,8 +2,10 @@ import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import groupsService from "../../services/groups.service"
 import GroupForm from "./GroupForm"
+import ClipboardJS from "clipboard";
 
-import "./group.css"
+//Essential to copy group key
+new ClipboardJS("#copy-id");
 
 const Groups = ({ user }) => {
   const [groups, setGroups] = useState([])
@@ -38,9 +40,15 @@ const Groups = ({ user }) => {
   }
 
   const copyToClipboard = (e) => {
-    const text = e.target.innerHTML
-    navigator.clipboard.writeText(text)
-    window.alert("Se ha copiado el código de acceso al grupo")
+    const copyIcon = document.getElementById("copy-id");
+
+    if (copyIcon.className === "bi bi-check-lg link-algebreb ps-3") {
+      copyIcon.className = "bi bi-clipboard link-algebreb ps-3";
+      copyIcon.title = "Copiar";
+    } else {
+      copyIcon.className = "bi bi-check-lg link-algebreb ps-3";
+      copyIcon.title = "Copiado";
+    }
   }
 
   const handleEdit  = (group) => {
@@ -70,7 +78,7 @@ const Groups = ({ user }) => {
   }
 
   return (
-    <div className="container mt-4 p-4">
+    <div className="container mt-4 p-4 animate__animated animate__fadeInUp">
       <div className="row align-items-center">
         <div className="col">
           <h2>Tabla de grupos</h2>
@@ -106,7 +114,15 @@ const Groups = ({ user }) => {
                 <td>{group.students.length}</td>
                 <td>{group.isOpen ? "Abierto" : "Cerrado"}</td>
                 <td>
-                  <span className="copy-code btn" onClick={copyToClipboard}>{group._id}</span>
+                  {group._id}
+                  <i
+                    id="copy-id"
+                    className="bi bi-clipboard link-algebreb ps-3"
+                    title="Copiar"
+                    data-clipboard-action="copy"
+                    data-clipboard-text={group._id}
+                    onClick={copyToClipboard}
+                  />
                 </td>
                 <td>
                   <Link className={`btn btn-dark ${selectedGroup && 'disabled'}`} to={`/group/${group._id}`}>

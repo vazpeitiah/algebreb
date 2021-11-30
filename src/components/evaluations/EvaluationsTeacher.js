@@ -38,7 +38,7 @@ const EvaluationsTeacher = ({user}) => {
   }
 
   return (
-    <div className="container-fluid mt-4 p-4">
+    <div className="container-fluid mt-4 p-4 animate__animated animate__fadeInUp">
       <h2>Tabla de evaluaciones</h2>
       <div className="table-responsive">
       <table className="table table-striped">

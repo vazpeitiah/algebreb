@@ -10,7 +10,8 @@ import { useReactToPrint } from 'react-to-print';
 import helpers from '../../lib/helpers'
 import ApplyExam from './ApplyExam'
 import examsService from '../../services/exams.service'
-
+import authService from "../../services/auth.service";
+import { exportComponentAsJPEG } from 'react-component-export-image';
 
 const SheetPage = ({user}) => {
 	const [exercises, setExercises] = useState([])
@@ -84,9 +85,26 @@ const SheetPage = ({user}) => {
 
 	}
 
-	const handleDownloadPDF = () => {
-		setShowSolution(!showSolution)
-		downloadPDF()
+	const handleDownload = () => {
+		const exportType = document.getElementById("export-type").value;
+    
+    switch (exportType) {
+      case "pdf":
+        setShowSolution(!showSolution);
+        downloadPDF();
+        break;
+
+      case "latex":
+        downloadLatex();
+        break;
+
+      case "png":
+        downloadPNG();
+        break;
+    
+      default:
+        break;
+    }
 	}
 
 	const downloadPDF = useReactToPrint({
@@ -94,6 +112,78 @@ const SheetPage = ({user}) => {
 		documentTitle: currentSheet && currentSheet.description,
 		pageStyle: helpers.getPrintConfig
 	})
+
+  const createLatexDocument = () => {
+    const latexHeader =
+      "\n \\documentclass{article}\n" +
+      "% Ajustes del idioma\n" +
+      "\\usepackage[spanish]{babel}\n" +
+      "% Espacio y margenes de la hoja\n" +
+      "\\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}\n" +
+      "% Paquetes útiles\n" +
+      "\\usepackage{amsmath}\n" +
+      "\\usepackage{graphicx}\n" +
+      "\\usepackage[colorlinks=true, allcolors=blue]{hyperref}\n" +
+      "\\title{" +
+      currentSheet.description +
+      "}\n" +
+      "\\author{" +
+      authService.getCurrentUser().name +
+      "}\n" +
+      "\\begin{document}\n" +
+      "\\maketitle\n";
+
+    const latexFooter = "\n\\end{document}";
+
+    let latextBody = "";
+
+    exercises.map((exercise) => {
+      latextBody += exercise.instrucciones + "\\\\ \\\\ ";
+
+      let latexProblems = "";
+
+      latextBody += exercise.exercisesArr.map((exe, index) => {
+        latexProblems =
+          "\n" + (index += 1) + ".- " + exe.enunciado + "\n";
+
+        latexProblems += "\n \\begin{quote}";
+
+        latexProblems += exe.pasos.map((step, ind) => {
+          return "\n" + (ind += 1) + ".- " + step + "\\\\";
+        });
+
+        latexProblems += "\\\\"
+        latexProblems += "\nSolución final: " + exe.solucion + "\\\\\n";
+
+        return latexProblems + "\n \\end{quote} \n";
+      });
+
+      latextBody = latextBody.replace("\n,", "");
+
+      return latextBody;
+    });
+
+    return latexHeader + latextBody + latexFooter;
+  };
+
+  const downloadLatex = () => {
+    let doc = createLatexDocument();
+
+    doc = doc.replace(/,/g, '');
+
+    var blob = new Blob([doc, " ", 2], {
+      type: "text/plain;charset=utf-8",
+    }).slice(2, -1);
+    var url = URL.createObjectURL(blob);
+    var elem = document.createElement("a");
+    elem.href = url;
+    elem.download = currentSheet.description + ".tex";
+    document.body.appendChild(elem);
+    elem.click();
+    document.body.removeChild(elem);
+  };
+
+  const downloadPNG = () =>  exportComponentAsJPEG(componentRef);
 
 	const applyExam = async (params) => {
 		params = {...params, sheet: sheetId, type: currentSheet.type}
@@ -160,10 +250,12 @@ const SheetPage = ({user}) => {
 					</button>
 					<h5>Exportar hoja</h5>
 					<label htmlFor="format">Seleccione un formato</label>
-					<select className='form-select'>
+					<select id="export-type" className='form-select'>
 						<option value="pdf">PDF</option>
+            <option value="latex">LATEX</option>
+            <option value="png">Imagen</option>
 					</select>
-					<button className='btn btn-primary form-control mt-2 mb-2' onClick={handleDownloadPDF}>Exportar</button>
+					<button className='btn btn-primary form-control mt-2 mb-2' onClick={handleDownload}>Exportar</button>
 					{currentSheet && currentSheet.type === "examen" && (
 						<ApplyExam user={user} applyExam={applyExam} />
 					)}

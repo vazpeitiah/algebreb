@@ -18,7 +18,7 @@ const LandingPage = () => {
       <main>
         <div
           id="home"
-          className="d-flex align-items-center fill position-relative overflow-hidden text-center text-dark pb-5"
+          className="d-flex align-items-center fill position-relative overflow-hidden text-center text-dark pb-5 animate__animated animate__fadeInLeft"
         >
           <div className="col-md-5 p-lg-5 mx-auto">
             <h1 className="display-1 fw-bold my-4">ALGEBREB</h1>
