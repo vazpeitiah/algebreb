@@ -30,7 +30,7 @@ function SheetsPage({ user }) {
 	}
 
 	return (
-		<div className='container mt-4 p-4'>
+		<div className='container mt-4 p-4 animate__animated animate__fadeInUp'>
 			<div className='row align-items-center'>
 				<div className='col'>
 					<h2>Tabla de hojas</h2>

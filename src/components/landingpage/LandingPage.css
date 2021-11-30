@@ -15,7 +15,19 @@
   background-color: #0c9299 !important;
 } */
 
-@media only screen and (min-height: 800px) {
+@media only screen and (max-height: 800px) and (orientation: portrait) {
+  .fill {
+    margin-top: 6rem !important;
+    margin-bottom: 6rem !important;
+  }
+
+  .fill-login {
+    margin-top: 0rem !important;
+    margin-bottom: 0rem !important;
+  }
+}
+
+@media only screen and (min-height: 801px) {
   .fill {
     height: 92vh !important;
   }
@@ -27,10 +39,10 @@
   }
 }
 
-@media only screen and (max-width: 1300px) and (orientation : landscape) {
+@media only screen and (max-height: 800px) and (orientation : landscape) {
   .fill {
     margin-top: 2rem !important;
-    margin-bottom: 2em !important;
+    margin-bottom: 2rem !important;
   }
 
   #form-1{
@@ -76,8 +88,8 @@
   position: absolute;
   right: 10%;
   bottom: -30%;
-  width: 25em;
-  height: 25em;
+  width: 25rem;
+  height: 25rem;
   background-color: red;
   transform: rotate(30deg);
 }
@@ -88,8 +100,8 @@
   right: auto;
   left: 15%;
   bottom: 0;
-  width: 20em;
-  height: 30em;
+  width: 20rem;
+  height: 30rem;
   background-color: blue;
   transform: rotate(60deg);
 }
@@ -98,8 +110,8 @@
   position: absolute;
   right: 65%;
   bottom: -30%;
-  width: 25em;
-  height: 25em;
+  width: 25rem;
+  height: 25rem;
   border-radius: 50%;
   background-color: green;
   transform: rotate(60deg);
