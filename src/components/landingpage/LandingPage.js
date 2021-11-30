@@ -14,30 +14,29 @@ import Profile from "./Profile";
 
 const LandingPage = () => {
   return (
-    <div>
-      <main>
-        <div
-          id="home"
-          className="d-flex align-items-center fill position-relative overflow-hidden text-center text-dark pb-5"
-        >
-          <div className="col-md-5 p-lg-5 mx-auto">
-            <h1 className="display-1 fw-bold my-4">ALGEBREB</h1>
-            <p className="lead fw-normal py-5 my-4">
-              Aplicación web generadora y evaluadora de ejercicios algebraicos
-              de nivel medio superior con soluciones paso a paso.
-            </p>
-            <a className="btn btn-primary btn-lg bg-btn h5" href="#app">
-              Conocer mas
-            </a>
+    <>
+      <section>
+        <div id="home">
+          <div className="d-flex align-items-center fill fill-login position-relative overflow-hidden text-center text-dark pb-5 animate__animated animate__fadeInLeft">
+            <div className="col-md-5 p-lg-5 mx-auto">
+              <h1 className="display-1 fw-bold my-4">ALGEBREB</h1>
+              <p className="lead fw-normal py-5 my-4">
+                Aplicación web generadora y evaluadora de ejercicios algebraicos
+                de nivel medio superior con soluciones paso a paso.
+              </p>
+              <a className="btn btn-primary btn-lg bg-btn h5" href="#app">
+                Conocer mas
+              </a>
+            </div>
+            <div id="form-1" className="form-1 d-none d-md-block"></div>
+            <div id="form-2" className="form-2 d-none d-md-block"></div>
+            <div id="form-3" className="form-3 d-none d-md-block"></div>
           </div>
-          <div id="form-1" className="form-1 d-none d-md-block"></div>
-          <div id="form-2" className="form-2 d-none d-md-block"></div>
-          <div id="form-3" className="form-3 d-none d-md-block"></div>
         </div>
+      </section>
 
-        <div className="cotainer py-5"></div>
-
-        <div id="app" className="container text-dark">
+      <section id="app">
+        <div className="container pt-5 text-dark">
           <Item
             className="col-md-7 my-auto"
             title="Algebreb."
@@ -55,11 +54,14 @@ const LandingPage = () => {
 
           {/* Característcas */}
           <Features />
+        </div>
+      </section>
 
-          <hr className="featurette-divider" />
+      <hr className="featurette-divider" />
 
+      <section id="topics">
+        <div className="container">
           <Item
-            id="topics"
             className="col-md-7 my-auto"
             title="Enfocada al Álgebra."
             text="El  álgebra  es  una  de  las  asignaturas 
@@ -84,10 +86,12 @@ const LandingPage = () => {
               "Ecuaciones cuadráticas",
             ]}
           />
-
-          <hr className="featurette-divider" />
         </div>
+      </section>
 
+      <hr className="featurette-divider" />
+
+      <section>
         <div className="container text-dark">
           <h3 id="for_" className="display-6 fw-bold pb-4 text-center">
             ¿Hacia quién va dirigido?
@@ -96,23 +100,35 @@ const LandingPage = () => {
 
         <div className="container text-dark">
           <Gallery />
-          <hr className="featurette-divider" />
         </div>
+      </section>
 
-        {/* Equipos */}
-        <div id="team" className="container text-dark">
+      <hr className="featurette-divider" />
+
+      <section id="team">
+        <div className="container text-dark">
           <h3 className="display-6 fw-bold pb-5 text-center">Nuestro equipo</h3>
           <div className="row pt-5 text-center">
-            <Profile name="Vladimir Azpeitia" src={Vladi} url="https://github.com/vazpeitiah" />
-            <Profile name="Ivan Aldavera" src={Aldave} url="https://github.com/Ivan0123456789" />
-            <Profile name="Ivan Vargas" src={Vargas} url="https://github.com/FxIvan09" />
+            <Profile
+              name="Vladimir Azpeitia"
+              src={Vladi}
+              url="https://github.com/vazpeitiah"
+            />
+            <Profile
+              name="Ivan Aldavera"
+              src={Aldave}
+              url="https://github.com/Ivan0123456789"
+            />
+            <Profile
+              name="Ivan Vargas"
+              src={Vargas}
+              url="https://github.com/FxIvan09"
+            />
           </div>
         </div>
+      </section>
 
-        <div className="container">
-          <hr className="featurette-divider text-dark" />
-        </div>
-      </main>
+      <hr className="featurette-divider text-dark" />
 
       <footer className="container container.item text-dark py-5">
         <div className="row">
@@ -149,7 +165,7 @@ const LandingPage = () => {
           </div>
         </div>
       </footer>
-    </div>
+    </>
   );
 };
 

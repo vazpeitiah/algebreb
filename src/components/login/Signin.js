@@ -21,7 +21,7 @@ const Signin = (props) => {
   }
 
   return (
-    <div className="d-flex align-items-center fill container col-lg-4 my-auto">
+    <div className="d-flex align-items-center fill fill-login container col-lg-4 my-auto animate__animated animate__zoomIn">
       <div className="card col align-self-center">
         <div className="card-header text-center bg-algebreb py-3">
           <div className="algebreb-header">

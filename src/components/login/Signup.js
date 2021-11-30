@@ -25,7 +25,7 @@ const Signup = (props) => {
   };
 
   return (
-    <div className="container fill d-flex align-items-center col-xl-4 my-5 my-md-4 my-lg-auto">
+    <div className="container fill d-flex align-items-center col-xl-4 my-5 my-md-4 my-lg-auto animate__animated animate__slideInDown">
       <div className="card col align-self-center">
         <div className="card-header text-center bg-algebreb py-3">
           <div className="algebreb-header">
