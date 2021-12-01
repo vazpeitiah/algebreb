@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import groupsService from "../../services/groups.service"
+import Kardex from "../groups_student/Kardex"
 import AddStudent from "./AddStudent"
 
 const Group = () => {
   const { groupId } = useParams()
   const [currentGroup, setCurrentGroup] = useState(null)
   const [showForm, setShowForm] = useState(false)
+  const [student, setStudent] = useState(null)
 
   useEffect(() => {
     const getCurrentGroup = async () => {
@@ -68,7 +70,10 @@ const Group = () => {
               <td>{student.name}</td>
               <td>{student.username}</td>
               <td>
-                <button className="btn btn-primary">
+                <button className="btn btn-primary" 
+                  data-bs-toggle="modal" 
+                  data-bs-target="#kardex-student"
+                  onClick={() => setStudent(student._id)}>
                   Kardex
                 </button>
               </td>
@@ -79,6 +84,7 @@ const Group = () => {
         {currentGroup && currentGroup.students.length === 0 && (<caption>No hay alumnos inscritos</caption>)}
       </table>
       </div>
+      <Kardex student={student} group={groupId}/>
     </div>
   )
 }

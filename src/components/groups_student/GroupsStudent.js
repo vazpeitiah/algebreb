@@ -6,7 +6,7 @@ import Kardex from "./Kardex"
 const GroupsStudent = ({ user }) => {
   const [groups, setGroups] = useState([])
   const [showForm, setShowForm] = useState(false)
-  const [selectedGroup, setSelectedGroup] = useState({})
+  const [selectedGroup, setSelectedGroup] = useState(null)
 
   useEffect(() => {
     const getGroup = async () => {
@@ -35,9 +35,25 @@ const GroupsStudent = ({ user }) => {
       window.alert(`Error: ${response.message}`)
     }
   }
+
+  const unsubscribe = async (studentId, group) => {
+    const confirm = window.confirm("¿Realmente deseas dejar el grupo?")
+    if(confirm) {
+      const params = {
+        name: group.name,
+        teacher: group.teacher._id,
+        students: group.students.filter(student => student !== studentId),
+        isOpen: group.isOpen
+      }
+      console.log(params)
+      const updatedGroup = await groupsService.updateGroup(group._id, params)
+      console.log(updatedGroup)
+      setGroups(groups.filter(group => group._id !== updatedGroup._id))
+    }
+  }
   
   return (
-    <div className="container mt-4 p-4 animate__animated animate__fadeInUp">
+    <div className="container mt-4 p-4">
       <div className="row align-items-center">
         <div className="col">
           <h2>Tabla de grupos</h2>
@@ -73,12 +89,12 @@ const GroupsStudent = ({ user }) => {
                   <button className="btn btn-primary" 
                     data-bs-toggle="modal" 
                     data-bs-target="#kardex-student"
-                    onClick={() => setSelectedGroup(group)}>
+                    onClick={() => setSelectedGroup(group._id)}>
                     Kardex
                   </button>
                 </td>
                 <td>
-                  <button className="btn btn-danger">
+                  <button className="btn btn-danger" onClick={() => unsubscribe(user.id, group)}>
                     Abandonar grupo
                   </button>
                 </td>
@@ -90,7 +106,7 @@ const GroupsStudent = ({ user }) => {
           )}
         </table>
       </div>
-      <Kardex student={user} group={selectedGroup}/>
+      <Kardex student={user.id} group={selectedGroup}/>
     </div>
   )
 }

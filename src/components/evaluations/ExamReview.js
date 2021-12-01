@@ -44,15 +44,21 @@ const ExamReview = () => {
 
   return (
     <div className="container p-4">
+      <div className="d-flex justify-content-between">
+        <h2>Revisión de: {data && data.exam.sheet.description}</h2>
+        <button className="btn btn-secondary" onClick={() => history.goBack()}>
+          Regresar
+        </button>
+      </div>
+      <hr/>
       <div className="table-responsive">
       <table className="table">
         <thead>
           <tr>
-            <th>Nombre</th>
+            <th>Nombre de la hoja</th>
             <th>Grupo</th>
             <th>Calificación</th>
             <th>Estado</th>
-            <th></th>
             <th></th>
           </tr>
         </thead>
@@ -71,11 +77,6 @@ const ExamReview = () => {
             <td>
               <button className="btn btn-warning">
                 Retroalimentación
-              </button>
-            </td>
-            <td>
-              <button className="btn btn-secondary" onClick={() => history.goBack()}>
-                Regresar
               </button>
             </td>
           </tr>

@@ -8,7 +8,7 @@ const Kardex = ({student, group}) => {
 
   useEffect(() => {
     const getExams = async () => {
-      const response = await examsService.getKardex(student.id, group._id)
+      const response = await examsService.getKardex(student, group)
       if(response && response.success) {
         setEvaluations(response.exams)
         
@@ -23,7 +23,7 @@ const Kardex = ({student, group}) => {
       }
     }
     getExams()
-  }, [student, group._id])
+  }, [student, group])
   
 
   return (
@@ -31,7 +31,7 @@ const Kardex = ({student, group}) => {
       <div className="modal-dialog modal-xl">
       <div className="modal-content">
         <div className="modal-header">
-          <h5 className="modal-title">Kardex del grupo {group && group.name}</h5>
+          <h5 className="modal-title">Kardex del estudiante</h5>
           <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div className="modal-body">
