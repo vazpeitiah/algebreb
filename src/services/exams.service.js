@@ -2,8 +2,8 @@ import authService from "./auth.service"
 
 const examsService = {}
 
-const API_URL = 'http://localhost:5000'
-//const API_URL = 'https://algebreb-api.herokuapp.com'
+//const API_URL = 'http://localhost:5000'
+const API_URL = 'https://algebreb-api.herokuapp.com'
 
 examsService.getExamsStudent = async (userId) => {
   const configuration = {
