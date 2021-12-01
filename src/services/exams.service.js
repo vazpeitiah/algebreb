@@ -2,8 +2,8 @@ import authService from "./auth.service"
 
 const examsService = {}
 
-//const API_URL = 'http://localhost:5000'
-const API_URL = 'https://algebreb-api.herokuapp.com'
+const API_URL = 'http://localhost:5000'
+//const API_URL = 'https://algebreb-api.herokuapp.com'
 
 examsService.getExamsStudent = async (userId) => {
   const configuration = {
@@ -138,6 +138,21 @@ examsService.submitExam = async (examId, params) => {
       body: JSON.stringify(params)
     }
     const res = await fetch(`${API_URL}/exams/submit/${examId}`, configuration)
+    const data = await res.json()
+    return data
+  } catch (err) {
+    return {success:false, message: err.message}
+  }
+}
+
+examsService.updateExamApply = async (examId, params) => {
+  try {
+    const configuration = {
+      headers: { ...authService.authHeader(), 'Content-Type': 'application/json' },
+      method: "PUT",
+      body: JSON.stringify(params)
+    }
+    const res = await fetch(`${API_URL}/exams/data/${examId}`, configuration)
     const data = await res.json()
     return data
   } catch (err) {

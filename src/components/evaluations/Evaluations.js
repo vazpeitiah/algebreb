@@ -2,11 +2,14 @@ import {useEffect, useState} from 'react'
 import { Link, useParams, useHistory} from "react-router-dom"
 import helpers from '../../lib/helpers'
 import examsService from '../../services/exams.service'
+import SendFeedback from './SendFeedback'
 
 const Evaluations = () => {
   const { examId } = useParams()
+  let history = useHistory()
   const [data, setData] = useState(null)
   const [exams, setExams] = useState([])
+  const [selectedExam, setSelectedExam] = useState(null)
 
   useEffect(() => {
     const getExamData = async () => {
@@ -31,9 +34,23 @@ const Evaluations = () => {
     getExams()
   }, [examId])
 
+  const sendFeed = async (examId, params) => {
+    const res = await examsService.updateExamApply(examId, params)
+    if(res && res.success) {
+      setExams([...exams.filter(exam => exam._id !== examId), res.exam])
+    } else {
+      window.alert(res.message)
+    }
+  }
+
   return (
     <div className="container mt-4 p-4">
-      <h2>Información de {data && data.sheet.description}</h2>
+      <div className="d-flex justify-content-between">
+        <h2>Información de {data && data.sheet.description}</h2>
+        <button className="btn btn-secondary" onClick={() => history.goBack()}>
+          Regresar
+        </button>
+      </div>
         <p><b>Grupo:</b> {data && data.group.name}</p>        
         <p><b>Fecha inicio:</b> {data && helpers.formatDate(data.startDate)}</p>
         <p><b>Fecha inicio:</b> {data && helpers.formatDate(data.endDate)}</p>
@@ -68,7 +85,10 @@ const Evaluations = () => {
                 </Link>
               </td>
               <td>
-                <button className="btn btn-primary">
+                <button className="btn btn-primary"
+                  data-bs-toggle="modal" 
+                  data-bs-target="#send_feedback"
+                  onClick={() => setSelectedExam(exam)}>
                   Enviar retroalimentación
                 </button>
               </td>
@@ -77,6 +97,7 @@ const Evaluations = () => {
         </tbody>
       </table>
       </div>
+      <SendFeedback exam={selectedExam} sendFeed={sendFeed} />
     </div>
   )
 }
