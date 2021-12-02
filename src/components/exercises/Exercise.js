@@ -5,7 +5,7 @@ import { InlineMath } from 'react-katex';
 const Exercise = ({ exercise, index, tipoRespuesta }) => {
 	/* const [isSolToggle, setIsSolToggle] = useState(false) */
 	return (
-		<div className="col-lg-6">
+		<div className="col-md-6">
 			{exercise.enunciado && 
 				(<span><b>{index})</b> <InlineMath math={exercise.enunciado} /></span>) 
 			}

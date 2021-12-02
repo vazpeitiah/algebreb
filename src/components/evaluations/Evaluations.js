@@ -51,13 +51,37 @@ const Evaluations = () => {
           Regresar
         </button>
       </div>
-        <p><b>Grupo:</b> {data && data.group.name}</p>        
-        <p><b>Fecha inicio:</b> {data && helpers.formatDate(data.startDate)}</p>
-        <p><b>Fecha inicio:</b> {data && helpers.formatDate(data.endDate)}</p>
-        <p><b>Estado:</b> {data && helpers.getStateExam(data.startDate, data.endDate)}</p>
+      <div className="table-responsive">
+      <table className="table table-borderless">
+        <thead>
+          <tr>
+            <th>Grupo:</th>
+            <th>Fecha inicio:</th>
+            <th>Fecha fin:</th>
+            <th>Estado:</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {data && (
+          <tr>
+            <td>{data.group.name}</td>
+            <td>{helpers.formatDate(data.startDate)}</td>
+            <td>{helpers.formatDate(data.endDate)}</td>
+            <td>{helpers.getStateExam(data.startDate, data.endDate)}</td>
+            <td>
+            <Link className="btn btn-primary" to={`/sheet/${data && data.sheet._id}`}>
+              Editar hoja
+            </Link>
+            </td>
+          </tr>
+          )}
+        </tbody>
+      </table>
+      </div>
       <h4>Tabla de evaluaciones</h4>
       <div className="table-responsive">
-      <table className="table">
+      <table className="table table-striped">
         <thead>
           <tr>
             <th>#</th>
