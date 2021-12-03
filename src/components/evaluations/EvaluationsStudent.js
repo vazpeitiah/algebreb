@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import examsService from '../../services/exams.service'
+import helpers from '../../lib/helpers'
 
 const EvaluationsStudent = ({user}) => {
   const [evaluations, setEvaluations] = useState([])
@@ -40,14 +41,11 @@ const EvaluationsStudent = ({user}) => {
             <td>{index + 1}</td>
             <td>{evaluation.exam.sheet.description}</td>
             <td>{evaluation.exam.group.name}</td>
-            <td>{new Date(evaluation.exam.startDate).toLocaleString()}</td>
-            <td>{evaluation.duration}</td>
+            <td>{helpers.formatDate(evaluation.exam.startDate)}</td>
+            <td>{helpers.getDurationHRS(evaluation.exam.startDate, evaluation.exam.endDate)}</td>
             <td>{evaluation.grade + '/10'}</td>
             <td>
-              {evaluation.isActive 
-                ? (<span className="text-danger">Sin resolver <i className="bi bi-x-circle"></i></span>) 
-                : (<span className="text-success">Resuelto <i className="bi bi-check-circle"></i></span>)
-              }
+              {helpers.getStateExam(evaluation.exam.startDate, evaluation.exam.endDate)}
             </td>
             <td>
               { new Date() >= new Date(evaluation.exam.startDate) && new Date() < new Date(evaluation.exam.endDate)

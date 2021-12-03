@@ -6,6 +6,7 @@ import ShowSolution from './ShowSolution';
 /* react-katex */
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
+import Feeback from './Feeback';
 
 
 const ExamReview = () => {
@@ -14,6 +15,7 @@ const ExamReview = () => {
   const labels = ['a', 'b', 'c', 'd']
   const [answers, setAnswers] = useState([])
   const [exercise, setExercise] = useState(null)
+  const [feed, setFeed] = useState('')
 
   let history = useHistory()
 
@@ -44,15 +46,21 @@ const ExamReview = () => {
 
   return (
     <div className="container p-4">
+      <div className="d-flex justify-content-between">
+        <h2>Revisión de: {data && data.exam.sheet.description}</h2>
+        <button className="btn btn-secondary" onClick={() => history.goBack()}>
+          Regresar
+        </button>
+      </div>
+      <hr/>
       <div className="table-responsive">
       <table className="table">
         <thead>
           <tr>
-            <th>Nombre</th>
+            <th>Nombre de la hoja</th>
             <th>Grupo</th>
             <th>Calificación</th>
             <th>Estado</th>
-            <th></th>
             <th></th>
           </tr>
         </thead>
@@ -69,13 +77,11 @@ const ExamReview = () => {
               }
             </td>
             <td>
-              <button className="btn btn-warning">
-                Retroalimentación
-              </button>
-            </td>
-            <td>
-              <button className="btn btn-secondary" onClick={() => history.goBack()}>
-                Regresar
+              <button className="btn btn-primary"
+                data-bs-toggle="modal" 
+                data-bs-target="#feedback"
+                onClick={() => setFeed(data.feedback)}>
+                Ver retroalimentación
               </button>
             </td>
           </tr>
@@ -92,8 +98,8 @@ const ExamReview = () => {
                 (<div className="card-header d-flex justify-content-between">
                   <h6><b>{idx + 1})</b> <InlineMath math={ex.enunciado} /></h6>
                   {ex.solucion === getAnswer(index, idx) 
-                    ? (<span className="text-success">Correcto <i class="bi bi-check-square-fill"></i></span>)
-                    : (<span className="text-danger">Incorrecto <i class="bi bi-x-square-fill"></i></span>)
+                    ? (<span className="text-success">Correcto <i className="bi bi-check-square-fill"></i></span>)
+                    : (<span className="text-danger">Incorrecto <i className="bi bi-x-square-fill"></i></span>)
                   }
                 </div>) 
               }
@@ -116,7 +122,7 @@ const ExamReview = () => {
                   ))
               }
               </div>
-              <div class="card-footer bg-transparent d-flex justify-content-end">
+              <div className="card-footer bg-transparent d-flex justify-content-end">
                 <button className="btn btn-primary" 
                   data-bs-toggle="modal" 
                   data-bs-target="#SolutionModal"
@@ -129,6 +135,7 @@ const ExamReview = () => {
         </div>
       ))}
       <ShowSolution exercise={exercise} />
+      <Feeback feed={feed}/>
     </div>
   )
 }

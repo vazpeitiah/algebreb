@@ -38,7 +38,7 @@ const EvaluationsTeacher = ({user}) => {
   }
 
   return (
-    <div className="container-fluid mt-4 p-4 animate__animated animate__fadeInUp">
+    <div className="container mt-4 p-4">
       <h2>Tabla de evaluaciones</h2>
       <div className="table-responsive">
       <table className="table table-striped">
@@ -48,10 +48,8 @@ const EvaluationsTeacher = ({user}) => {
             <th>Grupo</th>
             <th>Nombre</th>
             <th>Fecha Inicio</th>
-            <th>Fecha Fin</th>
             <th>Duración</th>
             <th>Estado</th>
-            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -64,17 +62,11 @@ const EvaluationsTeacher = ({user}) => {
             <td>{ev.group.name}</td>
             <td>{ev.sheet.description}</td>
             <td>{helpers.formatDate(ev.startDate)}</td>
-            <td>{helpers.formatDate(ev.endDate)}</td>
             <td>{helpers.getDurationHRS(ev.startDate, ev.endDate)}</td>
             <td>{helpers.getStateExam(ev.startDate, ev.endDate)}</td>
             <td>
               <Link to={`/evaluations/admin/${ev._id}`} className="btn btn-secondary">
                 Administrar
-              </Link>
-            </td>
-            <td>
-              <Link to={`/sheet/${ev.sheet._id}`} className="btn btn-secondary">
-                Ver hoja
               </Link>
             </td>
             <td>

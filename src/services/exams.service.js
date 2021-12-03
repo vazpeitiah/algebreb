@@ -145,6 +145,21 @@ examsService.submitExam = async (examId, params) => {
   }
 }
 
+examsService.updateExamApply = async (examId, params) => {
+  try {
+    const configuration = {
+      headers: { ...authService.authHeader(), 'Content-Type': 'application/json' },
+      method: "PUT",
+      body: JSON.stringify(params)
+    }
+    const res = await fetch(`${API_URL}/exams/data/${examId}`, configuration)
+    const data = await res.json()
+    return data
+  } catch (err) {
+    return {success:false, message: err.message}
+  }
+}
+
 examsService.getExamData = async (examId) => {
   try {
     const configuration = {
