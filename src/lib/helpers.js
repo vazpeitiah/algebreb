@@ -87,6 +87,13 @@ helpers.getDuration = (sdate, edate) => {
 	return moment.duration(diff, "milliseconds").format("d [days] h [hrs], m [min]")
 }
 
+helpers.timeLeft = (sdate, edate) => {
+	const startDate = new Date(sdate)
+	const endDate = new Date(edate)
+	const diff = endDate.getTime() - startDate.getTime()
+	return `${moment.duration(diff, "milliseconds").format("hh:mm:ss")}`
+}
+
 helpers.formatDate = (date) => {
 	return moment(date).format('D/MM/YYYY hh:mm a')
 }

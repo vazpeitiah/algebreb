@@ -7,6 +7,7 @@ import ShowSolution from './ShowSolution';
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
 import Feeback from './Feeback';
+import ViewImages from './ViewImages';
 
 
 const ExamReview = () => {
@@ -62,6 +63,7 @@ const ExamReview = () => {
             <th>Calificación</th>
             <th>Estado</th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -82,6 +84,14 @@ const ExamReview = () => {
                 data-bs-target="#feedback"
                 onClick={() => setFeed(data.feedback)}>
                 Ver retroalimentación
+              </button>
+            </td>
+            <td>
+              <button className="btn btn-primary"
+                data-bs-toggle="modal" 
+                data-bs-target="#view_images"
+                onClick={() => setFeed(data.feedback)}>
+                Ver procedimientos
               </button>
             </td>
           </tr>
@@ -135,6 +145,7 @@ const ExamReview = () => {
         </div>
       ))}
       <ShowSolution exercise={exercise} />
+      <ViewImages images={data ? data.images : []}/>
       <Feeback feed={feed}/>
     </div>
   )
