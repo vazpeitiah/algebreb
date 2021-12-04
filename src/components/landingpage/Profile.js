@@ -1,12 +1,14 @@
 const Profile = (props) => {
+  const url = "https://avatars.githubusercontent.com/u/" + props.src 
+  const profile_url = "https://github.com/" + props.url
   return (
     <div className="col-lg-4">
-      <a href={props.url} target="_blank" rel="noreferrer">
+      <a href={profile_url} target="_blank" rel="noreferrer">
         <img
-          className="bd-placeholder-img rounded-circle"
+          className="bd-placeholder-img rounded"
           width="140"
           height="140"
-          src={props.src}
+          src={url}
           alt="name-user"
         />
       </a>

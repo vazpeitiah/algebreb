@@ -2,9 +2,6 @@ import "./LandingPage.css";
 
 import Exam from "../../assets/img/app.jpg";
 import Math from "../../assets/img/math.jpg";
-import Vladi from "../../assets/img/vladimir.png";
-import Aldave from "../../assets/img/aldavera.jpeg";
-import Vargas from "../../assets/img/vargas.jpeg";
 
 import Item from "./Item";
 import Gallery from "./Gallery";
@@ -14,15 +11,16 @@ import Profile from "./Profile";
 
 const LandingPage = () => {
   return (
-    <div>
+    <div id="fullpagejs">
       <main>
+        <div className="section"></div>
         <div
           id="home"
-          className="d-flex align-items-center fill position-relative overflow-hidden text-center text-dark pb-5 animate__animated animate__fadeInLeft"
+          className="d-flex align-items-center fill position-relative overflow-hidden text-center text-dark pb-lg-5 animate__animated animate__fadeInLeft"
         >
           <div className="col-md-5 p-lg-5 mx-auto">
-            <h1 className="display-1 fw-bold my-4">ALGEBREB</h1>
-            <p className="lead fw-normal py-5 my-4">
+            <h1 className="display-1 fw-bold my-md-4 my-lg-4">ALGEBREB</h1>
+            <p className="lead fw-normal py-5 my-md-4 my-lg-4">
               Aplicación web generadora y evaluadora de ejercicios algebraicos
               de nivel medio superior con soluciones paso a paso.
             </p>
@@ -35,11 +33,11 @@ const LandingPage = () => {
           <div id="form-3" className="form-3 d-none d-md-block"></div>
         </div>
 
-        <div className="cotainer py-5"></div>
+        <div id="app" className="container pt-5 text-dark">
+          <hr className="divider" />
 
-        <div id="app" className="container text-dark">
           <Item
-            className="col-md-7 my-auto"
+            className="col-md-7 col-lg-7 my-auto"
             title="Algebreb."
             text="Una aplicación web capaz de generar ejercicios
             de álgebra junto con sus soluciones paso a paso.
@@ -55,11 +53,11 @@ const LandingPage = () => {
 
           {/* Característcas */}
           <Features />
-
-          <hr className="featurette-divider" />
+        </div>
+        <div id="topics" className="container pt-5 text-dark">
+          <hr className="divider" />
 
           <Item
-            id="topics"
             className="col-md-7 my-auto"
             title="Enfocada al Álgebra."
             text="El  álgebra  es  una  de  las  asignaturas 
@@ -103,18 +101,25 @@ const LandingPage = () => {
         <div id="team" className="container text-dark">
           <h3 className="display-6 fw-bold pb-5 text-center">Nuestro equipo</h3>
           <div className="row pt-5 text-center">
-            <Profile name="Vladimir Azpeitia" src={Vladi} url="https://github.com/vazpeitiah" />
-            <Profile name="Ivan Aldavera" src={Aldave} url="https://github.com/Ivan0123456789" />
-            <Profile name="Ivan Vargas" src={Vargas} url="https://github.com/FxIvan09" />
+            <Profile
+              name="Ivan Aldavera"
+              src="45408554?v=4"
+              url="Ivan0123456789"
+            />
+            <Profile
+              name="Vladimir Azpeitia"
+              src="13912287?v=4"
+              url="vazpeitiah"
+            />
+            <Profile name="Ivan Vargas" src="37196822?v=4" url="FxIvan09" />
           </div>
         </div>
 
-        <div className="container">
-          <hr className="featurette-divider text-dark" />
-        </div>
+        <div className="container"></div>
       </main>
 
-      <footer className="container container.item text-dark py-5">
+      <footer className="container container.item">
+        <hr className="featurette-divider text-dark" />
         <div className="row">
           <div className="d-flex flex-row-reverse">
             <small className="px-3 text-muted">&copy;Algebreb</small>

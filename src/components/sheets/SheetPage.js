@@ -144,16 +144,16 @@ const SheetPage = ({user}) => {
 
       latextBody += exercise.exercisesArr.map((exe, index) => {
         latexProblems =
-          "\n" + (index += 1) + ".- " + exe.enunciado + "\n";
+          "\n \\( " + (index += 1) + ".- " + exe.enunciado + "\\) \n";
 
         latexProblems += "\n \\begin{quote}";
 
         latexProblems += exe.pasos.map((step, ind) => {
-          return "\n" + (ind += 1) + ".- " + step + "\\\\";
+          return "\n \\( " + (ind += 1) + ".- " + step + " \\) \n \\\\";
         });
 
         latexProblems += "\\\\"
-        latexProblems += "\nSolución final: " + exe.solucion + "\\\\\n";
+        latexProblems += "\n \\( Solución final: " + exe.solucion + " \\) \n \\\\\n";
 
         return latexProblems + "\n \\end{quote} \n";
       });

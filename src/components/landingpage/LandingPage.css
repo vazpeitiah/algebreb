@@ -29,13 +29,17 @@
 
 @media only screen and (min-height: 801px) {
   .fill {
-    height: 92vh !important;
+    height: 93vh !important;
   }
 }
 
 @media only screen and (max-width: 1300px) and (orientation: portrait) {
   .fill{
-    height: 92vh !important;
+    height: 93vh !important;
+  }
+
+  #form-1{
+    display: none !important;
   }
 }
 
@@ -59,7 +63,16 @@
 }
 
 .landing {
-  height: 92vh !important;
+  height: 93vh !important;
+}
+
+.bg-algebreb {
+  background-color: #eeeeee !important;
+}
+
+.bg-algebreb-dark {
+  background-color: #222831 !important;
+  /*background-color:  #eeeeee !important;*/
 }
 
 .bd-placeholder-img {
@@ -75,10 +88,12 @@
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   backdrop-filter: saturate(180%) blur(20px);
 }
+
 .site-header a {
   color: #eeeeee;
   transition: color 0.15s ease-in-out;
 }
+
 .site-header a:hover {
   color: #eeeeee;
   font-weight: bold;
@@ -86,34 +101,34 @@
 
 .form-1 {
   position: absolute;
-  right: 10%;
-  bottom: -30%;
+  right: -12%;
+  bottom: 10%;
   width: 25rem;
   height: 25rem;
-  background-color: red;
+  background-color: rgb(224, 86, 86);
   transform: rotate(30deg);
 }
 
 .form-2 {
   position: absolute;
-  top: -45%;
+  top: -35%;
   right: auto;
   left: 15%;
   bottom: 0;
   width: 20rem;
   height: 30rem;
-  background-color: blue;
+  background-color: rgb(81, 81, 216);
   transform: rotate(60deg);
 }
 
 .form-3 {
   position: absolute;
-  right: 65%;
-  bottom: -30%;
+  right: 90%;
+  bottom: 0%;
   width: 25rem;
   height: 25rem;
   border-radius: 50%;
-  background-color: green;
+  background-color: rgb(56, 196, 56);
   transform: rotate(60deg);
 }
 
@@ -125,6 +140,12 @@
 
 .featurette-divider {
   margin: 5rem 0;
+}
+
+.divider {
+  margin: 2rem 0;
+  color: white !important;
+  background-color: white !important;
 }
 
 .featurette-heading {
