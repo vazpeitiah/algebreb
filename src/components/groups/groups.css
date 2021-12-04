@@ -1,0 +1,8 @@
+.copy-id:hover{
+    cursor: pointer !important;
+}
+
+.group-key{
+    background-color: rgba(230, 223, 223, 0.897) !important;
+    color: #222831 !important;
+}

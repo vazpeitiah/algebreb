@@ -1,81 +1,88 @@
-import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
-import groupsService from "../../services/groups.service"
-import GroupForm from "./GroupForm"
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import groupsService from "../../services/groups.service";
+import GroupForm from "./GroupForm";
 import ClipboardJS from "clipboard";
+
+import "./groups.css"
 
 //Essential to copy group key
 new ClipboardJS("#copy-id");
 
 const Groups = ({ user }) => {
-  const [groups, setGroups] = useState([])
-  const [showForm, setShowForm] = useState(false)
-  const [selectedGroup, setSelectedGroup] = useState(null)
+  const [groups, setGroups] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+  const [selectedGroup, setSelectedGroup] = useState(null);
 
   useEffect(() => {
     const getGroups = async () => {
-      const groupsFromServer = await fethGroupsByTeacher(user.id)
-      setGroups(groupsFromServer)
-    }
-    getGroups()
-  }, [user.id])
+      const groupsFromServer = await fethGroupsByTeacher(user.id);
+      setGroups(groupsFromServer);
+    };
+    getGroups();
+  }, [user.id]);
 
   const fethGroupsByTeacher = async (teacherId) => {
-    const groupsFromServer = await groupsService.getGroupsByUser(teacherId)
-    return groupsFromServer
-  }
+    const groupsFromServer = await groupsService.getGroupsByUser(teacherId);
+    return groupsFromServer;
+  };
 
   const deleteGroup = async (groupId) => {
-    const yes = window.confirm("¿Realmente deseas borrar el grupo?")
+    const yes = window.confirm("¿Realmente deseas borrar el grupo?");
     if (yes) {
-      await groupsService.deleteGroup(groupId)
-      setGroups(groups.filter((group) => group._id !== groupId))
+      await groupsService.deleteGroup(groupId);
+      setGroups(groups.filter((group) => group._id !== groupId));
     }
-  }
+  };
 
   const addGroup = async (params) => {
-    params.teacher = user.id
-    const newGroup = await groupsService.addGroup(params)
-    setGroups([...groups, newGroup])
-  }
+    params.teacher = user.id;
+    const newGroup = await groupsService.addGroup(params);
+    setGroups([...groups, newGroup]);
+  };
 
   const copyToClipboard = (e) => {
     const copyIcon = document.getElementById("copy-id");
 
-    if (copyIcon.className === "bi bi-check-lg link-algebreb ps-3") {
-      copyIcon.className = "bi bi-clipboard link-algebreb ps-3";
+    if (copyIcon.className === "copy-id bi bi-check-lg link-algebreb ps-3") {
+      copyIcon.className = "copy-id bi bi-clipboard link-algebreb ps-3";
       copyIcon.title = "Copiar";
     } else {
-      copyIcon.className = "bi bi-check-lg link-algebreb ps-3";
+      copyIcon.className = "copy-id bi bi-check-lg link-algebreb ps-3";
       copyIcon.title = "Copiado";
+      
+      setTimeout(() => {
+        copyIcon.className = "copy-id bi bi-clipboard link-algebreb ps-3";
+        copyIcon.title = "Copiar";
+      }, 1000);
     }
-  }
+  };
 
-  const handleEdit  = (group) => {
-    setShowForm(false)
-    setSelectedGroup(group)
-    setGroups([group])
-    setShowForm(true)
-  }
+  const handleEdit = (group) => {
+    setShowForm(false);
+    setSelectedGroup(group);
+    setGroups([group]);
+    setShowForm(true);
+  };
 
-  const handleHide  = async () => {
-    setShowForm(!showForm)
-    if(selectedGroup) {
-      const groups = await fethGroupsByTeacher(user.id)
-      setGroups(groups)
-      setSelectedGroup(null)
+  const handleHide = async () => {
+    setShowForm(!showForm);
+    if (selectedGroup) {
+      const groups = await fethGroupsByTeacher(user.id);
+      setGroups(groups);
+      setSelectedGroup(null);
     }
-  }
+  };
 
   const updateGroup = async (groupId, params) => {
-    await groupsService.updateGroup(groupId, params)
-    
-    const groups = await fethGroupsByTeacher(user.id)
-    setGroups(groups)
+    await groupsService.updateGroup(groupId, params);
 
-    setShowForm(false)
-    setSelectedGroup(null)
-  }
+    const groups = await fethGroupsByTeacher(user.id);
+    setGroups(groups);
+
+    setShowForm(false);
+    setSelectedGroup(null);
+  };
 
   return (
     <div className="container mt-4 p-4 animate__animated animate__fadeInUp">
@@ -92,9 +99,15 @@ const Groups = ({ user }) => {
           </button>
         </div>
       </div>
-      {showForm && <GroupForm addGroup={addGroup} updateGroup={updateGroup} group={selectedGroup} />}
+      {showForm && (
+        <GroupForm
+          addGroup={addGroup}
+          updateGroup={updateGroup}
+          group={selectedGroup}
+        />
+      )}
       <div className="table-responsive">
-        <table className="table table-striped">
+        <table className="table">
           <thead>
             <tr>
               <th>#</th>
@@ -114,10 +127,10 @@ const Groups = ({ user }) => {
                 <td>{group.students.length}</td>
                 <td>{group.isOpen ? "Abierto" : "Cerrado"}</td>
                 <td>
-                  {group._id}
+                  <span className="span group-key">{group._id}</span>
                   <i
                     id="copy-id"
-                    className="bi bi-clipboard link-algebreb ps-3"
+                    className="copy-id bi bi-clipboard link-algebreb ps-3"
                     title="Copiar"
                     data-clipboard-action="copy"
                     data-clipboard-text={group._id}
@@ -125,15 +138,20 @@ const Groups = ({ user }) => {
                   />
                 </td>
                 <td>
-                  <Link className={`btn btn-dark ${selectedGroup && 'disabled'}`} to={`/group/${group._id}`}>
+                  <Link
+                    className={`btn btn-dark ${selectedGroup && "disabled"}`}
+                    to={`/group/${group._id}`}
+                  >
                     Ver alumnos
                   </Link>
                 </td>
                 <td>
-                  <button type="button" 
-                    className="btn btn-primary" 
-                    onClick={() => handleEdit(group)} 
-                    disabled={selectedGroup ? true : false} >
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={() => handleEdit(group)}
+                    disabled={selectedGroup ? true : false}
+                  >
                     Editar
                   </button>
                 </td>
@@ -155,7 +173,7 @@ const Groups = ({ user }) => {
         </table>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Groups
+export default Groups;
