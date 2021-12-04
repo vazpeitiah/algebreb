@@ -5,8 +5,8 @@ const Features = () => {
     "Generación de evaluaciones en línea", "Exportado a PDF", "Exportado a imagen", "Exportado a LaTeX"];
 
   const listFeatures = features.map((feature, index) =>
-    <div className="col d-flex align-items-start py-4" key={index}>
-      <div className="icon-square text-dark flex-shrink-0 me-3">
+    <div className="col d-flex align-items-start py-3" key={index}>
+      <div className="icon-square text-dark flex-shrink-0 me-2">
         <Icon.GearFill className="bi icon-blue" />
       </div>
       <div>
@@ -14,9 +14,9 @@ const Features = () => {
       </div>
     </div>);
   return (
-    <div id="features" className="container px-4 pt-5">
+    <div id="features" className="container px-2 pt-3">
       <h2 className="pb-2 border-bottom">Características</h2>
-      <div className="row g-4 py-5 row-cols-1 row-cols-lg-3">
+      <div className="row g-2 py-3 row-cols-1 row-cols-lg-3">
         {listFeatures}
       </div>
     </div>
