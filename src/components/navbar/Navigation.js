@@ -78,7 +78,7 @@ const Navigation = () => {
                   <Link className="nav-link dropdown-toggle" to="/profile" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i className="bi bi-person-circle"></i> {user.username}
                   </Link>
-                  <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <ul className="dropdown-menu dropdown-menu-dark dm-dark" aria-labelledby="navbarDropdown">
                     <li><Link className="dropdown-item" to="/profile">Perfil</Link></li>
                     <li><button className="dropdown-item" onClick={logout}>Cerrar sesión</button></li>
                   </ul>

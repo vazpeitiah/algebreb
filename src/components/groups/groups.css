@@ -1,8 +1,79 @@
-.copy-id:hover{
-    cursor: pointer !important;
+.copy-id:hover {
+  cursor: pointer !important;
 }
 
-.group-key{
-    background-color: rgba(230, 223, 223, 0.897) !important;
-    color: #222831 !important;
+.group-key {
+  background-color: rgba(230, 223, 223, 0.897) !important;
+  color: #222831 !important;
 }
+
+.btn-watch {
+  color: white !important;
+  background-color: #627677 !important;
+  border: #708485 !important;
+}
+
+.btn-watch:hover {
+  background-color: #5b6a6b !important;
+}
+
+.btn-watch:focus {
+  background-color: #5b6a6b !important;
+  border: #5b6a6b !important;
+  box-shadow: 0 2px 3px 0 #6f7d7e;
+}
+
+.btn-primary {
+  background-color: #00adb5 !important;
+  border: #048a91 !important;
+}
+
+.btn-primary:hover {
+  background-color: #0c9299 !important;
+  border: #0a8f96 !important;
+}
+
+.btn-primary:focus {
+  background-color: #0c9299 !important;
+  border: #0c9299 !important;
+  box-shadow: 0 2px 3px 0 #0a7379;
+}
+
+.btn-danger {
+  background-color: #cc4c4c !important;
+  border: #ad4444 !important;
+}
+
+.btn-danger:focus {
+  background-color: #cc4c4c !important;
+  border: #ad4444 !important;
+  box-shadow: 0 2px 3px 0 #d45656;
+}
+
+.btn-success {
+  background-color: #3eb15b !important;
+  border: #33974c !important; 
+}
+
+.btn-success:hover {
+  background-color: #309e4c !important; 
+}
+
+.btn-success:focus {
+  background-color: #309e4c !important;
+  border: #309e4c !important;
+  box-shadow: 0 2px 3px 0 #3ba857;
+}
+
+.btn-dark{
+  background-color: #222831 !important;
+}
+
+.btn-danger:hover,
+.btn-danger:active,
+.btn-danger:visited {
+  background-color: #b64646 !important;
+  border: #a33838 !important;
+}
+
+
