@@ -58,7 +58,7 @@ const GroupForm = ({ addGroup, updateGroup, group }) => {
           onChange={() => setIsOpen(!isOpen)}
         />
       </div>
-      <div className="col">
+      <div className="col-3">
         <button type="submit" className="btn btn-success form-control">
           {group ? (
             <>
