@@ -11,6 +11,11 @@
   color: #eeeeee;
 }
 
+#nav .nav-link:focus{
+  background-color: #00ADB5;
+  color: white;
+}
+
 /* #nav #btn-signup, #btn-signin{
   border-width: 1px;
   border-style: solid;
