@@ -44,6 +44,11 @@
   border: #ad4444 !important;
 }
 
+.btn-danger:hover {
+  background-color: #b63b3b !important;
+  border: rgb(163, 48, 48) !important;
+}
+
 .btn-danger:focus {
   background-color: #cc4c4c !important;
   border: #ad4444 !important;
@@ -68,12 +73,3 @@
 .btn-dark{
   background-color: #222831 !important;
 }
-
-.btn-danger:hover,
-.btn-danger:active,
-.btn-danger:visited {
-  background-color: #b64646 !important;
-  border: #a33838 !important;
-}
-
-
