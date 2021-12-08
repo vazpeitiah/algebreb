@@ -70,6 +70,29 @@
   box-shadow: 0 2px 3px 0 #3ba857;
 }
 
+.btn-info {
+  background-color: #098edb !important;
+  color: white !important;
+  border: #0c7fc2 !important; 
+}
+
+.btn-info:hover {
+  background-color: #0a72af !important; 
+  color: white !important;
+}
+
+.btn-info:focus {
+  background-color: #098edb !important;
+  color: white !important;
+  border: #0c7fc2 !important;
+  box-shadow: 0 2px 3px 0 #0c7fc2;
+}
+
 .btn-dark{
   background-color: #222831 !important;
+}
+
+.border-info {
+  border-radius: 1em;
+  border-color: #098edb;
 }

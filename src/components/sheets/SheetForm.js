@@ -18,13 +18,13 @@ const SheetForm = ({ addSheet, user }) => {
     <form onSubmit={handleSubmit} 
       className="row align-items-center border rounded p-2">
       <div className="col-auto">
-        <label htmlFor="description">Description:</label>
+        <label htmlFor="description">Nombre:</label>
       </div>
       <div className="col">
         <input type="text"
           className="form-control"
           id="description"
-          placeholder="Descripción"
+          placeholder="Nombre de la hoja"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           autoComplete="off"
