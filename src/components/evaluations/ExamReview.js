@@ -49,7 +49,7 @@ const ExamReview = () => {
   return (
     <div className="container p-4">
       <div className="d-flex justify-content-between">
-        <h2>Revisión de: {data && data.exam.sheet.description}</h2>
+        <h2>Revisión de: {data && data.sheet.description}</h2>
         <button className="btn btn-secondary" onClick={() => history.goBack()}>
           {svgIcon.back}
           Regresar
@@ -71,7 +71,7 @@ const ExamReview = () => {
         <tbody>
         {data && (
           <tr>
-            <td>{data.exam.sheet.description}</td>
+            <td>{data.sheet.description}</td>
             <td>{data.exam.group.name}</td>
             <td>{`${data.grade}/10`}</td>
             <td>
@@ -103,7 +103,7 @@ const ExamReview = () => {
         </tbody>
       </table>
       </div>
-      {data && data.exam.sheet.exercises.map((exercise, index) => (
+      {data && data.sheet.exercises.map((exercise, index) => (
         <div key={index}>
           <h5>Parte {index+1}: {exercise.instrucciones}</h5>
           {exercise.exercisesArr.map((ex, idx) => (
