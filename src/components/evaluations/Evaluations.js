@@ -61,7 +61,7 @@ const Evaluations = () => {
             <th>Fecha inicio:</th>
             <th>Fecha fin:</th>
             <th>Estado:</th>
-            <th></th>
+            {data && data.different === false && (<th></th>)}
           </tr>
         </thead>
         <tbody>
@@ -71,12 +71,14 @@ const Evaluations = () => {
             <td>{helpers.formatDate(data.startDate)}</td>
             <td>{helpers.formatDate(data.endDate)}</td>
             <td>{helpers.getStateExam(data.startDate, data.endDate)}</td>
-            <td>
-            <Link className="btn btn-danger" to={`/sheet/${data && data.sheet._id}`}>
-              {svgIcon.edit}
-              Editar hoja
-            </Link>
-            </td>
+            {data.different === false && (
+              <td>
+                <Link className="btn btn-danger" to={`/sheet/${data && data.sheet._id}`}>
+                  {svgIcon.edit}
+                  Editar hoja
+                </Link>
+              </td>
+            )}
           </tr>
           )}
         </tbody>
@@ -93,6 +95,7 @@ const Evaluations = () => {
             <th>Estado</th>
             <th></th>
             <th></th>
+            {data && data.different === true && (<th></th>)}
           </tr>
         </thead>
         <tbody>
@@ -121,6 +124,14 @@ const Evaluations = () => {
                   Enviar retroalimentación
                 </button>
               </td>
+              {data && data.different === true && (
+                <td>
+                <Link className="btn btn-danger" to={`/sheet/${exam.sheet}`}>
+                  {svgIcon.edit}
+                  Editar hoja
+                </Link>
+                </td>
+              )}
             </tr>
           ))}
         </tbody>

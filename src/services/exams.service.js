@@ -1,4 +1,6 @@
 import authService from "./auth.service"
+import exercisesService from "./exercises.service"
+import sheetService from "./sheets.service"
 
 const examsService = {}
 
@@ -109,9 +111,38 @@ examsService.createExam = async (params) => {
     }
   
     const res = await fetch(`${API_URL}/exams`, configuration)
-    const resJson = await res.json()
+    const data = await res.json()
+
+    if(data && data.success && params.different) {
+      const exams = data.examsForm
+      for (let i = 0; i < exams.length; i++) {
+        let exercises = []
+        for (let j = 0; j < params.exparams.length; j++) { 
+          const response = await exercisesService.getExercises(params.exparams[j].topic, params.exparams[j])
+          if (response.latex) {
+            const exercisesLatex = response.latex
+            const newExercises = {
+              instrucciones: response.instrucciones,
+              exercisesArr: exercisesLatex,
+              tipoRespuesta: params.exparams[j].tipoRespuesta
+            }
+            exercises.push(newExercises)
+          } 
+        }
+        const body = {
+          description: params.sheet_description,
+          type: params.type,
+          user: params.teacher,
+          exercises: exercises,
+          params: params.exparams
+        }
+
+        const createdSheet = await sheetService.createSheet(body)
+        await examsService.updateSheet(exams[i], {sheet: createdSheet._id})
+      }
+    }
     
-    return resJson
+    return data
   } catch (err) {
     return {success:false, message: err.message}
   }
@@ -211,6 +242,21 @@ examsService.uploadImages = async (examId, images) => {
     }
 
     const res = await fetch(`${API_URL}/exams/uploadIMG/${examId}`, configuration)
+    const data = await res.json()
+    return data
+  } catch (err) {
+    return {success:false, message: err.message}
+  }
+}
+
+examsService.updateSheet = async (examId, params) => {
+  try {
+    const configuration = {
+      headers: { ...authService.authHeader(), 'Content-Type': 'application/json' },
+      method: 'POST',
+      body: JSON.stringify(params)
+    }
+    const res = await fetch(`${API_URL}/exams/updatesheet/${examId}`, configuration)
     const data = await res.json()
     return data
   } catch (err) {

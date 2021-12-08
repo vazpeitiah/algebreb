@@ -1,6 +1,6 @@
 const exercisesService = {}
 
-const API_URL = 'http://localhost:5000/'
+const API_URL = 'http://localhost:4000/'
 
 exercisesService.getExercises = async (topic, params) => {
   try {

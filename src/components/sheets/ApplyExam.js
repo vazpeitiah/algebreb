@@ -10,6 +10,7 @@ const ApplyExam = ({user, applyExam}) => {
   const [endDate, setEndDate] = useState(new Date(Date.now() + 86400000)) // 1 dia despues
   const [groups, setGroups] = useState([])
   const [selectedGroup, setSelectedGroup] = useState('')
+  const [different, setDifferent] = useState(true)
   
   useEffect(() => {
     const getGroups = async () => {
@@ -30,7 +31,8 @@ const ApplyExam = ({user, applyExam}) => {
       const params = {
         startDate: new Date(startDate).toISOString(),
         endDate: new Date(endDate).toISOString(), 
-        group: selectedGroup
+        group: selectedGroup,
+        different
       }
       applyExam(params)
     } else {
@@ -40,7 +42,7 @@ const ApplyExam = ({user, applyExam}) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h5>Aplicar examen</h5>
+      <h5>Aplicar evaluación</h5>
       <label htmlFor="">Fecha inicio</label>
       <DatePicker className="form-control"
         selected={startDate}
@@ -67,7 +69,19 @@ const ApplyExam = ({user, applyExam}) => {
         ))}
         {groups.length === 0 && (<option defaultValue>No tienes grupos todavía</option>)}
       </select>
-      
+
+      <div class="form-check mt-2">
+        <input 
+          class="form-check-input" 
+          type="checkbox" 
+          checked={different}
+          id="different"
+          onChange={() => setDifferent(!different)}
+        />
+        <label class="form-check-label" for="different">
+          Cambiar los ejercicios para cada alumno
+        </label>
+      </div>
 
       <button type="submit" className='btn btn-success form-control mt-2'> Aplicar </button>
     </form>
