@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import svgIcon from '../../lib/svgIcons'
 
 const EnrollGroup = ({enrollGroup}) => {
   const [keyCourse, setKeyCourse] = useState('')
@@ -22,8 +23,11 @@ const EnrollGroup = ({enrollGroup}) => {
           onChange={(e) => setKeyCourse(e.target.value)}
           required/>
       </div>
-      <div className="col">
-        <button type="submit" className="btn btn-success form-control">Inscribir</button>
+      <div className="col-4">
+        <button type="submit" className="btn btn-success form-control">
+          {svgIcon.add}
+          Inscribirse
+        </button>
       </div>
     </form>
   )

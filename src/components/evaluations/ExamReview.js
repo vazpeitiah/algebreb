@@ -8,6 +8,7 @@ import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
 import Feeback from './Feeback';
 import ViewImages from './ViewImages';
+import svgIcon from '../../lib/svgIcons';
 
 
 const ExamReview = () => {
@@ -50,6 +51,7 @@ const ExamReview = () => {
       <div className="d-flex justify-content-between">
         <h2>Revisión de: {data && data.exam.sheet.description}</h2>
         <button className="btn btn-secondary" onClick={() => history.goBack()}>
+          {svgIcon.back}
           Regresar
         </button>
       </div>
@@ -79,10 +81,11 @@ const ExamReview = () => {
               }
             </td>
             <td>
-              <button className="btn btn-primary"
+              <button className="btn btn-success"
                 data-bs-toggle="modal" 
                 data-bs-target="#feedback"
                 onClick={() => setFeed(data.feedback)}>
+                  {svgIcon.message}
                 Ver retroalimentación
               </button>
             </td>
@@ -91,6 +94,7 @@ const ExamReview = () => {
                 data-bs-toggle="modal" 
                 data-bs-target="#view_images"
                 onClick={() => setFeed(data.feedback)}>
+                {svgIcon.image}
                 Ver procedimientos
               </button>
             </td>
@@ -103,10 +107,10 @@ const ExamReview = () => {
         <div key={index}>
           <h5>Parte {index+1}: {exercise.instrucciones}</h5>
           {exercise.exercisesArr.map((ex, idx) => (
-            <div key={idx} className={`card m-2 ${ex.solucion === getAnswer(index, idx) ? 'border-success' : 'border-danger'}`}>
+            <div key={idx} className={`card m-2 pt-2 ${ex.solucion === getAnswer(index, idx) ? 'border-success' : 'border-danger'}`}>
               {ex.enunciado && 
                 (<div className="card-header d-flex justify-content-between">
-                  <h6><b>{idx + 1})</b> <InlineMath math={ex.enunciado} /></h6>
+                  <h6 className="pt-2"><b>{idx + 1})</b> <InlineMath math={ex.enunciado} /></h6>
                   {ex.solucion === getAnswer(index, idx) 
                     ? (<span className="text-success">Correcto <i className="bi bi-check-square-fill"></i></span>)
                     : (<span className="text-danger">Incorrecto <i className="bi bi-x-square-fill"></i></span>)
@@ -133,18 +137,19 @@ const ExamReview = () => {
               }
               </div>
               <div className="card-footer bg-transparent d-flex justify-content-end">
-                <button className="btn btn-primary" 
-                  data-bs-toggle="modal" 
-                  data-bs-target="#SolutionModal"
+                <button className="btn btn-info" 
+                  data-bs-toggle="collapse" 
+                  data-bs-target={`#solution${index}${idx}`}
                   onClick={() => setExercise(ex)}>
+                  {svgIcon.watch}
                   Ver solucion
                 </button>
               </div>
+              <ShowSolution exercise={ex} id={index +""+ idx} />
             </div>
           ))}
         </div>
       ))}
-      <ShowSolution exercise={exercise} />
       <ViewImages images={data ? data.images : []}/>
       <Feeback feed={feed}/>
     </div>
