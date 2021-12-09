@@ -11,9 +11,13 @@
   color: #eeeeee;
 }
 
-#nav .nav-link:focus{
-  background-color: #00ADB5;
-  color: white;
+.nav-item-active{
+  background-color: #00ADB5 !important;
+  color: white !important;
+  position: inherit;
+  bottom: -2em;
+  height: 0.3em;
+  border-radius: 0.5em;
 }
 
 /* #nav #btn-signup, #btn-signin{
