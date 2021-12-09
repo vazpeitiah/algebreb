@@ -4,7 +4,6 @@ import svgIcon from '../../lib/svgIcons'
 const UpdateProfile = ({ user, updateProfile }) => {
   const [passwd, setPasswd] = useState('')
   const [name, setName] = useState(user.name)
-  const [role, setRole] = useState(user.roles[0])
   const [email, setEmail] = useState(user.email)
   const [showPass, setShowPass] = useState(false)
   const [password, setPassword] = useState('')
@@ -14,7 +13,6 @@ const UpdateProfile = ({ user, updateProfile }) => {
     setPasswd('')
     setName(user.name)
     setEmail(user.email)
-    setRole(user.roles[0])
     setPassword('')
     setPasswordCofirm('')
     setShowPass(false)
@@ -23,15 +21,14 @@ const UpdateProfile = ({ user, updateProfile }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (password === passwordConfirm) {
-      const params = {
+      let params = {
         username: user.username,
         passwd,
         name,
-        email,
-        roles: [role]
+        email
       }
       if (password) {
-        params.password = password // checar que pex
+        params = {...params, password}
       }
       updateProfile(params)
     } else {
@@ -58,6 +55,9 @@ const UpdateProfile = ({ user, updateProfile }) => {
             </div>
             <form onSubmit={handleSubmit}>
               <div className="modal-body">
+                <div class="alert alert-info" role="alert">
+                <i class="bi bi-info-circle-fill"></i> Para actualizar la información de la cuenta, primero debe ingresar su contraseña actual.
+                </div>
                 <label className="fw-bold">Contraseña:</label>
                 <input type="password"
                   className='form-control'
@@ -76,21 +76,6 @@ const UpdateProfile = ({ user, updateProfile }) => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required />
-                <label className="pt-3 pb-1 form-label" htmlFor="role">Tipo de usuario:</label>
-                <select name="role"
-                  id="role"
-                  className='form-select'
-                  required
-                  value={role}
-                  onChange={(e) => setRole(e.target.value)}>
-                  {role === "admin" ?
-                    (<option value="admin">Administrador</option>) : (
-                      <>
-                        <option value="alumno">Alumno</option>
-                        <option value="profesor">Profesor</option>
-                      </>
-                    )}
-                </select>
                 <label className="pt-3 pb-1">¿Quieres cambiar la contraseña?</label>
                 <select className='form-select'
                   value={showPass}
