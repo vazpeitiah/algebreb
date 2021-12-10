@@ -43,7 +43,7 @@ const ApplyEvaluation = () => {
       answersArr.forEach((answer) => {
         const list = answer.list
         const ex = answer.exercise
-        const corretAnswer = data.exam.sheet.exercises[list].exercisesArr[ex].solucion
+        const corretAnswer = data.sheet.exercises[list].exercisesArr[ex].solucion
         
         if(answer.value === corretAnswer){
           count ++
@@ -99,7 +99,7 @@ const ApplyEvaluation = () => {
     <div className="container p-4">
       <form onSubmit={submitAnswers}>
       <div className="d-flex justify-content-between">
-        <h3>Evaluación: {data && data.exam.sheet.description}</h3>
+        <h3>Evaluación: {data && data.sheet.description}</h3>
         <button type="button" className="btn btn-secondary" onClick={() => history.goBack()}>
           {svgIcon.back}
           Regresar
@@ -120,7 +120,7 @@ const ApplyEvaluation = () => {
         <tbody>
         {data && (
           <tr>
-            <td>{data.exam.sheet.description}</td>
+            <td>{data.sheet.description}</td>
             <td>{data.exam.group.name}</td>
             <td>{data.images.length === 0 ? 'Sin subir' : `${data.images.length}`}</td>
             {/* <td>{helpers.timeLeft(new Date().toISOString(), data.exam.endDate)}</td> */}
@@ -146,7 +146,7 @@ const ApplyEvaluation = () => {
         </tbody>
       </table>
       </div>
-      {data && data.exam.sheet.exercises.map((exercise, index) => (
+      {data && data.sheet.exercises.map((exercise, index) => (
         <div key={index}>
           <h5>Parte {index+1}: {exercise.instrucciones}</h5>
           {exercise.exercisesArr.map((ex, idx) => (

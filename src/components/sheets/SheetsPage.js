@@ -62,7 +62,7 @@ function SheetsPage({ user }) {
 						</tr>
 					</thead>
 					<tbody>
-						{sheets.map((sheet, index) =>
+						{sheets.map((sheet, index) => !sheet.hidden && 
 						(<tr key={index} className="overlay">
 							<td>{index + 1}</td>
 							<td>{sheet.description}</td>

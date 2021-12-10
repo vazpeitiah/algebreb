@@ -8,10 +8,10 @@ const Signin = (props) => {
   const [message, setMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
-  const handleLogin = async (user) => {
+  const login = async (params) => {
     setIsLoading(true)
-    const res = await authService.signin(user)
-    if (res.success) {
+    const res = await authService.signin(params)
+    if (res && res.success) {
       props.history.push("/")
       window.location.reload()
     } else {
@@ -42,7 +42,7 @@ const Signin = (props) => {
               <button type="button" className="btn-close" onClick={() => setMessage('')}></button>
             </div>)
           }
-          <SigninForm onLogin={handleLogin} isLoading={isLoading} />
+          <SigninForm login={login} isLoading={isLoading} />
           <Link className="link-algebreb" to="/signup">¿Aún no tienes una cuenta?</Link>
           {/* <Link className="m-3" to='/resetpwd'>Recuperar contraseña</Link> */}
         </div>

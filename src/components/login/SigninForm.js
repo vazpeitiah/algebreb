@@ -1,13 +1,13 @@
 import { useState } from 'react'
 
-const SigninForm = ({ onLogin, isLoading }) => {
+const SigninForm = ({ login, isLoading }) => {
 	const [username, setUsername] = useState('')
 	const [password, setPassword] = useState('')
 
 	const onSubmit = (e) => {
 		e.preventDefault()
 		const newUser = { username, password }
-		onLogin(newUser)
+		login(newUser)
 		setPassword('')
 	}
 

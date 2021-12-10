@@ -23,6 +23,7 @@ const SheetPage = ({user}) => {
 	const [showSolution, setShowSolution] = useState(false)
 	const [solutionsType, setSolutionsType] = useState('oculta')
 	const [numberExercises, setNumberExercises] = useState('6')
+	const [params, setParams] = useState([]) 
 	// react-router-dom
 	const { sheetId } = useParams()
 	let history = useHistory()
@@ -36,22 +37,24 @@ const SheetPage = ({user}) => {
 				setCurrentSheet(sheet)
 				setExercises(sheet.exercises)
 				setSolutionsType(sheet.solutionsType)
+				setParams(sheet.params)
 			}
 		}
 		getCurrentSheet()
 	}, [sheetId])
 
-	const genExercises = async (params) => {
+	const genExercises = async (parameters) => {
 		setIsLoading(true)
-		const res = await exercisesService.getExercises(topic, params)
+		const res = await exercisesService.getExercises(topic, parameters)
 		if (res.latex) {
 			const exercisesLatex = res.latex
 			const newExercises = {
 				instrucciones: res.instrucciones,
 				exercisesArr: exercisesLatex,
-				tipoRespuesta: params.tipoRespuesta
+				tipoRespuesta: parameters.tipoRespuesta
 			}
 			setExercises([...exercises, newExercises])
+			setParams([...params, {...parameters, topic, solutionsType}])
 		} else {
 			alert("ERROR: " + res.message)
 		}
@@ -65,6 +68,8 @@ const SheetPage = ({user}) => {
 	const clearSheet = async () => {
 		setCurrentSheet({ ...currentSheet, exercises: [] })
 		setExercises([])
+		setCurrentSheet({ ...currentSheet, params: [] })
+		setParams([])
 	}
 
 	const saveSheet = async () => {
@@ -73,7 +78,8 @@ const SheetPage = ({user}) => {
 				description: currentSheet.description,
 				type: currentSheet.type,
 				exercises: exercises,
-				solutionsType
+				solutionsType,
+				params
 			})
 
 			if (updatedSheet && updatedSheet._id) {
@@ -134,13 +140,24 @@ const SheetPage = ({user}) => {
 
   	const downloadPNG = () =>  exportComponentAsJPEG(componentRef);
 
-	const applyExam = async (params) => {
-		params = {...params, sheet: sheetId, type: currentSheet.type}
-		const response = await examsService.createExam(params)
-		if(response && response.success) {
-			window.alert('El examen se ha generado. Puede revisar la pestaña de evaluaciones')
-		}else {
-			window.alert('Error: '+ response.message)
+	const applyExam = async (parameters) => {
+		const confirm = window.confirm('¿Quieres aplicar una evaluación con la hoja actual?')
+		if(confirm) {
+			setIsLoading(true)
+			parameters = {
+				...parameters, 
+				sheet: sheetId, 
+				type: currentSheet.type, 
+				exparams:params,
+				teacher: user.id,
+				sheet_description: currentSheet.description}
+			const response = await examsService.createExam(parameters)
+			setIsLoading(false)
+			if(response && response.success) {
+				window.alert('El examen se ha generado. Puede revisar la pestaña de evaluaciones')
+			}else {
+				window.alert('Error: '+ response.message)
+			}
 		}
 	}
 
