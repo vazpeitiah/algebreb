@@ -5,7 +5,6 @@ import "./groups.css";
 
 const GroupForm = ({ addGroup, updateGroup, group }) => {
   const [name, setName] = useState(group ? group.name : "");
-  const [isOpen, setIsOpen] = useState(group ? group.isOpen : false);
 
   const hanldeSubmit = (e) => {
     e.preventDefault();
@@ -13,22 +12,19 @@ const GroupForm = ({ addGroup, updateGroup, group }) => {
     if (group) {
       const params = {
         name,
-        isOpen,
         students: group.students,
         teacher: group.teacher,
       };
       updateGroup(group._id, params);
     } else {
       const params = {
-        name,
-        isOpen,
+        name
       };
 
       addGroup(params);
     }
 
     setName("");
-    setIsOpen(false);
   };
 
   return (
@@ -46,17 +42,6 @@ const GroupForm = ({ addGroup, updateGroup, group }) => {
           placeholder="Nombre del grupo"
           value={name}
           onChange={(e) => setName(e.target.value)}
-        />
-      </div>
-      <div className="col-auto">
-        <label htmlFor="name">¿Está abierto?:</label>
-      </div>
-      <div className="col-auto">
-        <input
-          className="form-check-input"
-          type="checkbox"
-          checked={isOpen}
-          onChange={() => setIsOpen(!isOpen)}
         />
       </div>
       <div className="col-3">

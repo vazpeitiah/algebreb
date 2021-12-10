@@ -5,28 +5,36 @@ const groupsService = {}
 //const API_URL = 'http://localhost:5000'
 const API_URL = 'https://algebreb-api.herokuapp.com'
 
-groupsService.addGroup = async (params) => {
-  const configuration = {
-    method: "POST",
-		headers: { ...authService.authHeader(), 'Content-Type': 'application/json'},
-    body: JSON.stringify(params)
-	}
-
-  const res = await fetch(`${API_URL}/groups`, configuration)
-  const newGroup = await res.json()
-
-  return newGroup
+groupsService.createGroup = async (params) => {
+  try {
+    const configuration = {
+      method: "POST",
+      headers: { ...authService.authHeader(), 'Content-Type': 'application/json'},
+      body: JSON.stringify(params)
+    }
+  
+    const res = await fetch(`${API_URL}/groups`, configuration)
+    const data = await res.json()
+  
+    return data
+  } catch (err) {
+    return { success: false, message: err.message }
+  }
 }
 
-groupsService.getGroupsByUser = async (userId) => {
-  const configuration = {
-		headers: { ...authService.authHeader(), 'Content-Type': 'application/json' }
-	}
-
-  const res = await fetch(`${API_URL}/groups/byuser/${userId}`, configuration)
-  const groups = await res.json()
-
-  return groups
+groupsService.getGroupsByTeacher = async (teacherId) => {
+  try {
+    const configuration = {
+      headers: { ...authService.authHeader(), 'Content-Type': 'application/json' }
+    }
+  
+    const res = await fetch(`${API_URL}/groups/byteacher/${teacherId}`, configuration)
+    const data = await res.json()
+  
+    return data
+  } catch (err) {
+    return { success: false, message: err.message }
+  }
 }
 
 groupsService.getGroupsByStudent = async (stundetId) => {
@@ -40,52 +48,68 @@ groupsService.getGroupsByStudent = async (stundetId) => {
 }
 
 groupsService.getGroupById = async (groupId) => {
-  const configuration = {
-		headers: { ...authService.authHeader(), 'Content-Type': 'application/json' }
-	}
-
-  const res = await fetch(`${API_URL}/groups/${groupId}`, configuration)
-  const group = await res.json()
-
-  return group
+  try {
+    const configuration = {
+      headers: { ...authService.authHeader(), 'Content-Type': 'application/json' }
+    }
+  
+    const res = await fetch(`${API_URL}/groups/${groupId}`, configuration)
+    const data = await res.json()
+  
+    return data
+  } catch (err) {
+    return { success:false, message: err.message }
+  }
 }
 
 groupsService.updateGroup = async (groupId, params) => {
-  const configuration = {
-    method: "PUT",
-		headers: { ...authService.authHeader(), 'Content-Type': 'application/json' },
-    body: JSON.stringify(params)
-	}
-
-  const res = await fetch(`${API_URL}/groups/${groupId}`, configuration)
-  const updatedGroup = await res.json()
-
-  return updatedGroup
+  try {
+    const configuration = {
+      method: "PUT",
+      headers: { ...authService.authHeader(), 'Content-Type': 'application/json' },
+      body: JSON.stringify(params)
+    }
+  
+    const res = await fetch(`${API_URL}/groups/${groupId}`, configuration)
+    const data = await res.json()
+  
+    return data
+  } catch (err) {
+    return { success: false, message: err.message }
+  }
 }
 
 groupsService.deleteGroup = async (groupId) => {
-  const configuration = {
-    method: "DELETE",
-		headers: { ...authService.authHeader(), 'Content-Type': 'application/json' }
-	}
-
-  const res = await fetch(`${API_URL}/groups/${groupId}`, configuration)
-  const deletedGroup = await res.json()
-
-  return deletedGroup
+  try {
+    const configuration = {
+      method: "DELETE",
+      headers: { ...authService.authHeader(), 'Content-Type': 'application/json' }
+    }
+  
+    const res = await fetch(`${API_URL}/groups/${groupId}`, configuration)
+    const data = await res.json()
+  
+    return data
+  } catch (err) {
+    return { success: false, message: err.message }
+  }
 }
 
 groupsService.enrollStudent = async (groupId, student) => {
-  const configuration = {
-    method: "POST",
-		headers: { ...authService.authHeader(), 'Content-Type': 'application/json' },
-    body: JSON.stringify({groupId, student})
-	}
-
-  const res = await fetch(`${API_URL}/groups/enroll`, configuration)
-  const response = await res.json()
-
-  return response
+  try {
+    const configuration = {
+      method: "POST",
+      headers: { ...authService.authHeader(), 'Content-Type': 'application/json' },
+      body: JSON.stringify({groupId, student})
+    }
+  
+    const res = await fetch(`${API_URL}/groups/enroll`, configuration)
+    const data = await res.json()
+  
+    return data
+  } catch (err) {
+    return { success: false, message: err.message }
+  }
 }
 
 export default groupsService

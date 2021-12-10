@@ -15,12 +15,13 @@ const ApplyExam = ({user, applyExam}) => {
   
   useEffect(() => {
     const getGroups = async () => {
-      const groupsFromServer = await groupsService.getGroupsByUser(user.id)
-      setGroups(groupsFromServer)
-      if(groupsFromServer && groupsFromServer.length > 0) {
-        setSelectedGroup(groupsFromServer[0]._id)
+      const res = await groupsService.getGroupsByTeacher(user.id)
+      if(res && res.success) {
+        setGroups(res.groups)
+        if(res.groups.length > 0) {
+          setSelectedGroup(res.groups[0]._id)
+        }
       }
-      
     }
     getGroups()
   }, [user.id])
@@ -76,6 +77,19 @@ const ApplyExam = ({user, applyExam}) => {
             ))}
             {groups.length === 0 && (<option defaultValue>No tienes grupos todavía</option>)}
           </select>
+
+          <div class="form-check mt-2">
+            <input 
+              class="form-check-input" 
+              type="checkbox" 
+              checked={different}
+              id="different"
+              onChange={() => setDifferent(!different)}
+            />
+            <label class="form-check-label" for="different">
+              Cambiar los ejercicios para cada alumno
+            </label>
+          </div>
 
           <button type="submit" className='btn btn-success form-control mt-2'> 
               {svgIcon.start}

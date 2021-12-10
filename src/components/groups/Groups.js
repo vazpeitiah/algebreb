@@ -24,22 +24,36 @@ const Groups = ({ user }) => {
   }, [user.id]);
 
   const fethGroupsByTeacher = async (teacherId) => {
-    const groupsFromServer = await groupsService.getGroupsByUser(teacherId);
-    return groupsFromServer;
+    let gps = []
+    const res = await groupsService.getGroupsByTeacher(teacherId);
+    if(res && res.success) {
+      gps = res.groups
+    } else {
+      window.alert(res.message)
+    }
+    return gps;
   };
 
   const deleteGroup = async (groupId) => {
     const yes = window.confirm("¿Realmente deseas borrar el grupo?");
     if (yes) {
-      await groupsService.deleteGroup(groupId);
-      setGroups(groups.filter((group) => group._id !== groupId));
+      const res = await groupsService.deleteGroup(groupId);
+      if(res && res.success) {
+        setGroups(groups.filter((group) => group._id !== res.group._id));
+      } else {
+        window.alert(`Error: ${res.message}`)
+      }
     }
   };
 
   const addGroup = async (params) => {
     params.teacher = user.id;
-    const newGroup = await groupsService.addGroup(params);
-    setGroups([...groups, newGroup]);
+    const res = await groupsService.createGroup(params);
+    if(res && res.success) {
+      setGroups([...groups, res.group]);
+    } else {
+      window.alert(`Error: ${res.message}`)
+    }
   };
 
   const copyToClipboard = (e) => {
@@ -76,13 +90,17 @@ const Groups = ({ user }) => {
   };
 
   const updateGroup = async (groupId, params) => {
-    await groupsService.updateGroup(groupId, params);
+    const res = await groupsService.updateGroup(groupId, params);
 
-    const groups = await fethGroupsByTeacher(user.id);
-    setGroups(groups);
+    if(res && res.success) {
+      const groups = await fethGroupsByTeacher(user.id);
+      setGroups(groups);
 
-    setShowForm(false);
-    setSelectedGroup(null);
+      setShowForm(false);
+      setSelectedGroup(null);
+    } else {
+      window.alert(`Error: ${res.message}`)
+    }
   };
 
   return (
@@ -124,7 +142,6 @@ const Groups = ({ user }) => {
               <th>No</th>
               <th>Grupo</th>
               <th>No inscritos</th>
-              <th>Estado</th>
               <th>Clave de acceso</th>
               <th></th>
               <th></th>
@@ -136,7 +153,6 @@ const Groups = ({ user }) => {
                 <td>{index + 1}</td>
                 <td>{group.name}</td>
                 <td>{group.students.length}</td>
-                <td>{group.isOpen ? "Abierto" : "Cerrado"}</td>
                 <td>
                   {group._id}
                   <i

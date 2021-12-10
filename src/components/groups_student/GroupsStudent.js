@@ -49,10 +49,13 @@ const GroupsStudent = ({ user }) => {
         students: group.students.filter((student) => student !== studentId),
         isOpen: group.isOpen,
       };
-      console.log(params);
-      const updatedGroup = await groupsService.updateGroup(group._id, params);
-      console.log(updatedGroup);
-      setGroups(groups.filter((group) => group._id !== updatedGroup._id));
+      const res = await groupsService.updateGroup(group._id, params);
+      if(res && res.success) {
+        setGroups(groups.filter((group) => group._id !== res.group._id));
+      } else {
+        window.alert(`Error: ${res.message}`)
+      }
+      
     }
   };
 

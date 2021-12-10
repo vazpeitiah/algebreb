@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useHistory } from "react-router-dom"
 import svgIcon from "../../lib/svgIcons"
 import groupsService from "../../services/groups.service"
 import Kardex from "../groups_student/Kardex"
 import AddStudent from "./AddStudent"
 
 const Group = () => {
+  let history = useHistory()
   const { groupId } = useParams()
   const [currentGroup, setCurrentGroup] = useState(null)
   const [showForm, setShowForm] = useState(false)
@@ -13,29 +14,35 @@ const Group = () => {
 
   useEffect(() => {
     const getCurrentGroup = async () => {
-      const group = await groupsService.getGroupById(groupId)
-      if(group) {
-        setCurrentGroup(group)
+      const res = await groupsService.getGroupById(groupId)
+      if(res && res.success) {
+        setCurrentGroup(res.group)
+      } else {
+        window.alert(res.message)
       }
     }
     getCurrentGroup()
   }, [groupId])
-  
-  const deleteStudent = async (studentId) => {
-    const confirmDeleted = window.confirm("¿Realmente desea eliminar al estudiante?")
-    if(confirmDeleted) {
-      currentGroup.students = currentGroup.students.filter(student => student._id !== studentId)
-      const updatedGroup = await groupsService.updateGroup(currentGroup._id, currentGroup)
-      setCurrentGroup(updatedGroup)
-    }
-  }
 
   const addStudent = async (username) => {
-    const response = await groupsService.enrollStudent(currentGroup._id, username)
-    if(response && response.success) {
-      setCurrentGroup(response.group)
+    const res = await groupsService.enrollStudent(currentGroup._id, username)
+    if(res && res.success) {
+      setCurrentGroup(res.group)
     } else {
-      window.alert(`Error: ${response.message}`)
+      window.alert(`Error: ${res.message}`)
+    }
+  }
+  
+  const deleteStudent = async (studentId) => {
+    const confirm = window.confirm("¿Realmente deseas eliminar al estudiante?")
+    if(confirm) {
+      currentGroup.students = currentGroup.students.filter(student => student._id !== studentId)
+      const res = await groupsService.updateGroup(currentGroup._id, currentGroup)
+      if(res && res.success) {
+        setCurrentGroup(res.group)
+      } else {
+        window.alert(`Error: ${res.message}`)
+      }
     }
   }
 
@@ -55,6 +62,10 @@ const Group = () => {
               {svgIcon.enroll}
               Inscribir estudiante
             </>}
+          </button>
+          <button className="btn btn-secondary ms-2" onClick={() => history.goBack()}>
+            {svgIcon.back}
+            Regresar
           </button>
         </div>
       </div>

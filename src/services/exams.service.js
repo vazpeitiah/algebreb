@@ -1,5 +1,6 @@
 import authService from "./auth.service"
 import exercisesService from "./exercises.service"
+import groupsService from "./groups.service"
 import sheetService from "./sheets.service"
 
 const examsService = {}
@@ -37,8 +38,12 @@ examsService.getExams = async (userId) => {
 		headers: { ...authService.authHeader(), 'Content-Type': 'application/json' }
 	}
 
-  const res = await fetch(`${API_URL}/groups/byuser/${userId}`, configuration)
-  const groups = await res.json()
+  const data = await groupsService.getGroupsByTeacher(userId)
+  
+  let groups = []
+  if(data && data.success) {
+    groups = data.groups
+  }
 
   let exams = []
   for(let i = 0; i < groups.length; i++) {
