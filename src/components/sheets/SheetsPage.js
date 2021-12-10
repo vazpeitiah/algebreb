@@ -12,22 +12,34 @@ function SheetsPage({ user }) {
 	useEffect(() => {
 		const getSheets = async () => {
 			const res = await sheetService.getSheetsByUser(user.id)
-			setSheets(res)
+			if(res && res.success) {
+				setSheets(res.sheets)
+			} else {
+				window.alert(`Error: ${res.message}`)
+			}
 		}
 		getSheets()
 	}, [user])
 
 	const deleteSheet = async (sheetId) => {
-		const yes = window.confirm("¿Realmente quieres eliminar la hoja?")
-		if (yes) {
-			await sheetService.deleteSheet(sheetId)
-			setSheets(sheets.filter(sheet => sheet._id !== sheetId))
+		const confirm = window.confirm("¿Realmente quieres eliminar la hoja?")
+		if (confirm) {
+			const res = await sheetService.deleteSheet(sheetId)
+			if(res && res.success) {
+				setSheets(sheets.filter(sheet => sheet._id !== sheetId))
+			} else {
+				window.alert(`Error: ${res.message}`)
+			}
 		}
 	}
 
 	const addSheet = async (params) => {
-		const newSheet = await sheetService.createSheet({ ...params, user: user.id })
-		setSheets([...sheets, newSheet])
+		const res = await sheetService.createSheet({ ...params, user: user.id })
+		if(res && res.success) {
+			setSheets([...sheets, res.sheet])
+		} else {
+			window.alert(`Error: ${res.message}`)
+		}
 	}
 
 	return (

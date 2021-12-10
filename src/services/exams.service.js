@@ -142,8 +142,10 @@ examsService.createExam = async (params) => {
           params: params.exparams
         }
 
-        const createdSheet = await sheetService.createSheet(body)
-        await examsService.updateSheet(exams[i], {sheet: createdSheet._id})
+        const res = await sheetService.createSheet(body)
+        if(res && res.success) {
+          await examsService.updateSheet(exams[i], {sheet: res.sheet._id})
+        }
       }
     }
     

@@ -46,7 +46,7 @@ const ApplyExam = ({user, applyExam}) => {
     <div className='card border-info my-3'>
       <form onSubmit={handleSubmit}>
         <div className='card-header border-info'>
-          <h5>Aplicar examen</h5>
+          <h5>Aplicar evaluación</h5>
         </div>
         <div className='card-body'>
           <label htmlFor="">Fecha inicio</label>

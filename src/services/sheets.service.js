@@ -13,7 +13,7 @@ sheetService.getSheetsByUser = async (userId) => {
     const data = await res.json()
     return data
   } catch(err) {
-    return {message: err.message}
+    return { success: false, message: err.message }
   }
 }
 
@@ -25,7 +25,7 @@ sheetService.getSheetById = async (sheetId) => {
     const data = await res.json()
     return data
   } catch(err) {
-    return {message: err.message}
+    return { success: false, message: err.message }
   }
 }
 
@@ -39,7 +39,7 @@ sheetService.createSheet = async (params) => {
     const data = await res.json()
     return data
   } catch(err) {
-    return {message: err.message}
+    return { success: false, message: err.message}
   }
 }
 
@@ -54,7 +54,7 @@ sheetService.updateSheet = async (sheetId, params) => {
     const data = await res.json()
     return data
   } catch(err) {
-    return {message: err.message}
+    return { success: false, message: err.message }
   }
 }
 
@@ -67,7 +67,7 @@ sheetService.deleteSheet = async (sheetId) => {
     const data = await res.json()
     return data
   } catch(err) {
-    return {message: err.message}
+    return { success: false, message: err.message }
   }
 }
 

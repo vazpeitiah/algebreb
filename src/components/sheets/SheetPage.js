@@ -33,12 +33,14 @@ const SheetPage = ({user}) => {
 
 	useEffect(() => {
 		const getCurrentSheet = async () => {
-			const sheet = await sheetService.getSheetById(sheetId)
-			if (sheet) {
-				setCurrentSheet(sheet)
-				setExercises(sheet.exercises)
-				setSolutionsType(sheet.solutionsType)
-				setParams(sheet.params)
+			const res = await sheetService.getSheetById(sheetId)
+			if (res && res.success) {
+				setCurrentSheet(res.sheet)
+				setExercises(res.sheet.exercises)
+				setSolutionsType(res.sheet.solutionsType)
+				setParams(res.sheet.params)
+			} else {
+				window.alert(`Error: ${res.message}`)
 			}
 		}
 		getCurrentSheet()
@@ -76,7 +78,7 @@ const SheetPage = ({user}) => {
 
 	const saveSheet = async () => {
 		if (currentSheet && currentSheet.description !== '') {
-			const updatedSheet = await sheetService.updateSheet(currentSheet._id, {
+			const res = await sheetService.updateSheet(currentSheet._id, {
 				description: currentSheet.description,
 				type: currentSheet.type,
 				exercises: exercises,
@@ -84,11 +86,11 @@ const SheetPage = ({user}) => {
 				params
 			})
 
-			if (updatedSheet && updatedSheet._id) {
-				setCurrentSheet(updatedSheet)
+			if (res && res.success) {
+				setCurrentSheet(res.sheet)
 				alert("Se actulizó la hoja correctamente")
 			} else {
-				alert('ERROR: No se actulizó la hoja')
+				window.alert(`Error: ${res.message}`)
 			}
 		} else {
 			alert('Debes colocarle un nombre a la hoja')
@@ -282,7 +284,7 @@ const SheetPage = ({user}) => {
 							</button>
 						</div>
                     </div>
-                    {currentSheet && currentSheet.type === "examen" && (
+                    {currentSheet && (currentSheet.type === "examen" || currentSheet.type === "tarea") && (
                         <ApplyExam user={user} applyExam={applyExam} />
                         )}
                 </div>
