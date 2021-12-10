@@ -2,10 +2,14 @@ import 'katex/dist/katex.min.css';
 /* import { useState } from 'react'; */
 import { InlineMath } from 'react-katex';
 
-const Exercise = ({ exercise, index, tipoRespuesta }) => {
+const Exercise = ({ exercise, index, tipoRespuesta, number }) => {
 	/* const [isSolToggle, setIsSolToggle] = useState(false) */
+	const numberClass = "col-md-" + number + " p-2";
+
+	console.log(number);
+
 	return (
-		<div className="col-md-6">
+		<div className={numberClass}>
 			{exercise.enunciado && 
 				(<span><b>{index})</b> <InlineMath math={exercise.enunciado} /></span>) 
 			}

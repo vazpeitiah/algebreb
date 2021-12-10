@@ -17,7 +17,7 @@ const Profile = ({ user }) => {
   return (
     <div className="d-flex align-items-center fill container col-lg-5 my-auto">
       <div className="card col align-self-center">
-        <div className="card-header text-center bg-algebreb py-3">
+        <div className="card-header text-center bg-algebreb-dark py-3">
           <div className="algebreb-header">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#00ADB5" className="bi bi-circle-square" viewBox="0 0 16 16">
               <path d="M0 6a6 6 0 1 1 12 0A6 6 0 0 1 0 6z" />

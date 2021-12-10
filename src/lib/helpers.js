@@ -117,4 +117,57 @@ helpers.getStateExam = (sdate, edate) => {
 	}
 } 
 
+helpers.createLatexDocument = (exercises, description, name) => {
+	const latexHeader =
+		"\n \\documentclass{article}\n" +
+		"% Ajustes del idioma\n" +
+		"\\usepackage[spanish]{babel}\n" +
+		"% Espacio y margenes de la hoja\n" +
+		"\\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}\n" +
+		"% Paquetes útiles\n" +
+		"\\usepackage{amsmath}\n" +
+		"\\usepackage{graphicx}\n" +
+		"\\usepackage[colorlinks=true, allcolors=blue]{hyperref}\n" +
+		"\\title{" +
+		description +
+		"}\n" +
+		"\\author{" +
+		name +
+		"}\n" +
+		"\\begin{document}\n" +
+		"\\maketitle\n";
+
+	const latexFooter = "\n\\end{document}";
+
+	let latextBody = "";
+
+	exercises.map((exercise) => {
+		latextBody += exercise.instrucciones + "\\\\ \\\\ ";
+
+		let latexProblems = "";
+
+		latextBody += exercise.exercisesArr.map((exe, index) => {
+		latexProblems =
+			"\n \\( " + (index += 1) + ".- " + exe.enunciado + "\\) \n";
+
+		latexProblems += "\n \\begin{quote}";
+
+		latexProblems += exe.pasos.map((step, ind) => {
+			return "\n \\( " + (ind += 1) + ".- " + step + " \\) \n \\\\";
+		});
+
+		latexProblems += "\\\\"
+		latexProblems += "\n \\( Solución final: " + exe.solucion + " \\) \n \\\\\n";
+
+		return latexProblems + "\n \\end{quote} \n";
+		});
+
+		latextBody = latextBody.replace("\n,", "");
+
+		return latextBody;
+	});
+
+	return latexHeader + latextBody + latexFooter;
+};
+
 export default helpers

@@ -7,6 +7,9 @@ import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
 import UploadFile from './UploadFile';
 import Timer from './Timer';
+import svgIcon from '../../lib/svgIcons';
+
+import './Evaluation.css';
 
 const ApplyEvaluation = () => {
   const { examId } = useParams()
@@ -98,6 +101,7 @@ const ApplyEvaluation = () => {
       <div className="d-flex justify-content-between">
         <h3>Evaluación: {data && data.sheet.description}</h3>
         <button type="button" className="btn btn-secondary" onClick={() => history.goBack()}>
+          {svgIcon.back}
           Regresar
         </button>
       </div>
@@ -126,11 +130,14 @@ const ApplyEvaluation = () => {
                 type="button"
                 data-bs-toggle="modal" 
                 data-bs-target="#upload_file">
+                {svgIcon.upload}
                 Subir archivos
               </button> 
             </td>
             <td className="text-end">
+
               <button className="btn btn-success" type="submit">
+                {svgIcon.send}
                 Enviar respuestas
               </button> 
             </td>
