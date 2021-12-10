@@ -5,7 +5,6 @@ import Topics from './Topics'
 import { useParams, useHistory } from 'react-router-dom'
 import exercisesService from '../../services/exercises.service'
 import sheetService from '../../services/sheets.service'
-import './sheets.css'
 import { useReactToPrint } from 'react-to-print';
 import helpers from '../../lib/helpers'
 import ApplyExam from './ApplyExam'
@@ -13,6 +12,7 @@ import examsService from '../../services/exams.service'
 import authService from "../../services/auth.service";
 import { exportComponentAsJPEG } from 'react-component-export-image';
 import svgIcon from '../../lib/svgIcons'
+import './sheets.css'
 import '../profile/profile.css'
 
 const SheetPage = ({user}) => {
@@ -23,6 +23,7 @@ const SheetPage = ({user}) => {
 	const [showSolution, setShowSolution] = useState(false)
 	const [solutionsType, setSolutionsType] = useState('oculta')
 	const [numberExercises, setNumberExercises] = useState('6')
+	const [toggleView, setToggleView] = useState(null)
 	const [params, setParams] = useState([]) 
 	// react-router-dom
 	const { sheetId } = useParams()
@@ -58,6 +59,7 @@ const SheetPage = ({user}) => {
 		} else {
 			alert("ERROR: " + res.message)
 		}
+		console.log(exercises);
 		setIsLoading(false)
 	}
 
@@ -183,23 +185,26 @@ const SheetPage = ({user}) => {
                 </div>
                 <div className='col-8'>
                     <div className='row ms-4'>
-						<div className='col-auto py-auto'>
-							<div className="form-check form-switch pt-2">
-								<input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-								<label className="form-check-label" for="flexSwitchCheckDefault">Vista de cartas</label>
+						<div className='col d-grid gap-2 d-md-flex justify-content-md-end'>
+							<div className='col-auto py-auto me-lg-5'>
+								<div className="form-check form-switch pt-2">
+									<input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" 
+											onChange={ (e) => {setToggleView(e.target.checked)} } />
+									<label className="form-check-label" for="flexSwitchCheckDefault">Vista de cartas</label>
+								</div>
 							</div>
-						</div>
-                        <div className='col-auto'>
-							<span class="input-group-text">Número de ejercicios: </span>
-						</div>
-						<div className='col-auto'>
-                            <select id='exercise-number' className="form-select form-control" onChange={ e => { setNumberExercises(e.target.value) }}>
-                                <option value="12">1</option>
-                                <option value="6" selected>2</option>
-                                <option value="4">3</option>
-                            </select>
-                        </div>
-						<div className='col-auto'>
+							<div className='btn-toolbar col-auto me-lg-5'>
+								<div className='col-auto pt-2 me-2'>
+									<label class="form-check-label">Número de ejercicios: </label>
+								</div>
+								<div className='col-auto'>
+									<select id='exercise-number' className="form-select form-control" onChange={ e => { setNumberExercises(e.target.value) }}>
+										<option value="12">1</option>
+										<option value="6" selected>2</option>
+										<option value="4">3</option>
+									</select>
+								</div>
+							</div>
 							<button className='btn btn-primary me-1 ms-1' onClick={saveSheet}>
 								{svgIcon.save}
 								Guardar
@@ -288,7 +293,8 @@ const SheetPage = ({user}) => {
                             ref={componentRef}
                             title={currentSheet && currentSheet.description}
                             solutionsType={solutionsType}
-							numberExercises={numberExercises} />) :
+							numberExercises={numberExercises}
+							viewType={toggleView} />) :
                         (<center className="mt-4">
                             <div className="spinner-border" role="status">
                                 <span className="visually-hidden">Loading...</span>
