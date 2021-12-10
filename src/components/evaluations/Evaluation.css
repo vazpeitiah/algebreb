@@ -1,0 +1,11 @@
+.form-check-input:focus {
+  -webkit-box-shadow: inset 0 1px 1px #00adb5, 0 0 2px #00adb5;
+  box-shadow: inset 0 1px 1px #00adb5, 0 0 2px #00adb5;
+}
+
+.form-check-input:checked {
+  background-color: #00adb5 !important;
+  border-color: #00adb5;
+  -webkit-box-shadow: inset 0 1px 1px #00adb5, 0 0 2px #00adb5;
+  box-shadow: inset 0 1px 1px #00adb5, 0 0 2px #00adb5;
+}

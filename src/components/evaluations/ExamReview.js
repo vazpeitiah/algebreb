@@ -16,7 +16,6 @@ const ExamReview = () => {
   const [data, setData] = useState(null)
   const labels = ['a', 'b', 'c', 'd']
   const [answers, setAnswers] = useState([])
-  const [exercise, setExercise] = useState(null)
   const [feed, setFeed] = useState('')
 
   let history = useHistory()
@@ -139,8 +138,7 @@ const ExamReview = () => {
               <div className="card-footer bg-transparent d-flex justify-content-end">
                 <button className="btn btn-info" 
                   data-bs-toggle="collapse" 
-                  data-bs-target={`#solution${index}${idx}`}
-                  onClick={() => setExercise(ex)}>
+                  data-bs-target={`#solution${index}${idx}`}>
                   {svgIcon.watch}
                   Ver solucion
                 </button>

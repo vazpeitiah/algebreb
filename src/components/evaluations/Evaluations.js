@@ -46,7 +46,7 @@ const Evaluations = () => {
 
   return (
     <div className="container mt-4 p-4">
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between pb-lg-4">
         <h2>Información de {data && data.sheet.description}</h2>
         <button className="btn btn-secondary" onClick={() => history.goBack()}>
           {svgIcon.back}

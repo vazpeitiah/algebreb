@@ -96,3 +96,21 @@
   border-radius: 1em;
   border-color: #098edb;
 }
+
+.btn-warning {
+  background-color: #fa9600 !important;
+  color: white !important;
+  border: #fa8500 !important; 
+}
+
+.btn-warning:hover {
+  background-color: #fa8500 !important; 
+  color: white !important;
+}
+
+.btn-warning:focus {
+  background-color: #fa9600 !important;
+  color: white !important;
+  border: #fa8500 !important;
+  box-shadow: 0 2px 3px 0 #fa8500;
+}

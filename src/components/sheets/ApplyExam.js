@@ -3,6 +3,7 @@ import DatePicker , { registerLocale } from  "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import es from 'date-fns/locale/es';
 import groupsService from '../../services/groups.service';
+import svgIcon from '../../lib/svgIcons';
 registerLocale('es', es)
 
 const ApplyExam = ({user, applyExam}) => {
@@ -39,38 +40,48 @@ const ApplyExam = ({user, applyExam}) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h5>Aplicar examen</h5>
-      <label htmlFor="">Fecha inicio</label>
-      <DatePicker className="form-control"
-        selected={startDate}
-        onChange={(date) => setStartDate(date)}
-        showTimeSelect
-        dateFormat="dd/MMMM/yyyy hh:mm aa"
-        locale="es" 
-        required />
-      <label htmlFor="">Fecha fin</label>
-      <DatePicker className="form-control"
-        selected={endDate}
-        onChange={(date) => setEndDate(date)}
-        showTimeSelect
-        dateFormat="dd/MMMM/yyyy hh:mm aa"
-        locale="es" 
-        required />
-      <label htmlFor="">Grupo</label>
-      <select className="form-select" 
-        required
-        value={selectedGroup}
-        onChange={(e) => setSelectedGroup(e.target.value)}>
-        {groups.map((group, index) => (
-          <option value={group._id} key={index}>{group.name}</option>
-        ))}
-        {groups.length === 0 && (<option defaultValue>No tienes grupos todavía</option>)}
-      </select>
-      
+    <div className='card border-info my-3'>
+      <form onSubmit={handleSubmit}>
+        <div className='card-header border-info'>
+          <h5>Aplicar examen</h5>
+        </div>
+        <div className='card-body'>
+          <label htmlFor="">Fecha inicio</label>
+          <DatePicker className="form-control"
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            showTimeSelect
+            dateFormat="dd/MMMM/yyyy hh:mm aa"
+            locale="es" 
+            required />
 
-      <button type="submit" className='btn btn-success form-control mt-2'> Aplicar </button>
-    </form>
+          <label htmlFor="">Fecha fin</label>
+          <DatePicker className="form-control"
+            selected={endDate}
+            onChange={(date) => setEndDate(date)}
+            showTimeSelect
+            dateFormat="dd/MMMM/yyyy hh:mm aa"
+            locale="es" 
+            required />
+
+          <label htmlFor="">Grupo</label>
+          <select className="form-select" 
+            required
+            value={selectedGroup}
+            onChange={(e) => setSelectedGroup(e.target.value)}>
+            {groups.map((group, index) => (
+              <option value={group._id} key={index}>{group.name}</option>
+            ))}
+            {groups.length === 0 && (<option defaultValue>No tienes grupos todavía</option>)}
+          </select>
+
+          <button type="submit" className='btn btn-success form-control mt-2'> 
+              {svgIcon.start}
+            Aplicar 
+          </button>
+        </div>  
+      </form>
+    </div>
   )
 }
 
