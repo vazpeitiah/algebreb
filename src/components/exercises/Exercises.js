@@ -1,10 +1,9 @@
 import { forwardRef } from 'react'
 import Solutions from './Solutions';
 import Exercise from './Exercise';
+import CardExercise from './CardExercise';
 
-const Exercises = forwardRef(({ exercises, title, solutionsType, numberExercises }, ref) => {
-	console.log(numberExercises);
-
+const Exercises = forwardRef(({ exercises, title, solutionsType, numberExercises, viewType }, ref) => {
 	return (
 		<div ref={ref} style={{ margin: "0", padding: "0" }} >
 			<h3>{title}</h3>
@@ -14,7 +13,21 @@ const Exercises = forwardRef(({ exercises, title, solutionsType, numberExercises
 						<div className="row" key={idx}>
 							<h5>{ex.instrucciones}</h5>
 							{ex.exercisesArr.map((exercise, index) => (
-								<Exercise exercise={exercise} key={index} index={index + 1} tipoRespuesta={ex.tipoRespuesta} number={numberExercises} />
+								viewType ? (
+									<CardExercise
+										exercise={exercise}
+										number={index + 1}
+										index={index +""+ idx}
+										solutionType={solutionsType}
+										numberExercises={numberExercises}  />
+								) : (
+									<Exercise 
+										exercise={exercise} 
+										key={index} 
+										index={index + 1} 
+										tipoRespuesta={ex.tipoRespuesta}
+										numberExercises={numberExercises} /> 
+								)
 							))}
 							{ex.exercisesArr.length === 0 && (<p> No se han agregado ejercicios</p>)}
 						</div>
@@ -22,7 +35,7 @@ const Exercises = forwardRef(({ exercises, title, solutionsType, numberExercises
 				</>
 			)}
 
-			{solutionsType !== "oculta" && (
+			{!viewType && solutionsType !== "oculta" && (
 				<Solutions exercises={exercises} solutionsType={solutionsType} />
 			)}
 
