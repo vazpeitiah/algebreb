@@ -42,7 +42,6 @@ const ApplyExam = ({user, applyExam}) => {
   }
 
   return (
-<<<<<<< HEAD
     <div className='card border-info my-3'>
       <form onSubmit={handleSubmit}>
         <div className='card-header border-info'>
@@ -77,49 +76,6 @@ const ApplyExam = ({user, applyExam}) => {
             ))}
             {groups.length === 0 && (<option defaultValue>No tienes grupos todavía</option>)}
           </select>
-=======
-    <form onSubmit={handleSubmit}>
-      <h5>Aplicar evaluación</h5>
-      <label htmlFor="">Fecha inicio</label>
-      <DatePicker className="form-control"
-        selected={startDate}
-        onChange={(date) => setStartDate(date)}
-        showTimeSelect
-        dateFormat="dd/MMMM/yyyy hh:mm aa"
-        locale="es" 
-        required />
-      <label htmlFor="">Fecha fin</label>
-      <DatePicker className="form-control"
-        selected={endDate}
-        onChange={(date) => setEndDate(date)}
-        showTimeSelect
-        dateFormat="dd/MMMM/yyyy hh:mm aa"
-        locale="es" 
-        required />
-      <label htmlFor="">Grupo</label>
-      <select className="form-select" 
-        required
-        value={selectedGroup}
-        onChange={(e) => setSelectedGroup(e.target.value)}>
-        {groups.map((group, index) => (
-          <option value={group._id} key={index}>{group.name}</option>
-        ))}
-        {groups.length === 0 && (<option defaultValue>No tienes grupos todavía</option>)}
-      </select>
-
-      <div class="form-check mt-2">
-        <input 
-          class="form-check-input" 
-          type="checkbox" 
-          checked={different}
-          id="different"
-          onChange={() => setDifferent(!different)}
-        />
-        <label class="form-check-label" for="different">
-          Cambiar los ejercicios para cada alumno
-        </label>
-      </div>
->>>>>>> c6628200a3bae5795f98facff9268b4b3dc99247
 
           <button type="submit" className='btn btn-success form-control mt-2'> 
               {svgIcon.start}
