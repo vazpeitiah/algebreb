@@ -23,7 +23,7 @@ const SheetPage = ({user}) => {
 	const [showSolution, setShowSolution] = useState(false)
 	const [solutionsType, setSolutionsType] = useState('oculta')
 	const [numberExercises, setNumberExercises] = useState('6')
-	const [toggleView, setToggleView] = useState(null)
+	const [viewCard, setviewCard] = useState(null)
 	const [params, setParams] = useState([]) 
 	// react-router-dom
 	const { sheetId } = useParams()
@@ -102,9 +102,8 @@ const SheetPage = ({user}) => {
 		switch (exportType) {
 			case "pdf":
 				setShowSolution(!showSolution);
-
-				if (toggleView)
-					setToggleView(!toggleView)
+				
+				if(viewCard) setviewCard(!viewCard)
 
 				downloadPDF();
 				break;
@@ -205,7 +204,7 @@ const SheetPage = ({user}) => {
 							<div className='col-auto py-auto me-lg-5'>
 								<div className="form-check form-switch pt-2">
 									<input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" 
-											onChange={ (e) => {setToggleView(e.target.checked)} } />
+											onChange={ (e) => {setviewCard(e.target.checked)} } />
 									<label className="form-check-label" htmlFor="flexSwitchCheckDefault">Vista de cartas</label>
 								</div>
 							</div>
@@ -214,9 +213,9 @@ const SheetPage = ({user}) => {
 									<label className="form-check-label">Número de ejercicios: </label>
 								</div>
 								<div className='col-auto'>
-									<select id='exercise-number' className="form-select form-control" onChange={ e => { setNumberExercises(e.target.value) }}>
+									<select id='exercise-number' className="form-select form-control" value={numberExercises}  onChange={ e => { setNumberExercises(e.target.value) }}>
 										<option value="12">1</option>
-										<option value="6" selected>2</option>
+										<option value="6">2</option>
 										<option value="4">3</option>
 									</select>
 								</div>
@@ -270,7 +269,9 @@ const SheetPage = ({user}) => {
 									<option value="oculta">No mostar soluciones</option>
 									<option value="unica">Solución final</option>
 									<option value="pasos">Soluciones paso a paso</option>
-									<option value="solo_respuestas">Mostrar solo las respuestas</option>
+									<option value="solo_respuestas" disabled={!viewCard ? "" : "disable"} >
+										Mostrar solo las respuestas
+									</option>
 							</select>
 							<button className="btn btn-danger form-control mt-2 mb-2"
 								onClick={clearSheet}
@@ -310,7 +311,7 @@ const SheetPage = ({user}) => {
                             title={currentSheet && currentSheet.description}
                             solutionsType={solutionsType}
 							numberExercises={numberExercises}
-							viewType={toggleView}
+							viewType={viewCard}
 							deleteExercise={deleteExercise} />) :
                         (<center className="mt-4">
                             <div className="spinner-border" role="status">

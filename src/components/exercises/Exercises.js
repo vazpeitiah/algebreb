@@ -40,7 +40,7 @@ const Exercises = forwardRef(({ exercises, title, solutionsType, numberExercises
 				</>
 			)}
 
-			{!viewType && solutionsType !== "oculta" && (
+			{!viewType && exercises.length !== 0 && solutionsType !== "oculta" && (
 				<Solutions exercises={exercises} solutionsType={solutionsType} />
 			)}
 

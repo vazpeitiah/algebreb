@@ -5,6 +5,7 @@ import CardSolution from "./CardSolution";
 
 const CardExercise = ({ exercise, index, number, solutionType, numberExercises, tipoRespuesta, deleteExercise }) => {
     const numberClass = "col-md-" + numberExercises + " p-2";
+    console.log(solutionType);
 
     return (
         <div className={numberClass}>
@@ -30,12 +31,16 @@ const CardExercise = ({ exercise, index, number, solutionType, numberExercises, 
                         {svgIcon.delete}
                         Eliminar
                     </button>
-                    <button className="btn btn-info" data-bs-toggle="collapse" data-bs-target={`#solution${index}`}>
-                        {svgIcon.watch}
-                        Ver solucion
-                    </button>
+                    { solutionType !== "oculta" && (
+                        <button className="btn btn-info" data-bs-toggle="collapse" data-bs-target={`#solution${index}`}>
+                            {svgIcon.watch}
+                            Ver solucion
+                        </button>
+                    )}
                 </div>
-                <CardSolution exercise={exercise} id={index} number={number} solutionType={solutionType} />
+                { solutionType !== "oculta" && ( 
+                    <CardSolution exercise={exercise} id={index} number={number} solutionType={solutionType} /> 
+                )}
             </div>
         </div>
     );
