@@ -61,7 +61,6 @@ const SheetPage = ({user}) => {
 		} else {
 			alert("ERROR: " + res.message)
 		}
-		console.log(exercises);
 		setIsLoading(false)
 	}
 
@@ -163,6 +162,11 @@ const SheetPage = ({user}) => {
 				window.alert('Error: '+ response.message)
 			}
 		}
+	}
+
+	const deleteExercise = idxEx => {
+		
+		console.log("Eliminando");
 	}
 
 	return (
@@ -296,7 +300,8 @@ const SheetPage = ({user}) => {
                             title={currentSheet && currentSheet.description}
                             solutionsType={solutionsType}
 							numberExercises={numberExercises}
-							viewType={toggleView} />) :
+							viewType={toggleView}
+							deleteExercises={deleteExercise} />) :
                         (<center className="mt-4">
                             <div className="spinner-border" role="status">
                                 <span className="visually-hidden">Loading...</span>
