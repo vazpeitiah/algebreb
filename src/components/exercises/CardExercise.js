@@ -3,12 +3,12 @@ import { InlineMath } from "react-katex";
 import svgIcon from "../../lib/svgIcons";
 import CardSolution from "./CardSolution";
 
-const CardExercise = ({ key, exercise, index, number, solutionType, numberExercises, tipoRespuesta, deleteExercise }) => {
+const CardExercise = ({ exercise, index, number, solutionType, numberExercises, tipoRespuesta, deleteExercise }) => {
     const numberClass = "col-md-" + numberExercises + " p-2";
 
     return (
         <div className={numberClass}>
-            <div key={key} className="card m-2 pt-2">
+            <div key={index} className="card m-2 pt-2">
                 {exercise.enunciado && (
                     <div className="card-header d-flex justify-content-between">
                         <h6 className="pt-2">
@@ -26,7 +26,7 @@ const CardExercise = ({ key, exercise, index, number, solutionType, numberExerci
                 </ol>
 
                 <div className="card-footer bg-transparent d-flex justify-content-end">
-                    <button className="btn btn-danger me-2" onClick={() => deleteExercise(number-1)}>
+                    <button className="btn btn-danger me-2" onClick={() => deleteExercise(exercise.enunciado)}>
                         {svgIcon.delete}
                         Eliminar
                     </button>
