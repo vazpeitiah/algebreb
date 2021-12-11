@@ -51,6 +51,7 @@ const EvaluationsTeacher = ({user}) => {
             <th>Fecha Inicio</th>
             <th>Duración</th>
             <th>Estado</th>
+            <th>Tipo</th>
             <th></th>
             <th></th>
             <th></th>
@@ -65,6 +66,7 @@ const EvaluationsTeacher = ({user}) => {
             <td>{helpers.formatDate(ev.startDate)}</td>
             <td>{helpers.getDurationHRS(ev.startDate, ev.endDate)}</td>
             <td>{helpers.getStateExam(ev.startDate, ev.endDate)}</td>
+            <td>{ev.type}</td>
             <td>
               <Link to={`/evaluations/admin/${ev._id}`} className="btn btn-secondary">
                 {svgIcon.manage}

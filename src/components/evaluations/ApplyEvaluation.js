@@ -13,7 +13,7 @@ import './Evaluation.css';
 
 const ApplyEvaluation = () => {
   const { examId } = useParams()
-  const [data, setData] = useState(null)
+  const [exam, setExam] = useState(null)
   const labels = ['a', 'b', 'c', 'd']
   const [answers, setAnswers] = useState({})
   const [isLoading, setIsLoading] = useState(false)
@@ -21,11 +21,11 @@ const ApplyEvaluation = () => {
   let history = useHistory()
   useEffect(() => {
     const getExam = async () => {
-      const response = await examsService.getExam(examId)
-      if(response && response.success) {
-        setData(response.exam)
+      const res = await examsService.getExam(examId)
+      if(res && res.success) {
+        setExam(res.exam)
       } else {
-        window.alert(response.message)
+        window.alert(res.message)
         history.goBack()
       }
     }
@@ -43,7 +43,7 @@ const ApplyEvaluation = () => {
       answersArr.forEach((answer) => {
         const list = answer.list
         const ex = answer.exercise
-        const corretAnswer = data.sheet.exercises[list].exercisesArr[ex].solucion
+        const corretAnswer = exam.sheet.exercises[list].exercisesArr[ex].solucion
         
         if(answer.value === corretAnswer){
           count ++
@@ -53,21 +53,21 @@ const ApplyEvaluation = () => {
       const grade = count * 10 / answersArr.length
 
       const params = {
-        exam: data.exam._id,
-        student: data.student,
+        exam: exam.examData._id,
+        student: exam.student,
         grade: grade.toFixed(2),
         answers: answersArr,
         isActive: false,
         feedback: 'Saved answers.'
       }
 
-      const response = await examsService.submitExam(data._id, params)
+      const res = await examsService.submitExam(exam._id, params)
       
-      if(response && response.success) {
+      if(res && res.success) {
         window.alert('Se han guardado las respuestas')
         history.goBack()
       }else {
-        window.alert('Error: '+ response.message)
+        window.alert('Error: '+ res.message)
       }
 
     }
@@ -85,11 +85,11 @@ const ApplyEvaluation = () => {
 
   const uploadImages = async (images) => {
     setIsLoading(true)
-    const response = await examsService.uploadImages(data._id, images)
-    if(response && response.success) {
-      setData(response.exam)
+    const res = await examsService.uploadImages(exam._id, images)
+    if(res && res.success) {
+      setExam(res.exam)
     } else {
-      window.alert(response.message)
+      window.alert(res.message)
       history.goBack()
     }
     setIsLoading(false)
@@ -99,7 +99,7 @@ const ApplyEvaluation = () => {
     <div className="container p-4">
       <form onSubmit={submitAnswers}>
       <div className="d-flex justify-content-between">
-        <h3>Evaluación: {data && data.sheet.description}</h3>
+        <h3>Evaluación: {exam && exam.sheet.description}</h3>
         <button type="button" className="btn btn-secondary" onClick={() => history.goBack()}>
           {svgIcon.back}
           Regresar
@@ -118,13 +118,13 @@ const ApplyEvaluation = () => {
           </tr>
         </thead>
         <tbody>
-        {data && (
+        {exam && (
           <tr>
-            <td>{data.sheet.description}</td>
-            <td>{data.exam.group.name}</td>
-            <td>{data.images.length === 0 ? 'Sin subir' : `${data.images.length}`}</td>
-            {/* <td>{helpers.timeLeft(new Date().toISOString(), data.exam.endDate)}</td> */}
-            <td><Timer endDate={data.exam.endDate} /></td>
+            <td>{exam.sheet.description}</td>
+            <td>{exam.examData.group.name}</td>
+            <td>{exam.images.length === 0 ? 'Sin subir' : `${exam.images.length}`}</td>
+            {/* <td>{helpers.timeLeft(new Date().toISOString(), exam.examData.endDate)}</td> */}
+            <td><Timer endDate={exam.examData.endDate} /></td>
             <td className="text-end">
               <button className="btn btn-primary" 
                 type="button"
@@ -146,7 +146,7 @@ const ApplyEvaluation = () => {
         </tbody>
       </table>
       </div>
-      {data && data.sheet.exercises.map((exercise, index) => (
+      {exam && exam.sheet.exercises.map((exercise, index) => (
         <div key={index}>
           <h5>Parte {index+1}: {exercise.instrucciones}</h5>
           {exercise.exercisesArr.map((ex, idx) => (
@@ -175,7 +175,7 @@ const ApplyEvaluation = () => {
         </div>
       ))}
       </form>
-      <UploadFile uploadImages={uploadImages} images={data ? data.images : []} isLoading={isLoading} />
+      <UploadFile uploadImages={uploadImages} images={exam ? exam.images : []} isLoading={isLoading} />
     </div>
   )
 }

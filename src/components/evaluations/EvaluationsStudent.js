@@ -5,15 +5,15 @@ import helpers from '../../lib/helpers'
 import svgIcon from '../../lib/svgIcons'
 
 const EvaluationsStudent = ({user}) => {
-  const [evaluations, setEvaluations] = useState([])
+  const [exams, setExams] = useState([])
 
   useEffect(() => {
     const getExams = async () => {
-      const response = await examsService.getExamsStudent(user.id)
-      if(response && response.success) {
-        setEvaluations(response.exams)
+      const res = await examsService.getExamsStudent(user.id)
+      if(res && res.success) {
+        setExams(res.exams)
       } else {
-        window.alert(response.message)
+        window.alert(res.message)
       }
     }
     getExams()
@@ -37,37 +37,37 @@ const EvaluationsStudent = ({user}) => {
           </tr>
         </thead>
         <tbody>
-          {evaluations.map((evaluation, index) => (
+          {exams.map((exam, index) => (
           <tr key={index}>
             <td>{index + 1}</td>
-            <td>{evaluation.exam.sheet.description}</td>
-            <td>{evaluation.exam.group.name}</td>
-            <td>{helpers.formatDate(evaluation.exam.startDate)}</td>
-            <td>{helpers.getDurationHRS(evaluation.exam.startDate, evaluation.exam.endDate)}</td>
-            <td>{evaluation.grade + '/10'}</td>
+            <td>{exam.examData.sheet.description}</td>
+            <td>{exam.examData.group.name}</td>
+            <td>{helpers.formatDate(exam.examData.startDate)}</td>
+            <td>{helpers.getDurationHRS(exam.examData.startDate, exam.examData.endDate)}</td>
+            <td>{exam.grade + '/10'}</td>
             <td>
-              {helpers.getStateExam(evaluation.exam.startDate, evaluation.exam.endDate)}
+              {helpers.getStateExam(exam.examData.startDate, exam.examData.endDate)}
             </td>
             <td>
-              { new Date() >= new Date(evaluation.exam.startDate) && new Date() < new Date(evaluation.exam.endDate)
-                ? (evaluation.isActive ? ( // Si se puede hacer el examen
-                    <Link className="btn btn-success" to={`/exam/${evaluation._id}`}>
+              { new Date() >= new Date(exam.examData.startDate) && new Date() < new Date(exam.examData.endDate)
+                ? (exam.isActive ? ( // Si se puede hacer el examen
+                    <Link className="btn btn-success" to={`/exam/${exam._id}`}>
                       {svgIcon.start}
                       Iniciar
                     </Link>
                   ) : (  // El alumno ya envio sus respuestas
-                    <Link className="btn btn-primary" to={`/review/${evaluation._id}`}>
+                    <Link className="btn btn-primary" to={`/review/${exam._id}`}>
                       {svgIcon.watch}
                       Revisión
                     </Link>
                   ) 
-                ) : ( new Date() >= new Date(evaluation.exam.endDate) ? (  // No hizo el examen o aún no inicia
-                    <Link className="btn btn-primary" to={`/review/${evaluation._id}`}>
+                ) : ( new Date() >= new Date(exam.examData.endDate) ? (  // No hizo el examen o aún no inicia
+                    <Link className="btn btn-primary" to={`/review/${exam._id}`}>
                       {svgIcon.watch}
                       Revisión
                     </Link>
                   ) : (  // El alumno ya envio sus respuestas
-                    <Link className="btn btn-secondary disabled" to={`/exam/${evaluation._id}`}>
+                    <Link className="btn btn-secondary disabled" to={`/exam/${exam._id}`}>
                       {svgIcon.start}
                       Iniciar
                     </Link>
@@ -77,7 +77,7 @@ const EvaluationsStudent = ({user}) => {
             </td>
           </tr>))}
         </tbody>
-        {evaluations.length === 0 && (
+        {exams.length === 0 && (
             <caption>No se han encontrado evaluaciones</caption>
         )}
       </table>

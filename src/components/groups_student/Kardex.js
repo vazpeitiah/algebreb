@@ -3,23 +3,23 @@ import examsService from '../../services/exams.service'
 
 const Kardex = ({student, group}) => {
 
-  const [evaluations, setEvaluations] = useState([])
+  const [exams, setExams] = useState([])
   const [grade, setGrade] = useState(0)
 
   useEffect(() => {
     const getExams = async () => {
-      const response = await examsService.getKardex(student, group)
-      if(response && response.success) {
-        setEvaluations(response.exams)
+      const res = await examsService.getKardex(student, group)
+      if(res && res.success) {
+        setExams(res.exams)
         
         let final = 0
-        response.exams.forEach(evaluation => final += evaluation.grade)
-        final = (final / response.exams.length)
+        res.exams.forEach(evaluation => final += evaluation.grade)
+        final = (final / res.exams.length)
 
         setGrade(final.toFixed(1))
 
       } else {
-        window.alert(response.message)
+        window.alert(res.message)
       }
     }
     getExams()
@@ -40,28 +40,28 @@ const Kardex = ({student, group}) => {
             <thead>
               <tr>
                 <th>#</th>
-                <th>Nombre</th>
+                <th>Evaluación</th>
                 <th>Fecha</th>
                 <th>Calificacion</th>
                 <th>Estado</th>
               </tr>
             </thead>
             <tbody>
-              {evaluations.map((evaluation, index) => (
+              {exams.map((exam, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{evaluation.exam.sheet.description}</td>
-                <td>{new Date(evaluation.exam.startDate).toLocaleDateString()}</td>
-                <td>{evaluation.grade + '/10'}</td>
+                <td>{exam.examData.sheet.description}</td>
+                <td>{new Date(exam.examData.startDate).toLocaleDateString()}</td>
+                <td>{exam.grade + '/10'}</td>
                 <td>
-                  {evaluation.isActive 
+                  {exam.isActive 
                     ? (<span className="text-danger">Sin resolver <i className="bi bi-x-circle"></i></span>) 
                     : (<span className="text-success">Resuelto <i className="bi bi-check-circle"></i></span>)
                   }
                 </td>
               </tr>))}
             </tbody>
-            {evaluations.length === 0 && (
+            {exams.length === 0 && (
                 <caption>No se han encontrado evaluaciones</caption>
             )}
           </table>

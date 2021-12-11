@@ -77,6 +77,7 @@ const Group = () => {
             <th>#</th>
             <th>Nombre</th>
             <th>Usuario</th>
+            <th>Correo</th>
             <th></th>
             <th></th>
           </tr>
@@ -87,6 +88,7 @@ const Group = () => {
               <td>{index+1}</td>
               <td>{student.name}</td>
               <td>{student.username}</td>
+              <td>{student.email}</td>
               <td>
                 <button className="btn btn-primary" 
                   data-bs-toggle="modal" 

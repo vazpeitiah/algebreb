@@ -13,7 +13,7 @@ import svgIcon from '../../lib/svgIcons';
 
 const ExamReview = () => {
   const { examId } = useParams()
-  const [data, setData] = useState(null)
+  const [exam, setExam] = useState(null)
   const labels = ['a', 'b', 'c', 'd']
   const [answers, setAnswers] = useState([])
   const [feed, setFeed] = useState('')
@@ -24,9 +24,10 @@ const ExamReview = () => {
     const getExam = async () => {
       const response = await examsService.getExam(examId)
       if(response && response.success) {
-        setData(response.exam)
+        setExam(response.exam)
         setAnswers(response.exam.answers)
       } else {
+        console.log(response)
         window.alert(response.message)
         history.goBack()
       }
@@ -48,7 +49,7 @@ const ExamReview = () => {
   return (
     <div className="container p-4">
       <div className="d-flex justify-content-between">
-        <h2>Revisión de: {data && data.sheet.description}</h2>
+        <h2>Revisión de: {exam && exam.sheet.description}</h2>
         <button className="btn btn-secondary" onClick={() => history.goBack()}>
           {svgIcon.back}
           Regresar
@@ -68,13 +69,13 @@ const ExamReview = () => {
           </tr>
         </thead>
         <tbody>
-        {data && (
+        {exam && (
           <tr>
-            <td>{data.sheet.description}</td>
-            <td>{data.exam.group.name}</td>
-            <td>{`${data.grade}/10`}</td>
+            <td>{exam.sheet.description}</td>
+            <td>{exam.examData.group.name}</td>
+            <td>{`${exam.grade}/10`}</td>
             <td>
-              {data.isActive 
+              {exam.isActive 
                 ? (<span className="text-danger">Sin resolver <i className="bi bi-x-circle"></i></span>) 
                 : (<span className="text-success">Resuelto <i className="bi bi-check-circle"></i></span>)
               }
@@ -83,7 +84,7 @@ const ExamReview = () => {
               <button className="btn btn-success"
                 data-bs-toggle="modal" 
                 data-bs-target="#feedback"
-                onClick={() => setFeed(data.feedback)}>
+                onClick={() => setFeed(exam.feedback)}>
                   {svgIcon.message}
                 Ver retroalimentación
               </button>
@@ -92,7 +93,7 @@ const ExamReview = () => {
               <button className="btn btn-primary"
                 data-bs-toggle="modal" 
                 data-bs-target="#view_images"
-                onClick={() => setFeed(data.feedback)}>
+                onClick={() => setFeed(exam.feedback)}>
                 {svgIcon.image}
                 Ver procedimientos
               </button>
@@ -102,7 +103,7 @@ const ExamReview = () => {
         </tbody>
       </table>
       </div>
-      {data && data.sheet.exercises.map((exercise, index) => (
+      {exam && exam.sheet.exercises.map((exercise, index) => (
         <div key={index}>
           <h5>Parte {index+1}: {exercise.instrucciones}</h5>
           {exercise.exercisesArr.map((ex, idx) => (
@@ -148,7 +149,7 @@ const ExamReview = () => {
           ))}
         </div>
       ))}
-      <ViewImages images={data ? data.images : []}/>
+      <ViewImages images={exam ? exam.images : []}/>
       <Feeback feed={feed}/>
     </div>
   )

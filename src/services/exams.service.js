@@ -34,10 +34,6 @@ examsService.getKardex = async (student, group) => {
 }
 
 examsService.getExams = async (userId) => {
-  const configuration = {
-		headers: { ...authService.authHeader(), 'Content-Type': 'application/json' }
-	}
-
   const data = await groupsService.getGroupsByTeacher(userId)
   
   let groups = []

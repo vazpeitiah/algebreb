@@ -60,6 +60,7 @@ const Evaluations = () => {
             <th>Grupo:</th>
             <th>Fecha inicio:</th>
             <th>Fecha fin:</th>
+            <th>Tipo:</th>
             <th>Estado:</th>
             {data && data.different === false && (<th></th>)}
           </tr>
@@ -70,6 +71,7 @@ const Evaluations = () => {
             <td>{data.group.name}</td>
             <td>{helpers.formatDate(data.startDate)}</td>
             <td>{helpers.formatDate(data.endDate)}</td>
+            <td>{data.type}</td>
             <td>{helpers.getStateExam(data.startDate, data.endDate)}</td>
             {data.different === false && (
               <td>
