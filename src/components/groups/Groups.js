@@ -7,9 +7,6 @@ import svgIcon from '../../lib/svgIcons';
 
 import "./groups.css";
 
-//Essential to copy group key
-new ClipboardJS("#copy-id");
-
 const Groups = ({ user }) => {
   const [groups, setGroups] = useState([]);
   const [showForm, setShowForm] = useState(false);
@@ -56,8 +53,10 @@ const Groups = ({ user }) => {
     }
   };
 
-  const copyToClipboard = (e) => {
-    const copyIcon = document.getElementById("copy-id");
+  const copyToClipboard = index => {
+    new ClipboardJS("#copy-id" + index);
+    const copyId = "copy-id" + index;
+    const copyIcon = document.getElementById(copyId);
 
     if (copyIcon.className === "copy-id bi bi-check-lg link-algebreb ps-3") {
       copyIcon.className = "copy-id bi bi-clipboard link-algebreb ps-3";
@@ -156,12 +155,12 @@ const Groups = ({ user }) => {
                 <td>
                   {group._id}
                   <i
-                    id="copy-id"
+                    id={"copy-id" + index}
                     className="copy-id bi bi-clipboard link-algebreb ps-3"
                     title="Copiar"
                     data-clipboard-action="copy"
                     data-clipboard-text={group._id}
-                    onClick={copyToClipboard}
+                    onClick={() => copyToClipboard(index)}
                   />
                 </td>
                 <td>
