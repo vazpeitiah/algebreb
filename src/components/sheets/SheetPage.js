@@ -102,6 +102,10 @@ const SheetPage = ({user}) => {
 		switch (exportType) {
 			case "pdf":
 				setShowSolution(!showSolution);
+
+				if (toggleView)
+					setToggleView(!toggleView)
+
 				downloadPDF();
 				break;
 
@@ -164,9 +168,15 @@ const SheetPage = ({user}) => {
 		}
 	}
 
-	const deleteExercise = idxEx => {
-		
-		console.log("Eliminando");
+	const deleteExercise = enunciado => {
+		let newExercises = [...exercises]
+
+		newExercises = newExercises.map(exercise => {
+		  exercise.exercisesArr = exercise.exercisesArr.filter(ex => ex.enunciado !== enunciado)
+		  return exercise
+		})
+
+		setExercises(newExercises)
 	}
 
 	return (
@@ -196,12 +206,12 @@ const SheetPage = ({user}) => {
 								<div className="form-check form-switch pt-2">
 									<input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" 
 											onChange={ (e) => {setToggleView(e.target.checked)} } />
-									<label className="form-check-label" for="flexSwitchCheckDefault">Vista de cartas</label>
+									<label className="form-check-label" htmlFor="flexSwitchCheckDefault">Vista de cartas</label>
 								</div>
 							</div>
 							<div className='btn-toolbar col-auto me-lg-5'>
 								<div className='col-auto pt-2 me-2'>
-									<label class="form-check-label">Número de ejercicios: </label>
+									<label className="form-check-label">Número de ejercicios: </label>
 								</div>
 								<div className='col-auto'>
 									<select id='exercise-number' className="form-select form-control" onChange={ e => { setNumberExercises(e.target.value) }}>
@@ -301,7 +311,7 @@ const SheetPage = ({user}) => {
                             solutionsType={solutionsType}
 							numberExercises={numberExercises}
 							viewType={toggleView}
-							deleteExercises={deleteExercise} />) :
+							deleteExercise={deleteExercise} />) :
                         (<center className="mt-4">
                             <div className="spinner-border" role="status">
                                 <span className="visually-hidden">Loading...</span>
