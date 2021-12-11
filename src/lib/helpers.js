@@ -77,7 +77,8 @@ helpers.getDurationHRS = (sdate, edate) => {
 	const startDate = new Date(sdate)
 	const endDate = new Date(edate)
 	const diff = endDate.getTime() - startDate.getTime()
-	return `${moment.duration(diff, "milliseconds").format("hh:mm")} HRS`
+	const timeHRS = `${moment.duration(diff, "milliseconds").format("h [horas], m [min]")}`
+	return timeHRS
 }
 
 helpers.getDuration = (sdate, edate) => {

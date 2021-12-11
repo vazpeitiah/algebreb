@@ -3,7 +3,12 @@ import Solutions from './Solutions';
 import Exercise from './Exercise';
 import CardExercise from './CardExercise';
 
-const Exercises = forwardRef(({ exercises, title, solutionsType, numberExercises, viewType }, ref) => {
+const Exercises = forwardRef(({ exercises, title, solutionsType, numberExercises, viewType, deleteExercises }, ref) => {
+	const deleteExercise = idx => {
+		deleteExercises(exercises)
+		console.log(idx);
+	}
+
 	return (
 		<div ref={ref} style={{ margin: "0", padding: "0" }} >
 			<h3>{title}</h3>
@@ -15,11 +20,14 @@ const Exercises = forwardRef(({ exercises, title, solutionsType, numberExercises
 							{ex.exercisesArr.map((exercise, index) => (
 								viewType ? (
 									<CardExercise
+										key={index}
 										exercise={exercise}
 										number={index + 1}
 										index={index +""+ idx}
 										solutionType={solutionsType}
-										numberExercises={numberExercises}  />
+										tipoRespuesta={ex.tipoRespuesta}
+										numberExercises={numberExercises}
+										deleteExercise={deleteExercise}  />
 								) : (
 									<Exercise 
 										exercise={exercise} 

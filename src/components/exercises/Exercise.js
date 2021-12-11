@@ -12,10 +12,10 @@ const Exercise = ({ exercise, index, tipoRespuesta, numberExercises }) => {
 				(<span><b>{index})</b> <InlineMath math={exercise.enunciado} /></span>) 
 			}
 
-			<ol type='a'>
+			<ol className='ps-lg-5' type='a'>
 			{ tipoRespuesta === "opcion_multiple" && exercise.respuestas && exercise.respuestas.map(
 					(respuesta, index) => (
-							<li className='fw-lighter' style={{color: "#393E46"}} key={index}> 
+							<li className='fw-lighter py-lg-3' style={{color: "#393E46"}} key={index}> 
 								<InlineMath math={respuesta} /> 
 							</li>
 					))

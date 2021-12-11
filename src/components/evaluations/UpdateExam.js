@@ -3,6 +3,7 @@ import DatePicker , { registerLocale } from  "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import es from 'date-fns/locale/es';
 import helpers from '../../lib/helpers';
+import svgIcon from '../../lib/svgIcons';
 registerLocale('es', es)
 
 const UpdateExam = ({exam, updateExam}) => {
@@ -60,8 +61,14 @@ const UpdateExam = ({exam, updateExam}) => {
           <p className="mt-2"><b>Duración: </b>{helpers.getDuration(startDate.toISOString(), endDate.toISOString())}</p>
         </div>
         <div className="modal-footer">
-          <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="submit" className='btn btn-primary' data-bs-dismiss="modal">Actualizar</button>
+          <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
+            {svgIcon.cancel}
+            Cerrar
+          </button>
+          <button type="submit" className='btn btn-primary' data-bs-dismiss="modal">
+            {svgIcon.confirm}
+            Actualizar
+          </button>
         </div>
       </div>
       </form>
