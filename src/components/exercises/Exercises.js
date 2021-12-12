@@ -4,7 +4,9 @@ import Exercise from './Exercise';
 import CardExercise from './CardExercise';
 
 const Exercises = forwardRef(({ exercises, title, solutionsType, numberExercises, viewType, deleteExercise }, ref) => {
-	const deleteExercises = enunciado => deleteExercise(enunciado)
+	const deleteExercises = (enunciado,idx) => {
+		deleteExercise(enunciado, idx)
+	}
 
 	return (
 		<div ref={ref} style={{ margin: "0", padding: "0" }} >
@@ -21,6 +23,7 @@ const Exercises = forwardRef(({ exercises, title, solutionsType, numberExercises
 										exercise={exercise}
 										number={index + 1}
 										index={index +""+ idx}
+										gIndex={idx}
 										solutionType={solutionsType}
 										tipoRespuesta={ex.tipoRespuesta}
 										numberExercises={numberExercises}

@@ -167,15 +167,22 @@ const SheetPage = ({user}) => {
 		}
 	}
 
-	const deleteExercise = enunciado => {
+	const deleteExercise = (enunciado, gIndex) => {
 		let newExercises = [...exercises]
+		let newParams = [...params]
 
 		newExercises = newExercises.map(exercise => {
 		  exercise.exercisesArr = exercise.exercisesArr.filter(ex => ex.enunciado !== enunciado)
 		  return exercise
 		})
 
+		newParams = newParams.map((param, idx) => {
+			if(idx === gIndex) param.cantidad -= 1;
+			return param
+		})
+
 		setExercises(newExercises)
+		setParams(newParams)
 	}
 
 	return (
