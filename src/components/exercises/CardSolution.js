@@ -10,11 +10,6 @@ const CardSolution = ({ exercise, id, number, solutionType }) => {
   return (
     <div className="collapse" id={solutionId} aria-hidden="true">
       <div className="card card-body m-3 border-info">
-        <h6 className="card-title">
-          <b>Ejercicio {number}: </b>
-          {exercise && <InlineMath>{exercise.enunciado}</InlineMath>}
-        </h6>
-
         {solutionType === "pasos" && (
           <ol>
             {exercise.pasos &&
