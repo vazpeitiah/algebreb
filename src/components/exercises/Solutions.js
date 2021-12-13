@@ -2,7 +2,9 @@ import 'katex/dist/katex.min.css';
 /* import { useState } from 'react'; */
 import { InlineMath } from 'react-katex';
 
-const Solutions = ({exercises, solutionsType}) => {
+const Solutions = ({exercises, solutionsType, numberExercises}) => {
+  const numberClass = "col-md-" + numberExercises + " p-2";
+
   return (
     <>
       <h3>Soluciones</h3>
@@ -10,7 +12,7 @@ const Solutions = ({exercises, solutionsType}) => {
         <div className="row" key={idx}>
           <h5>{ex.instrucciones}</h5>
           {ex.exercisesArr.map((exercise, index) => (
-            <div key={index}>
+            <div key={index} className={numberClass}>
               <span><b>{index + 1})</b><InlineMath math={exercise.enunciado} /></span>
               {(solutionsType === "pasos" || solutionsType === "solo_respuestas") && (
                 <ol>

@@ -122,7 +122,7 @@ const ExercisesForm = ({ genExercises, topic, isLoading }) => {
                 <label>Número de ejercicios</label>
                 <input
                   type="number"
-                  className="form-control"
+                  className="form-control mb-3"
                   min="1"
                   max="200"
                   step="1"
@@ -134,7 +134,7 @@ const ExercisesForm = ({ genExercises, topic, isLoading }) => {
                     <label>Tipo de números:</label>
                     <select
                       name="dominio"
-                      className="form-select"
+                      className="form-select mb-3"
                       value={dominio}
                       onChange={(e) => setDominio(e.target.value)}
                     >
@@ -156,7 +156,7 @@ const ExercisesForm = ({ genExercises, topic, isLoading }) => {
                         ))}
                       </label>
                       <select
-                        className="form-select"
+                        className="form-select mb-3"
                         value={variables.length}
                         onChange={handleVariables}
                       >
@@ -174,7 +174,7 @@ const ExercisesForm = ({ genExercises, topic, isLoading }) => {
                 </label>
                 <input
                   type="range"
-                  className="form-range"
+                  className="form-range mb-3"
                   min="1"
                   max="100"
                   step="1"
@@ -188,7 +188,7 @@ const ExercisesForm = ({ genExercises, topic, isLoading }) => {
                       <label> Grado de los polinomios: ({grado})</label>
                       <input
                         type="range"
-                        className="form-range"
+                        className="form-range mb-3"
                         min="1"
                         max="7"
                         step="1"
@@ -205,7 +205,7 @@ const ExercisesForm = ({ genExercises, topic, isLoading }) => {
                     <div className="form-group">
                       <label>Polinomios completos</label>
                       <select
-                        className="form-select"
+                        className="form-select mb-3"
                         value={completo}
                         onChange={(e) => setCompleto(!completo)}
                       >

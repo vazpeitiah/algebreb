@@ -12,13 +12,31 @@
 }
 
 @media only screen and (min-height: 800px) and (min-width: 1000px) {
+  #nav .nav-link {
+    transition: all 0.15s ease-in 0.05s !important;
+  }
+
+  #nav .nav-link:hover {
+    color: #eeeeee;
+    opacity: 1 !important;
+    transform: scale(1.1) !important;
+    transition: all 0.15s ease-in-out 0.05s !important;
+  }
+
+  #nav .nav-link:focus {
+    color: #eeeeee;
+    opacity: 1 !important;
+    transform: scale(1.1) !important;
+    transition: all 0.15s ease-in-out 0.05s !important;
+  }
+
   .nav-item-active {
     background-color: #00adb5 !important;
     color: white !important;
-    position: inherit;
-    bottom: -2em;
-    height: 0.3em;
-    border-radius: 0.5em;
+    position: inherit !important;
+    bottom: -2em !important;
+    height: 0.3em !important;
+    border-radius: 0.5em !important;
   }
 }
 /* #nav #btn-signup, #btn-signin{

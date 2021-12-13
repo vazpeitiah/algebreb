@@ -9,7 +9,7 @@ const CardExercise = ({ exercise, index, gIndex, number, solutionType, numberExe
 
     return (
         <div className={numberClass}>
-            <div key={index} className="card m-2 pt-2">
+            <div key={index} className="card">
                 {exercise.enunciado && (
                     <div className="card-header d-flex justify-content-between">
                         <h6 className="pt-2">

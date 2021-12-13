@@ -44,7 +44,7 @@ const Exercises = forwardRef(({ exercises, title, solutionsType, numberExercises
 			)}
 
 			{!viewType && exercises.length !== 0 && solutionsType !== "oculta" && (
-				<Solutions exercises={exercises} solutionsType={solutionsType} />
+				<Solutions exercises={exercises} solutionsType={solutionsType} numberExercises={numberExercises} />
 			)}
 
 		</div>

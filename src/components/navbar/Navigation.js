@@ -19,7 +19,7 @@ const Navigation = () => {
   };
 
   const toggleClass = id => {
-    const ulsElement = ['home', 'sheets', 'groups', 'evaluations']
+    const ulsElement = ['home', 'sheets', 'groups', 'evaluations', 'help']
 
     ulsElement.forEach((ulId) => {
       const ulEl = document.getElementById(ulId)
@@ -97,6 +97,11 @@ const Navigation = () => {
                   </li>
                 </>
               )}
+              <li id="help" className="nav-item mx-lg-2" onClick={() => toggleClass("help")}>
+                <Link to={"/help"} className="nav-link mx-lg-2">
+                  {svgIcon.help} Ayuda
+                </Link>
+              </li>
             </ul>
           ) : (
             <ul className="navbar-nav me-auto">
@@ -119,6 +124,11 @@ const Navigation = () => {
                 <a className="nav-link mx-lg-2" href="/#team">
                   {svgIcon.group} Nuestro equipo
                 </a>
+              </li>
+              <li>
+                <Link to={"/help"} className="nav-link mx-lg-2">
+                  {svgIcon.help} Ayuda
+                </Link>
               </li>
             </ul>
           )}
