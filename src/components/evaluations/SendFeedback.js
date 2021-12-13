@@ -5,7 +5,13 @@ const SendFeedback = ({exam, sendFeed}) => {
   
   useEffect(() => {
     if(exam) {
-      setFeedback(exam.feedback)
+      if(exam.feedback !== '') {
+        setFeedback(exam.feedback)
+      } else {
+        setFeedback('')
+      }
+    } else {
+      setFeedback('')
     }
   }, [exam])
 
@@ -21,6 +27,7 @@ const SendFeedback = ({exam, sendFeed}) => {
     }
 
     sendFeed(exam._id, params)
+    setFeedback('')
   }
 
   return (

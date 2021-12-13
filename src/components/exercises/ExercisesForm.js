@@ -34,7 +34,7 @@ const ExercisesForm = ({ genExercises, topic, isLoading }) => {
     }
 
     // Para los ejercicios que solo permiten numeros enteros
-    if (topic === "factor_comun") auxDominio = "ZZ";
+    if (topic === "factor_comun" || topic === "trinomios_al_cuadrado") auxDominio = "ZZ";
 
     const params = {
       cantidad,
@@ -50,6 +50,8 @@ const ExercisesForm = ({ genExercises, topic, isLoading }) => {
       metodo,
       tipoRespuesta,
     };
+
+    console.log(JSON.stringify(params))
 
     genExercises(params);
   };

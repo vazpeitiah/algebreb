@@ -78,6 +78,9 @@ const Topics = ({ selectTopic }) => {
             <option value="factor_comun">Factor común</option>
             <option value="diferencia_cuadrados">Diferencia de cuadrados</option>
             <option value="trinomio_cuadrado_perfecto">Trinomio cuadrado perfecto</option>
+            <option value="cubo_perfecto_binomios">Cubo perfecto de binomios</option>
+            <option value="trinomio_forma1">Trinomio de la forma x^2+bx+c</option>
+            <option value="trinomio_forma2">Trinomio de la forma ax^2+bx+c</option>
           </>
         )}
 
@@ -98,6 +101,7 @@ const Topics = ({ selectTopic }) => {
             <option value="binomios_conjugados">Binomios conjugados</option>
             <option value="binomios_forma1">Binomio de la forma (ax+b)(cx+d)</option>
             <option value="binomios_forma2">Binomio de la forma (x+a)(x+b)</option>
+            {/* <option value="trinomios_al_cuadrado">Trinomio al cuadrado</option> */}
           </>
         )}
       </select>

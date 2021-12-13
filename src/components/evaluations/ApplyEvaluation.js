@@ -58,7 +58,7 @@ const ApplyEvaluation = () => {
         grade: grade.toFixed(2),
         answers: answersArr,
         isActive: false,
-        feedback: 'Saved answers.'
+        feedback: 'Tus respuestas se guardaron correcatamente. Por favor, espera la retroalimentación de tu profesor.'
       }
 
       const res = await examsService.submitExam(exam._id, params)
