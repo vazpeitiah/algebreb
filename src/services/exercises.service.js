@@ -1,7 +1,7 @@
 const exercisesService = {}
 
 //const API_URL = 'http://localhost:4000/'
-const API_URL = 'http://localhost:4000/'
+const API_URL = 'http://algebreb21.southcentralus.cloudapp.azure.com:4000/'
 exercisesService.getExercises = async (topic, params) => {
   try {
     const res = await fetch(API_URL + topic, {
