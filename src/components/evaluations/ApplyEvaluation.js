@@ -45,7 +45,7 @@ const ApplyEvaluation = () => {
         const ex = answer.exercise
         const corretAnswer = exam.sheet.exercises[list].exercisesArr[ex].solucion
         
-        if(answer.value === corretAnswer){
+        if(String(answer.value) === String(corretAnswer)){
           count ++
         }
       })

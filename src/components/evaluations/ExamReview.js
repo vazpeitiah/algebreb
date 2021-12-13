@@ -107,11 +107,11 @@ const ExamReview = () => {
         <div key={index}>
           <h5>Parte {index+1}: {exercise.instrucciones}</h5>
           {exercise.exercisesArr.map((ex, idx) => (
-            <div key={idx} className={`card m-2 pt-2 ${ex.solucion === getAnswer(index, idx) ? 'border-success' : 'border-danger'}`}>
+            <div key={idx} className={`card m-2 pt-2 ${String(ex.solucion) === String(getAnswer(index, idx)) ? 'border-success' : 'border-danger'}`}>
               {ex.enunciado && 
                 (<div className="card-header d-flex justify-content-between">
                   <h6 className="pt-2"><b>{idx + 1})</b> <InlineMath math={ex.enunciado} /></h6>
-                  {ex.solucion === getAnswer(index, idx) 
+                  {String(ex.solucion) === String(getAnswer(index, idx)) 
                     ? (<span className="text-success">Correcto <i className="bi bi-check-square-fill"></i></span>)
                     : (<span className="text-danger">Incorrecto <i className="bi bi-x-square-fill"></i></span>)
                   }
@@ -125,12 +125,12 @@ const ExamReview = () => {
                         type="radio" 
                         name={`answer${index}_${idx}`} 
                         id={`answer${index}_${idx}`}
-                        checked={respuesta === getAnswer(index, idx)}
+                        checked={String(respuesta) === String(getAnswer(index, idx))}
                         required
                         readOnly />
                       <label className="form-check-label" htmlFor={`response_${index}_${idx}`}>
                         {labels[idx2]}) <InlineMath math={String(respuesta)} /> 
-                        {ex.solucion === respuesta && (<span>(Respuesta correcta<i className="bi bi-check-all"></i>)</span>)}
+                        {String(ex.solucion) === String(respuesta) && (<span>(Respuesta correcta<i className="bi bi-check-all"></i>)</span>)}
                       </label>
                     </div>
                   ))
