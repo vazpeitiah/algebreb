@@ -10,7 +10,7 @@ const ExercisesForm = ({ genExercises, topic, isLoading }) => {
   const [completo, setCompleto] = useState(true);
   const [exacta, setExacta] = useState(true);
   const [metodo, setMetodo] = useState("formula");
-  const [tipoRespuesta, setTipoRespuesta] = useState("abierta");
+  const [tipoRespuesta, setTipoRespuesta] = useState("opcion_multiple");
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -248,8 +248,8 @@ const ExercisesForm = ({ genExercises, topic, isLoading }) => {
                   value={tipoRespuesta}
                   onChange={(e) => setTipoRespuesta(e.target.value)}
                 >
-                  <option value="abierta">Preguntas abiertas</option>
                   <option value="opcion_multiple">Opción multiple</option>
+                  <option value="abierta">Preguntas abiertas</option>
                 </select>
               </div>
               <div className="modal-footer">

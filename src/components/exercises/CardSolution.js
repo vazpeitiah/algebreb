@@ -22,7 +22,7 @@ const CardSolution = ({ exercise, id, number, solutionType }) => {
         )}
         <p className="fw-bolder">
           <b>Solución final:</b>{" "}
-          <InlineMath>{exercise && exercise.solucion}</InlineMath>
+          <InlineMath>{exercise && String(exercise.solucion)}</InlineMath>
         </p>
       </div>
     </div>

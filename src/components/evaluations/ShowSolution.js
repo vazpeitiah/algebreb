@@ -13,11 +13,11 @@ const ShowSolution = ({exercise, id}) => {
       <div className="card card-body m-3 border-info">
         <h5 className="card-title"> <b>Ejercicio:{" "}</b> {exercise && (<InlineMath>{exercise.enunciado}</InlineMath>)}</h5>
         <ol>
-          {exercise && exercise.pasos.map((paso, index) => (
-            <li key={index}><InlineMath math={paso} /> </li>)
+          {exercise.pasos && exercise.pasos.map((paso, index) => (
+            <li key={index}><InlineMath math={String(paso)} /> </li>)
           )}
         </ol>
-        <p className="fw-bolder"><b>Solución final:</b> <InlineMath>{exercise && exercise.solucion}</InlineMath></p>     
+        <p className="fw-bolder"><b>Solución final:</b> <InlineMath>{exercise && String(exercise.solucion)}</InlineMath></p>     
       </div>
     </div>
   )

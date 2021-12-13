@@ -153,10 +153,12 @@ helpers.createLatexDocument = (exercises, description, name) => {
 
 		latexProblems += "\n \\begin{quote}";
 
-		latexProblems += exe.pasos.map((step, ind) => {
-			return "\n \\( " + (ind += 1) + ".- " + step + " \\) \n \\\\";
-		});
-
+		if(exe.pasos) {
+			latexProblems += exe.pasos.map((step, ind) => {
+				return "\n \\( " + (ind += 1) + ".- " + step + " \\) \n \\\\";
+			});
+		}
+		
 		latexProblems += "\\\\"
 		latexProblems += "\n \\( Solución final: " + exe.solucion + " \\) \n \\\\\n";
 

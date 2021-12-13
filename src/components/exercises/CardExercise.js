@@ -18,10 +18,10 @@ const CardExercise = ({ exercise, index, gIndex, number, solutionType, numberExe
                     </div>
                 )}
                 
-                <ol className="ps-lg-5">
+                <ol className="ps-lg-5" type="a">
                     { tipoRespuesta === "opcion_multiple" && exercise.respuestas && exercise.respuestas.map(
                         (respuesta, index) => (
-                            <li className="py-lg-3" key={index}> <InlineMath math={respuesta} /> </li>
+                            <li className="py-lg-3" key={index}> <InlineMath math={String(respuesta)} /> </li>
                         ))
                     }
                 </ol>

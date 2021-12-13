@@ -165,7 +165,7 @@ const ApplyEvaluation = () => {
                         onClick={changeAnswers}
                         required />
                       <label className="form-check-label" htmlFor={`response_${index}_${idx}`}>
-                        {labels[idx2]}) <InlineMath math={respuesta} /> {ex.solucion === respuesta && (<span>X</span>)}
+                        {labels[idx2]}) <InlineMath math={String(respuesta)} /> {ex.solucion === respuesta && (<span>X</span>)}
                       </label>
                     </div>
                   ))

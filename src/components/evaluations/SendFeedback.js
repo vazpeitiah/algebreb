@@ -13,7 +13,7 @@ const SendFeedback = ({exam, sendFeed}) => {
     e.preventDefault()
     const params = {
       feedback,
-      exam: exam.exam._id,
+      exam: exam.examData._id,
       student: exam.student._id, 
       grade: exam.grade, 
       answers: exam.answers,

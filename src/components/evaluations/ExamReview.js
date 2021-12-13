@@ -26,8 +26,8 @@ const ExamReview = () => {
       if(response && response.success) {
         setExam(response.exam)
         setAnswers(response.exam.answers)
-      } else {
         console.log(response)
+      } else {
         window.alert(response.message)
         history.goBack()
       }
@@ -129,7 +129,7 @@ const ExamReview = () => {
                         required
                         readOnly />
                       <label className="form-check-label" htmlFor={`response_${index}_${idx}`}>
-                        {labels[idx2]}) <InlineMath math={respuesta} /> 
+                        {labels[idx2]}) <InlineMath math={String(respuesta)} /> 
                         {ex.solucion === respuesta && (<span>(Respuesta correcta<i className="bi bi-check-all"></i>)</span>)}
                       </label>
                     </div>

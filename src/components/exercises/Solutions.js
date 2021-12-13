@@ -21,7 +21,7 @@ const Solutions = ({exercises, solutionsType, numberExercises}) => {
                 )}
                 </ol>
               )}
-              <p><b>Solución:</b> <InlineMath math={exercise.solucion} /> </p>
+              <p><b>Solución:</b> <InlineMath math={String(exercise.solucion)} /> </p>
             </div>
           ))}
           {ex.exercisesArr.length === 0 && (<p> No se han agregado ejercicios</p>)}

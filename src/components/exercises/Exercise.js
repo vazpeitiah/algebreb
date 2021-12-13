@@ -16,7 +16,7 @@ const Exercise = ({ exercise, index, tipoRespuesta, numberExercises }) => {
 			{ tipoRespuesta === "opcion_multiple" && exercise.respuestas && exercise.respuestas.map(
 					(respuesta, index) => (
 							<li className='fw-lighter py-lg-3' style={{color: "#393E46"}} key={index}> 
-								<InlineMath math={respuesta} /> 
+								<InlineMath math={String(respuesta)} /> 
 							</li>
 					))
 			}
