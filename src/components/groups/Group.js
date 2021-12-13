@@ -74,7 +74,7 @@ const Group = () => {
       <table className="table table-striped">
         <thead>
           <tr>
-            <th>#</th>
+            <th>No</th>
             <th>Nombre</th>
             <th>Usuario</th>
             <th>Correo</th>

@@ -39,7 +39,7 @@ const Kardex = ({student, group}) => {
           <table className="table">
             <thead>
               <tr>
-                <th>#</th>
+                <th>No</th>
                 <th>Evaluación</th>
                 <th>Fecha</th>
                 <th>Calificacion</th>

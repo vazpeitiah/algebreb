@@ -15,6 +15,7 @@ import EvaluationsStudent from '../components/evaluations/EvaluationsStudent'
 import ApplyEvaluation from '../components/evaluations/ApplyEvaluation'
 import ExamReview from '../components/evaluations/ExamReview'
 import Evaluations from '../components/evaluations/Evaluations'
+import Help from '../components/help/Help'
 
 const AppRotuer = () => {
 	return (
@@ -24,6 +25,7 @@ const AppRotuer = () => {
 				<Route exact path="/" component={HomePage} />
 				<Route exact path="/signin" component={Signin} />
 				<Route exact path="/signup" component={Signup} />
+				<Route exact path="/help" component={Help} />
 				<PrivateRoute exact path="/profile" component={Profile} />
 				<PrivateRoute exact path="/sheets" component={SheetsPage} />
 				<PrivateRoute exact path="/sheet/:sheetId" component={SheetPage} />

@@ -45,7 +45,7 @@ const EvaluationsTeacher = ({user}) => {
       <table className="table table-striped">
         <thead>
           <tr>
-            <th>#</th>
+            <th>No</th>
             <th>Grupo</th>
             <th>Nombre</th>
             <th>Fecha Inicio</th>

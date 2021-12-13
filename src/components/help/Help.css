@@ -1,0 +1,24 @@
+.help-link {
+  color: #0c9299 !important;
+  transition: all 0.15s ease-in 0.05s !important;
+}
+
+.help-link:hover, .help-link:focus {
+  color: #007980 !important;
+  opacity: 1 !important;
+  transform: scale(1.1) !important;
+  transition: all 0.15s ease-in-out 0.05s !important;
+}
+
+#nav {
+  background-color: #222831;
+  /*  margin-bottom: 1.5rem; */
+}
+
+#nav .navbar-brand {
+  color: #00adb5;
+}
+
+#nav .nav-link:hover {
+  color: #eeeeee;
+}
