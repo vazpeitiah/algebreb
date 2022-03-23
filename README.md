@@ -1,6 +1,15 @@
 # ALGEBREB
 Una aplicación web capaz de generar ejercicios de álgebra junto con sus soluciones paso a paso. De manera que tanto profesores como alumnos puedan verse beneficiados con ella, al poder realizar material de evaluación de una forma práctica y rápida, y al contar con ejercicios que puedan ayudar a mejorar su desempeño en la asignatura respectivamente.
 
+# Otros repositorios de algebreb
+
+- [API-EXPRESS](https://github.com/vazpeitiah/algebreb-api)
+
+**Generación de ejercicios**
+
+- [CORE](https://github.com/zarzamora01/algebreb)
+- [API-FLASK](https://github.com/zarzamora01/algebreb-api/)
+
 ![algebreb.png](https://i.imgur.com/9u8x7SZ.png)
 
 ## Características principales
