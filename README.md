@@ -13,19 +13,13 @@ Una aplicación web capaz de generar ejercicios de álgebra junto con sus soluci
 ![algebreb.png](https://i.imgur.com/9u8x7SZ.png)
 
 ## Características principales
-🔲 Generación de ejercicios de álgebra
-
-🔲 Generación de solución final
-
-🔲 Generación de solución paso a paso
-
-🔲 Generación de evaluaciones en línea
-
-🔲 Exportado a PDF
-
-🔲 Exportado a imagen
-
-🔲 Exportado a LaTeX
+- Generación de ejercicios de álgebra
+- Generación de solución final
+- Generación de solución paso a paso
+- Generación de evaluaciones en línea
+- Exportado a PDF
+- Exportado a imagen
+- Exportado a LaTeX
 
 ## Temas del álgebra
 ✅ Polinomios
